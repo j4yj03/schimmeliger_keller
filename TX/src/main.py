@@ -1,7 +1,7 @@
 import time
 import pycom
 from machine import Pin
-#from LoraMAC import sendtoLoRa
+from LoraMAC-TX import sendtoLoRa
 #from DHT22RinusW import DHT22
 from DHT11RinusW import DHT11
 
