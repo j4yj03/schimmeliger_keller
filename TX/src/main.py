@@ -1,11 +1,15 @@
 import time
 import pycom
+import binascii
+
+
 from machine import Pin
+import machine
 from LoraMAC_TX import sendtoLoRa
 #from DHT22RinusW import DHT22
 from DHT11RinusW import DHT11
 
-def go_DHT():
+def go_DHT(dev_ID):
     dht_pin=Pin('P9', Pin.OPEN_DRAIN)	# connect DHT22 sensor data line to pin P9/G16 on the expansion board
     dht_pin(1)							# drive pin high to initiate data conversion on DHT sensor
     
@@ -16,16 +20,21 @@ def go_DHT():
         hum_str = '{}.{}'.format(hum//10,hum%10)
         # Print or upload it
         print('temp = {}C; hum = {}%'.format(temp_str, hum_str))
-        #if hum!=0xffff:
-        #    sendtoLoRa(dev_ID,  temp,  hum)
+
+        if hum!=0xffff:
+            sendtoLoRa(dev_ID,  temp,  hum)
+
         time.sleep(2)
  
 pycom.heartbeat(False)
 pycom.rgbled(0x1f0000)    # turn LED red
 
 
+device_ID = binascii.hexlify(machine.unique_id())
+
+
 #f=open('device_name.py')   #get device name from file
 #dev_ID = f.read()
-#print(dev_ID)
+print('Device ID:', device_ID[8:12])
 
-go_DHT()
+go_DHT(device_ID[8:12])

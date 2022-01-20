@@ -33,7 +33,6 @@ def decode(inp):
             ix = ie
     except:
         print('6: decode error')
-        print(inp)
         print('length:')
         print(len(inp), len(bits))
         return([0xff,0xff,0xff,0xff])
@@ -51,7 +50,7 @@ def decode(inp):
         print (res[0:4])
         # res= [0xff,0xff,0xff,0xff]
 
-    print ('res:', res[0:4])
+    #print ('res:', res[0:4])
     return(res[0:4])
 
 def DHT11(pin):
