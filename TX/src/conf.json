@@ -1,0 +1,14 @@
+{
+
+    "wifi" : {
+        "ssid": "Botanist 2.0",
+        "passwd": "Drumm&Ba55!"
+    },
+
+    "adafruit" : {
+        "user" : "jayjoe",
+        "key"  : "aio_cDFH66kVnkBj1nfs3MTjdH24ioRK",
+        "topics" :["jayjoe/feeds/schimmligerkeller", "" ]
+    }
+
+}
