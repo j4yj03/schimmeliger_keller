@@ -1,89 +1,62 @@
 import time
 import pycom
-import binascii
-import json
 
-from mqtt import MQTTClient
-from network import WLAN
+from dhtsensor import DHTSensor
+from mqttwrapper import MQTTWrapper
 
-from machine import Pin
-import machine
-#from LoraMAC_TX import sendtoLoRa
-#from DHT22RinusW import DHT22
-from DHT11RinusW import DHT11
+import globalvars
 
 
+def run():
 
-def load_config_data():
-    config_file = open("config.json",)
-    config_data = json.load(config_file)
+    #mqtt_client = MQTTWrapper(DEVICE_ID, ADA_USERNAME, ADA_KEY, ADA_TOPICS_LIST)
 
-    return config_data
+    sensor_list = []
 
+    for sensor_type, gpio_pin in zip(SENSOR_LIST, SENSOR_GPIO):
 
-def sub_cb(topic, msg):
-   print(msg)
+        sensor = DHTSensor(sensor_type, gpio_pin)
 
+        sensor_list.append(sensor)
 
-def connect_wifi(WIFI_SSID, WIFI_PWD):
-    wlan = WLAN(mode=WLAN.STA, antenna=WLAN.EXT_ANT)
-    nets = wlan.scan()
-    for net in nets:
-        if net.ssid == WIFI_SSID:
-            for i in range(3):
-                try:
-                    wlan.connect(net.ssid, auth=(net.sec, WIFI_PWD), timeout=10000)
-                    break
+    while True:
 
-                except Exception as e:
-                    print('ERROR, Try again', i)
-            #wlan.connect(SSID, auth=(WLAN.WPA2, PWD), timeout=5000)
-            print('')
-            while not wlan.isconnected():
-                machine.idle() # Save power while waiting.
+        data_to_publish = []
 
-            print("Connected to", WIFI_SSID, wlan.ifconfig(), "\n")
+        try:
 
+            for sensor in sensor_list:
+                sensor.readSensor()
 
-def mqtt_init(device_id, ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY):
-    client = MQTTClient(device_id, "io.adafruit.com",user=ADAFRUIT_IO_USERNAME, password=ADAFRUIT_IO_KEY, port=1883)
+                temp = sensor.getTemperature()
+                hum = sensor.getHumidity()
 
-    client.set_callback(sub_cb)
-    client.connect()
-    #client.subscribe(topic="youraccount/feeds/lights")
+                temp_str = '{}.{}'.format(temp//10, temp%10)
+                hum_str = '{}.{}'.format(hum//10, hum%10)
 
-    return client
+                if (hum != 0xffff) and (temp != 0xffff):
+                    
+                    data = json.dumps({
+                        "value": {"temp": float(temp_str), "hum": float(hum_str)},
+                        "lat": 0.0,
+                        "lon": 0.0,
+                        "ele": 0
+                    })
 
-def mqtt_publish(mqtt_client, ADAFRUIT_IO_TOPIC, MESSAGE):
-    mqtt_client.publish(topic=ADAFRUIT_IO_TOPIC, msg=MESSAGE)
-    mqtt_client.check_msg()
+                    print(data)
 
+                    data_to_publish.append(data)
+                    
+            #mqtt_client.publish(data_to_publish)
+        
+        except Exception as e:
+            print(e)
 
-def go_DHT(dev_ID):
-    dht_pin=Pin('P9', Pin.OPEN_DRAIN)	# connect DHT22 sensor data line to pin P9/G16 on the expansion board
-    dht_pin(1)							# drive pin high to initiate data conversion on DHT sensor
-    
-    while (True):
-        temp, hum = DHT11(dht_pin)
-        # temp = temp * 9 // 5 + 320   # uncomment for Fahrenheit
-        temp_str = '{}.{}'.format(temp//10,temp%10)
-        hum_str = '{}.{}'.format(hum//10,hum%10)
-        # Print or upload it
-        print('temp = {}C; hum = {}%'.format(temp_str, hum_str))
+        time.sleep(1)
 
-        if hum!=0xffff:
-            #sendtoLoRa(dev_ID,  temp,  hum) #LoRa send
-
-            data = json.dumps({
-                    "temp" : temp_str,
-                    "hum"  : hum_str
-            })
-
-            print(data)
             
-            mqtt_publish(mqtt_client, data)
 
-        time.sleep(10)
+        
 
 ##################################################################################################
 
@@ -92,26 +65,4 @@ def go_DHT(dev_ID):
 pycom.heartbeat(False)
 pycom.rgbled(0x1f0000)    # turn LED red
 
-conf = load_config_data()
-
-WIFI_SSID = conf['wifi']['ssid']
-WIFI_PASS = conf['wifi']['passpwd']
-
-ADA_USERNAME = conf['adafruit']['user']
-ADA_KEY = conf['adafruit']['key']
-ADA_TOPICS_LIST = conf['adafruit']['topics']
-
-device_ID = binascii.hexlify(machine.unique_id())
-
-
-#f=open('device_name.py')   #get device name from file
-#dev_ID = f.read()
-print('Device ID:', device_ID[8:12])
-
-
-
-connect_wifi(WIFI_SSID, WIFI_PASS)
-
-mqtt_client = mqtt_init(device_ID)
-
-go_DHT(device_ID[8:12])
+run()

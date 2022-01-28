@@ -1,23 +1,22 @@
 from machine import Pin, enable_irq, disable_irq
 import time
 
-class dhtsensor():
+class DHTSensor():
     '''
-        Class to initialize and read a DHT11/DHT22 sensor
+        Class to initialize and read a DHT11/DHT22 humidity/temperature sensor
         Based on: https://github.com/johnmcdnz/LoPy-DHT-transmission
+        Modified by: Sidney Göhler
     '''
 
-    self.sensor_typ = ""
-    self.dht_pin = None
-    self.temperature = 0
-    self.humidity = 0
 
     def __init__(self, sensor_typ: str, gpio_pin: str):
 
         if sensor_typ in ["DHT11", "DHT22"] and 'P' in gpio_pin :
             self.sensor_typ = sensor_typ     
-            self.dht_pin=Pin(gpio_pin, Pin.OPEN_DRAIN)	# connect DHT22/DHT11 sensor data line to pin P9/G16 on the expansion board
+            self.dht_pin = Pin(gpio_pin, Pin.OPEN_DRAIN)	# connect DHT22/DHT11 sensor data line to pin P9/G16 on the expansion board
             self.dht_pin(1)							# drive pin high to initiate data conversion on DHT sensor
+            self.temperature = 0
+            self.humidity = 0
         else:
             raise Exception('Invalid sensortype or invalid Pin')
 
@@ -35,6 +34,7 @@ class dhtsensor():
         irqf = disable_irq()
         for i in range(len(ms)):
             ms[i] = self.dht_pin()      ## sample input and store value
+
         enable_irq(irqf)
         # for i in range(len(ms)):		#print debug for checking raw data
         #     print (ms[i])
@@ -42,12 +42,13 @@ class dhtsensor():
 
     def _decode(self):
         inp = self.input
-        res= [0]*5
+        res = [0]*5
         bits=[]
         ix = 0
         try:
             if self.sensor_typ == 'DHT11':
-                if inp[0] == 1 : ix = inp.index(0, ix) ## skip to first 0	# ignore first '1' as probably sample of start signal.  *But* code seems to be missing the start signal, so jump this line to ensure response signal is identified in next two lines.
+                if inp[0] == 1: 
+                    ix = inp.index(0, ix) ## skip to first 0	# ignore first '1' as probably sample of start signal.  *But* code seems to be missing the start signal, so jump this line to ensure response signal is identified in next two lines.
             ix = inp.index(1,ix) ## skip first 0's to next 1	#  ignore first '10' bits as probably the response signal.
             ix = inp.index(0,ix) ## skip first 1's to next 0
             while len(bits) < len(res)*8 : ##need 5 * 8 bits :
@@ -60,18 +61,21 @@ class dhtsensor():
             print('6: decode error')
             print('length:')
             print(len(inp), len(bits))
-            return([0xff,0xff,0xff,0xff])
+            return([0xff, 0xff, 0xff, 0xff])
 
         # print('bits:', bits)
         for i in range(len(res)):
-            for v in bits[i*8:(i+1)*8]:   #process next 8 bit
-                res[i] = res[i]<<1  ##shift byte one place to left
+            for v in bits[i * 8 : (i + 1) * 8]:   #process next 8 bit
+                res[i] = res[i] << 1  ##shift byte one place to left
                 if v > 5:                   #  less than 5 '1's is a zero, more than 5 1's in the sequence is a one
                     res[i] = res[i]+1  ##and add 1 if lsb is 1
-                # print ('res',  i,  res[i])
+                print ('res',  i,  res[i])
 
-        if (res[0]+res[1]+res[2]+res[3])&0xff != res[4] :   ##parity error!
-            raise Exception("Checksum Error:", res[0:4])
+
+
+        if (res[0] + res[1] + res[2] + res[3]) & 0xff != res[4] :
+            #pass   ##parity error!
+            print("Checksum Error:", (res[0] + res[1] + res[2] + res[3]) & 0xff, res)
 
             # res= [0xff,0xff,0xff,0xff]
 
@@ -83,12 +87,23 @@ class dhtsensor():
         self._getval()
         res = self._decode()
 
-        hum = res[0]*256+res[1]
-        temp = res[2]*256 + res[3]
-        if (temp > 0x7fff):
-            temp = 0x8000 - temp
+        if self.sensor_typ == 'DHT11':
+            hum = 10  * res[0] + res[1]
+            temp = 10 * res[2] + res[3]
+
+        elif self.sensor_typ == 'DHT22':
+            hum = res[0] * 256 + res[1]
+            temp = res[2] * 256 + res[3]
+            if (temp > 0x7fff):
+                temp = 0x8000 - temp
+        else:
+            raise Exception('Uknown DHT Senortype')
+
+        print(hum, temp)
+
         self.temperature = temp
         self.humidity = hum
+
 
     def getTemperature(self):
         if self.temperature != 0:
