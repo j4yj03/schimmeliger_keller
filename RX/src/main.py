@@ -1,8 +1,8 @@
 ### LoRa-Empfänger 
 ### Code entnommen von https://github.com/johnmcdnz/LoPy-DHT-transmission/
 
-import LoraMAC-RX
+import lib.LoraMAC_RX as RX
 
-LoraMAC-RX.LoraDemoRun()
+RX.LoraDemoRun()
 
 
