@@ -50,8 +50,14 @@ def decode(inp):
         print (res[0:4])
         # res= [0xff,0xff,0xff,0xff]
 
-    #print ('res:', res[0:4])
+    print ('res:', res[0:4])
     return(res[0:4])
+
+def DHT11(pin):
+    res = decode(getval(pin))
+    temp = 10*res[0] + res[1]
+    hum = 10 * res[2] + res[3]
+    return temp, hum
    
 def DHT22(pin):
     res = decode(getval(pin))

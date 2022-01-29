@@ -1,4 +1,9 @@
 {
+    "machine" :
+    {
+        "sleeptimer_sec" : 300
+    },
+
     "sensor" :
     {
         "sensortype" : ["DHT11"],

@@ -1,8 +1,16 @@
 import time
 import pycom
+import json
 
-from dhtsensor import DHTSensor
-from mqttwrapper import MQTTWrapper
+from machine import Pin, deepsleep
+
+#from dhtsensor import DHTSensor
+#
+#from mqttwrapper import MQTTWrapper
+
+from dth import DTH
+
+#from DHT11RinusW import DHT11
 
 import globalvars
 
@@ -11,11 +19,18 @@ def run():
 
     #mqtt_client = MQTTWrapper(DEVICE_ID, ADA_USERNAME, ADA_KEY, ADA_TOPICS_LIST)
 
+    dht_pin=Pin('P9', Pin.OPEN_DRAIN)	# connect DHT22 sensor data line to pin P9/G16 on the expansion board
+    dht_pin(1)							# drive pin high to initiate data conversion on DHT sensor
+
     sensor_list = []
 
     for sensor_type, gpio_pin in zip(SENSOR_LIST, SENSOR_GPIO):
 
-        sensor = DHTSensor(sensor_type, gpio_pin)
+        pin = Pin(gpio_pin, mode=Pin.OPEN_DRAIN)
+
+        dht_type = 0 if sensor_type == 'DHT11' else 1 if sensor_type == 'DHT22' else 0
+
+        sensor = DTH(pin, dht_type)
 
         sensor_list.append(sensor)
 
@@ -26,16 +41,27 @@ def run():
         try:
 
             for sensor in sensor_list:
-                sensor.readSensor()
 
-                temp = sensor.getTemperature()
-                hum = sensor.getHumidity()
+                result = sensor.read()
 
-                temp_str = '{}.{}'.format(temp//10, temp%10)
-                hum_str = '{}.{}'.format(hum//10, hum%10)
+                temp = result.temperature
+                hum = result.humidity
+
+                if sensor.sensortype() == 0:
+                    temp_str = '{}.0'.format(temp)
+                    hum_str = '{}.0'.format(hum)
+
+                elif sensor.sensortype() == 1:
+                    temp_str = '{:3.1f}'.format(temp / 1.0)
+                    hum_str = '{:3.1f}'.format(hum / 1.0)
+
+                else:
+                    temp_str = 'invalid sensor'
+                    hum_str = 'invalid sensor'
+
 
                 if (hum != 0xffff) and (temp != 0xffff):
-                    
+
                     data = json.dumps({
                         "value": {"temp": float(temp_str), "hum": float(hum_str)},
                         "lat": 0.0,
@@ -46,13 +72,19 @@ def run():
                     print(data)
 
                     data_to_publish.append(data)
-                    
+
             #mqtt_client.publish(data_to_publish)
+
+            deepsleep(SLEEP_TIMER_SEC * 1000)
+            
         
         except Exception as e:
             print(e)
 
-        time.sleep(1)
+        
+
+        
+        #time.sleep(1)
 
             
 

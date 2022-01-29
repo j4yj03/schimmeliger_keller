@@ -37,7 +37,7 @@ def decode(inp):
         print(len(inp), len(bits))
         return([0xff,0xff,0xff,0xff])
 
-    #  print('bits:', bits)
+    print('bits:', bits)
     for i in range(len(res)):
         for v in bits[i*8:(i+1)*8]:   #process next 8 bit
             res[i] = res[i]<<1  ##shift byte one place to left
@@ -50,11 +50,13 @@ def decode(inp):
         print (res[0:4])
         # res= [0xff,0xff,0xff,0xff]
 
-    print ('res:', res[0:4])
+    print ('res:', res)
     return(res[0:4])
 
 def DHT11(pin):
-    res = decode(getval(pin))
+    val = getval(pin)
+    res = decode(val)
+    print(pin, val, res)
 	#  data order is reversed in DHT11 and DHT22
     hum = 10*res[0] + res[1]
     temp = 10 * res[2] + res[3]

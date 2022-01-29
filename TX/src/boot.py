@@ -60,6 +60,8 @@ ADA_TOPICS_LIST = conf['adafruit']['topics']
 
 DEVICE_ID = binascii.hexlify(machine.unique_id())
 
+SLEEP_TIMER_SEC = conf['machine']['sleeptimer_sec']
+
 print("Device ID:", DEVICE_ID, "\nSensor list:", SENSOR_LIST, "GPIO pins", SENSOR_GPIO)
 
 #connect_wifi()
