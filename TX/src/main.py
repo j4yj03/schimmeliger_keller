@@ -41,6 +41,9 @@ def run():
             temp = result.temperature
             hum = result.humidity
 
+
+            ####################################################### not needed
+
             if sensor.sensortype() == 0:
                 temp_str = '{}.0'.format(temp)
                 hum_str = '{}.0'.format(hum)
@@ -66,6 +69,8 @@ def run():
                 
 
                 print(now[0 : 14], data)
+
+            ##################################################################################
 
                 datatosend = struct.pack('LHhH',int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum)
 
