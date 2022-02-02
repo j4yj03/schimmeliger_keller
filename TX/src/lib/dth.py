@@ -22,6 +22,10 @@ class DTHResult():
         self.humidity = humidity
 
     def is_valid(self):
+
+        if self.error_code == DTHResult.ERR_NO_ERROR:
+            print('Sensor value valid...')
+
         return self.error_code == DTHResult.ERR_NO_ERROR
 
 
@@ -45,6 +49,7 @@ class DTH():
 
 
     def read(self):
+        print('Read Sensor... Type={}'.format(self.__dhttype))
         self.__transdriverpin.toggle() # drive transistor high
 
         #time.sleep(1)

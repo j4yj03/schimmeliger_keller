@@ -47,7 +47,7 @@ def run():
 
 
             ####################################################### not needed
-
+            '''
             if sensor.sensortype() == 0:
                 temp_str = '{}.0'.format(temp)
                 hum_str = '{}.0'.format(hum)
@@ -73,9 +73,9 @@ def run():
                 
 
                 print(now[0 : 14], data)
-
+            '''
             ##################################################################################
-
+            if (hum != 0xffff) and (temp != 0xffff):
                 datatosend = struct.pack('QHhHb', int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum, sensor.sensortype())
 
     
