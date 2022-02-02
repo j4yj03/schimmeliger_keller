@@ -81,7 +81,6 @@ def run():
     
     except Exception as e:
         print(e)
-        datatosend = struct.pack('QHhH', int(now[0 : 14]), int(DEVICE_ID, 16), str(e).encode(encoding = 'UTF-8'))
 
     try:
 
