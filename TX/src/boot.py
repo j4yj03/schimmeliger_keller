@@ -8,18 +8,15 @@ from network import WLAN
 import globalvars
 
 def load_config():
-    try:
-        fn = "./config/conf.json"
 
-        with open(fn) as config_file:
-            config_data = json.load(config_file)
+    fn = "./config/conf.json"
 
-            print("configuration file",fn, "read successful!")
+    with open(fn) as config_file:
+        config_data = json.load(config_file)
 
-            return config_data
+        print("configuration file",fn, "read successful!")
 
-    except Exception as e:
-        print(e)
+        return config_data
 
 def connect_wifi():
     wlan = WLAN(mode=WLAN.STA, antenna=WLAN.EXT_ANT)
@@ -44,24 +41,29 @@ def connect_wifi():
             
 
             print("Connected to", WIFI_SSID, wlan.ifconfig(), "\n")
+try:
 
+    
 
-conf = load_config()
+    conf = load_config()
 
-SENSOR_LIST = conf['sensor']['sensortype']
-SENSOR_GPIO = conf['sensor']['gpiopin']
+    SENSOR_LIST = conf['sensor']['sensortype']
+    SENSOR_GPIO = conf['sensor']['gpiopin']
 
-WIFI_SSID = conf['wifi']['ssid']
-WIFI_PASS = conf['wifi']['passwd']
+    WIFI_SSID = conf['wifi']['ssid']
+    WIFI_PASS = conf['wifi']['passwd']
 
-ADA_USERNAME = conf['adafruit']['user']
-ADA_KEY = conf['adafruit']['key']
-ADA_TOPICS_LIST = conf['adafruit']['topics']
+    ADA_USERNAME = conf['adafruit']['user']
+    ADA_KEY = conf['adafruit']['key']
+    ADA_TOPICS_LIST = conf['adafruit']['topics']
 
-DEVICE_ID = binascii.hexlify(machine.unique_id())
+    DEVICE_ID = binascii.hexlify(machine.unique_id())
 
-SLEEP_TIMER_SEC = conf['machine']['sleeptimer_sec']
+    SLEEP_TIMER_SEC = conf['machine']['sleeptimer_sec']
 
-print("Device ID:", DEVICE_ID, "\nSensor list:", SENSOR_LIST, "GPIO pins", SENSOR_GPIO)
+    print("Device ID:", DEVICE_ID, "\nSensor list:", SENSOR_LIST, "GPIO pins", SENSOR_GPIO)
+
+except Exception as e:
+    print(e)
 
 #connect_wifi()
