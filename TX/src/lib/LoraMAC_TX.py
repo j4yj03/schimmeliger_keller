@@ -1,9 +1,5 @@
 from network import LoRa
 import socket
-import machine
-import time
-import pycom
-
 
 #
 

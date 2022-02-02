@@ -18,6 +18,9 @@ def load_config():
 
         return config_data
 
+
+################################################################# not neeeded
+'''
 def connect_wifi():
     wlan = WLAN(mode=WLAN.STA, antenna=WLAN.EXT_ANT)
     nets = wlan.scan()
@@ -41,6 +44,10 @@ def connect_wifi():
             
 
             print("Connected to", WIFI_SSID, wlan.ifconfig(), "\n")
+
+'''
+################################################################################
+
 try:
 
     
@@ -50,12 +57,12 @@ try:
     SENSOR_LIST = conf['sensor']['sensortype']
     SENSOR_GPIO = conf['sensor']['gpiopin']
 
-    WIFI_SSID = conf['wifi']['ssid']
-    WIFI_PASS = conf['wifi']['passwd']
+    #WIFI_SSID = conf['wifi']['ssid']
+    #WIFI_PASS = conf['wifi']['passwd']
 
-    ADA_USERNAME = conf['adafruit']['user']
-    ADA_KEY = conf['adafruit']['key']
-    ADA_TOPICS_LIST = conf['adafruit']['topics']
+    #ADA_USERNAME = conf['adafruit']['user']
+    #ADA_KEY = conf['adafruit']['key']
+    #ADA_TOPICS_LIST = conf['adafruit']['topics']
 
     DEVICE_ID = binascii.hexlify(machine.unique_id())
 
@@ -63,7 +70,9 @@ try:
 
     print("Device ID:", DEVICE_ID, "\nSensor list:", SENSOR_LIST, "GPIO pins", SENSOR_GPIO)
 
+    #connect_wifi()
+
 except Exception as e:
     print(e)
 
-#connect_wifi()
+

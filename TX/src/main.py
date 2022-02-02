@@ -18,8 +18,8 @@ def run():
 
         from dth import DTH
 
-        dht_pin=Pin('P9', Pin.OPEN_DRAIN)	# connect DHT22 sensor data line to pin P9/G16 on the expansion board
-        dht_pin(1)							# drive pin high to initiate data conversion on DHT sensor
+        #dht_pin=Pin('P9', Pin.OPEN_DRAIN)	# connect DHT22 sensor data line to pin P9/G16 on the expansion board
+        #dht_pin(1)							# drive pin high to initiate data conversion on DHT sensor
 
         sensor_list = []
 
