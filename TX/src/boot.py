@@ -56,6 +56,7 @@ try:
 
     SENSOR_LIST = conf['sensor']['sensortype']
     SENSOR_GPIO = conf['sensor']['gpiopin']
+    SENSOR_TRANS_DRIVE = conf['sensor']['transdrivepin']
 
     #WIFI_SSID = conf['wifi']['ssid']
     #WIFI_PASS = conf['wifi']['passwd']
@@ -68,7 +69,7 @@ try:
 
     SLEEP_TIMER_SEC = conf['machine']['sleeptimer_sec']
 
-    print("Device ID:", DEVICE_ID, "\nSensor list:", SENSOR_LIST, "GPIO pins", SENSOR_GPIO)
+    print("Device ID:", DEVICE_ID, "\nSensor list:", SENSOR_LIST, "GPIO pins", SENSOR_GPIO, "Driver pins", SENSOR_TRANS_DRIVE)
 
     #connect_wifi()
 
