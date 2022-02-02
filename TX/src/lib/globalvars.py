@@ -1,6 +1,7 @@
 
 global SENSOR_LIST
 global SENSOR_GPIO
+global SENSOR_TRANS_DRIVE
 
 global WIFI_SSID
 global WIFI_PASS

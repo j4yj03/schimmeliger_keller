@@ -31,10 +31,13 @@ class DTH():
     #__pin = Pin('P3', mode=Pin.OPEN_DRAIN)
     __dhttype = 0
 
-    def __init__(self, pin, sensor_type = 0):
+    def __init__(self, pin, transdriverpin, sensor_type = 0):
         self.__pin = pin
         self.__dhttype = sensor_type
         self.__pin(1)
+        self.__transdriverpin = transdriverpin
+
+        self.__transdriverpin(0)    # drive transistor low
         time.sleep(1.0)
 
     def sensortype(self):
@@ -42,6 +45,8 @@ class DTH():
 
 
     def read(self):
+        self.__transdriverpin.toggle() # drive transistor high
+
         #time.sleep(1)
 
         # send initial high
@@ -82,6 +87,11 @@ class DTH():
             t = (((int_t & 0x7F) * 256) + dec_t)/10
             if (int_t & 0x80) > 0:
                 t *= -1
+
+        self.__transdriverpin.toggle()   # drive transistor low
+
+        #self.__transdriverpin.hold(True) # stay low after reset
+        
         return DTHResult(DTHResult.ERR_NO_ERROR, t, rh)
 
     def __send_and_sleep(self, output, mysleep):

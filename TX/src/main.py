@@ -23,13 +23,17 @@ def run():
 
         sensor_list = []
 
-        for sensor_type, gpio_pin in zip(SENSOR_LIST, SENSOR_GPIO):
+        for sensor_type, gpio_pin, trans_driver_pin in zip(SENSOR_LIST, SENSOR_GPIO, SENSOR_TRANS_DRIVE):
 
             pin = Pin(gpio_pin, mode=Pin.OPEN_DRAIN)
 
+            driver_pin = Pin(trans_driver_pin, mode=Pin.OUT, pull=Pin.PULL_DOWN)
+
             dht_type = 0 if sensor_type == 'DHT11' else 1 if sensor_type == 'DHT22' else 0
 
-            sensor = DTH(pin, dht_type)
+            ###
+
+            sensor = DTH(pin, driver_pin, dht_type)
 
             sensor_list.append(sensor)
         
@@ -72,12 +76,12 @@ def run():
 
             ##################################################################################
 
-                datatosend = struct.pack('LHhH',int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum)
+                datatosend = struct.pack('QHhHb', int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum, sensor.sensortype())
 
     
     except Exception as e:
         print(e)
-        datatosend = struct.pack('LHhH',int(now[0 : 14]), int(DEVICE_ID, 16), str(e).encode(encoding = 'UTF-8'))
+        datatosend = struct.pack('QHhH', int(now[0 : 14]), int(DEVICE_ID, 16), str(e).encode(encoding = 'UTF-8'))
 
     try:
 

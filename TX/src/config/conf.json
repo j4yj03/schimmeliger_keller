@@ -2,12 +2,14 @@
     "machine" :
     {
         "sleeptimer_sec" : 10
+        
     },
 
     "sensor" :
     {
         "sensortype" : ["DHT11"],
-        "gpiopin" : ["P9"]
+        "gpiopin" : ["P9"],
+        "transdrivepin" : ["P15"]
     },
 
     "wifi" : 
