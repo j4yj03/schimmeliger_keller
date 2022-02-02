@@ -4,6 +4,7 @@ import machine
 import time
 import pycom
 import struct
+import json
 
 def LoraDemoRun():
     #set to have no heart beat
@@ -16,21 +17,25 @@ def LoraDemoRun():
     s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
     s.setblocking(False)
     print("Started")
-    while True:
-        # send some data
-        #s.setblocking(True)
-        #s.send('Test1')
-        #time.sleep(1)
-        
+    while True:        
         # wait to receive data
         time.sleep(1)
-        data = s.recv(64)
-        
+        data_raw = s.recv(64)
         #if Data has been received
-        if data != b'':
+        if data_raw != b'':
             #print(data)
-            uData = struct.unpack("HhH",  data)
-            print(hex (uData[0]), "\tTemperature:\t",  uData[1]/10, "C\tHumidity:\t\t",  uData[2]/10,  '%')
+            uData = struct.unpack("QHhHb",  data_raw)
+
+            uData_json = json.dumps({
+                "time":uData[0],
+                "devID":uData[1],
+                "temp":'{}.0'.format(uData[2]) if uData[4] == 0 else '{:3.1f}'.format(uData[2] / 1.0),
+                "hum":'{}.0'.format(uData[3]) if uData[4] == 0 else '{:3.1f}'.format(uData[3] / 1.0),
+                "sensTyp":uData[4]
+            })
+            
+            print(uData_json)
+            
             #print ( '{}.{}'.format(uData[0]))
             pycom.rgbled(0x007f00) # green
             time.sleep(1)
