@@ -7,7 +7,7 @@ from paho.mqtt import client as mqtt_client
 
 broker = 'io.adafruit.com'
 port = 1883
-topic = "b_ilja/feeds/welcome-feed"
+topics = ["b_ilja/feeds/temperature", "b_ilja/feeds/humidity"]
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
 ADAFRUIT_IO_USERNAME = "b_ilja"
@@ -32,8 +32,9 @@ def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
         print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
 
-    client.subscribe(topic)
-    client.on_message = on_message
+    for topic in topics:
+        client.subscribe(topic)
+        client.on_message = on_message
 
 
 def run():

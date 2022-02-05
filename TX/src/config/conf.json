@@ -1,7 +1,7 @@
 {
     "machine" :
     {
-        "sleeptimer_sec" : 10
+        "sleeptimer_sec" : 30
         
     },
 

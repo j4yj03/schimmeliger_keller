@@ -30,8 +30,7 @@ def LoraDemoRun():
                 "time":uData[0],
                 "devID":uData[1],
                 "temp":'{}.0'.format(uData[2]) if uData[4] == 0 else '{:3.1f}'.format(uData[2] / 1.0),
-                "hum":'{}.0'.format(uData[3]) if uData[4] == 0 else '{:3.1f}'.format(uData[3] / 1.0),
-                "sensTyp":uData[4]
+                "hum":'{}.0'.format(uData[3]) if uData[4] == 0 else '{:3.1f}'.format(uData[3] / 1.0)
             })
             
             print(uData_json)
