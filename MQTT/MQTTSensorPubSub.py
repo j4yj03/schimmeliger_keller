@@ -25,8 +25,8 @@ class MQTTSensorPubSub():
 
             print("configuration file", fn, "read successful!")
 
-            self.broker = config_data['broker']
-            self.port = config_data['port']
+            self.broker = config_data['adafruit']['broker']
+            self.port = config_data['adafruit']['port']
 
             self.ADAFRUIT_IO_USERNAME = config_data['adafruit']['user']
             self.ADAFRUIT_IO_KEY = config_data['adafruit']['key']
