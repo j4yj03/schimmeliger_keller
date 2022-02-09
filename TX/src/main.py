@@ -1,4 +1,5 @@
 import time
+# from TX.src.boot import SLEEP_TIMER_SEC
 import pycom
 import json
 import struct
@@ -12,7 +13,7 @@ def run():
 
     try:
 
-        rtc = machine.RTC()
+        rtc = RTC()
 
         now = "".join(map(str, rtc.now()))
 
@@ -92,7 +93,9 @@ def run():
         print(e)
 
     finally:
+        print("sleeping for: " + str(SLEEP_TIMER_SEC) + " s")
         deepsleep(SLEEP_TIMER_SEC * 1000)
+        
 
 ######################### END DEF RUN ########################################
 

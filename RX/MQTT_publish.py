@@ -1,12 +1,8 @@
-from curses import baudrate
 import json
-import subprocess as sp
 from paho.mqtt import client as mqtt_client
 import random
-import time
-from datetime import datetime
-import sys
-import serial
+
+from serial import Serial
 
 broker = 'io.adafruit.com'
 port = 1883
@@ -16,7 +12,11 @@ ADAFRUIT_IO_USERNAME = "b_ilja"
 ADAFRUIT_IO_KEY = "aio_FuoS98iogf9JapfSPc4ag1zH9J3o"
 
 def read_data():
-    ser = serial.Serial('/dev/ttyACM0', baudrate=115200, timeout=1)
+    try:
+        ser = Serial('/dev/ttyACM0', baudrate=115200, timeout=1)
+    except Exception as e:
+            print("Error: ", e)
+        
     time_old = 0
     while True:
         try:
