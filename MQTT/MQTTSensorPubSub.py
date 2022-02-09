@@ -78,7 +78,7 @@ class MQTTSensorPubSub():
         #
         self.client = client
 
-        if self.type == 'subscriber':
+        if self.type != 'subscriber':
             client.loop_start()
         
 
