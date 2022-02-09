@@ -35,6 +35,7 @@ def run():
             sensor = DTH(pin, driver_pin, dht_type)
 
             sensor_list.append(sensor)
+
         
 
         for sensor in sensor_list:
@@ -74,10 +75,14 @@ def run():
 
             ##################################################################################
 
-            condi = '(0 < '+ temp +'< 50.0) and (20.0 < '+ hum +' < 90.0)' if dht_type == 0 else '(-40.0 < '+ temp +' < 80.0) and (0.0 < '+ hum +' < 100.0)'
+            temp_h = 50.0 if sensor.sensortype() == 0 else 80.0
+            temp_l = 0.0 if sensor.sensortype() == 0 else -40.0
+
+            hum_h = 90.0 if sensor.sensortype() == 0 else 100.0
+            hum_l = 20.0 if sensor.sensortype() == 0 else 0.0
             
 
-            if eval(condi): #DHT22 range
+            if (temp_l < temp < temp_h) and (hum_l < hum < hum_h): #check DHT11/22 range
             
                 format_str = 'QHffb'
                 
