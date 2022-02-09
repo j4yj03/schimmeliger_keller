@@ -60,6 +60,9 @@ class MQTTSensorPubSub():
 
                         if (-50.0 < self.temp < 100.0) and (0.0 < self.hum < 100.0): # check correct range
                             break
+                            
+                        else:
+                            raise Exception('Werte Außerhalb des erlaubten Bereichs')
 
             except Exception as e:
                 print("Error: " + str(e))
