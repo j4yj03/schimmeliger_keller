@@ -4,15 +4,16 @@ import random
 
 from serial import Serial
 
-broker = 'io.adafruit.com'
-port = 1883
-client_id = f'python-mqtt-{random.randint(0, 1000)}'
+
 
 
 class Mqtt_sensor_publisher():
 
     def __init__(self):
         self.client = None
+        self.broker = 'io.adafruit.com'
+        self.port = 1883
+        self.client_id = f'python-mqtt-{random.randint(0, 1000)}'
 
     def read_config(self):
         fn = "./config/conf.json"
@@ -65,10 +66,10 @@ class Mqtt_sensor_publisher():
                 print("Failed to connect, return code %d\n", rc)
 
         # Set Connecting Client ID
-        client = mqtt_client.Client(client_id)
+        client = mqtt_client.Client(self.client_id)
         client.username_pw_set(self.ADAFRUIT_IO_USERNAME, self.ADAFRUIT_IO_KEY)
         client.on_connect = on_connect
-        client.connect(broker, port)
+        client.connect(self.broker, self.port)
 
         client.loop_start()
         self.client = client

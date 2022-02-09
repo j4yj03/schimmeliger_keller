@@ -73,7 +73,13 @@ def run():
 
 
             ##################################################################################
-            if (-40.0 < temp < 80.0) and (0.0 < hum < 100.0): #DHT22 range
+
+            print(temp, hum)
+
+            condi = '(0 < temp < 50.0) and (20.0 < hum < 90.0)' if dht_type == 0 else '(-40.0 < temp < 80.0) and (0.0 < hum < 100.0)'
+            
+
+            if eval(condi): #DHT22 range
             
                 format_str = 'QHffb'
                 
