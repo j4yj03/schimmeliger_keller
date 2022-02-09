@@ -58,7 +58,8 @@ class MQTTSensorPubSub():
                         self.hum = float(data_dict["hum"]) 
                         self.dev_ID = data_dict["devID"]
 
-                        break
+                        if (-50.0 < self.temp < 100.0) and (0.0 < self.hum < 100.0): # check correct range
+                            break
 
             except Exception as e:
                 print("Error: " + str(e))
@@ -126,13 +127,13 @@ class MQTTSensorPubSub():
             current_time = now.strftime("%d.%m.%Y %H:%M:%S")
 
             if 'temp' in msg.topic:
-                print(f"{current_time}: Temperatur: {msg.payload.decode()}°C.  Topic: '{msg.topic}'")
+                print(f"{current_time}\t- Temperatur:\t{msg.payload.decode()}°C.\tTopic: '{msg.topic}'")
 
             elif 'hum' in msg.topic:
-                print(f"{current_time}: Luftfeuchtigkeit: {msg.payload.decode()}%.  Topic: '{msg.topic}'")
+                print(f"{current_time}\t- Luftfeuchtigkeit:\t{msg.payload.decode()}%.\tTopic: '{msg.topic}'")
 
             else:
-                print(f"{current_time}: Sensorwert: {msg.payload.decode()}.  Topic: '{msg.topic}'")
+                print(f"{current_time}\t- Sensorwert:\t{msg.payload.decode()}.\tTopic: '{msg.topic}'")
 
         if topics is None:
             topics = self.ADAFRUIT_IO_TOPICS_LIST
