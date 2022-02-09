@@ -114,16 +114,16 @@ class MQTTSensorPubSub():
                 print(f"Failed to send message to topic {topic}")
 
 
-        def subscribe(self, topics):
-            def on_message(client, userdata, msg):
-                print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+    def subscribe(self, topics):
+        def on_message(client, userdata, msg):
+            print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
 
-            if self.client is not None:
-                for topic in topics:
-                    self.client.subscribe(topic)
-                    self.client.on_message = on_message
+        if self.client is not None:
+            for topic in topics:
+                self.client.subscribe(topic)
+                self.client.on_message = on_message
 
-                self.client.loop_forever()
+            self.client.loop_forever()
         
 
     
