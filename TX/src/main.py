@@ -74,7 +74,6 @@ def run():
 
             ##################################################################################
             if (-40.0 < temp < 80.0) and (0.0 < hum < 100.0): #DHT22 range
-                pass
             
                 format_str = 'QHffb'
                 
@@ -82,8 +81,11 @@ def run():
                 print("time:", int(now[0 : 14]), "DEV_ID:", int(DEVICE_ID, 16), "Temp:", temp,"Hum:", hum)
                 
                 import LoraMac_TX as lora
-                
+
                 lora.sendtoLoRa(datatosend)
+
+            else:
+                print('Sensor values out of range...')
     except Exception as e:
         print(e)
 

@@ -9,6 +9,8 @@ import globalvars
 
 def load_config():
 
+    #print('yo debug')
+
     fn = "./config/conf.json"
 
     with open(fn) as config_file:

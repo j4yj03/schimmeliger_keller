@@ -47,14 +47,10 @@ class Mqtt_sensor_publisher():
                     time_current = data_dict["time"]
                     if time_current > time_old:
                         time_old = time_current
-                        temp = data_dict["temp"] 
-                        hum = data_dict["hum"] 
-                        dev_ID = data_dict["devID"]
                         
-                        if (-40.0 < float(temp) < 80.0) and (0.0 < float(hum) < 100.0): #DHT22 range
-                            self.temp = temp
-                            self.hum = hum
-                            self.dev_ID = dev_ID
+                        self.temp = data_dict["temp"] 
+                        self.hum = data_dict["hum"] 
+                        self.dev_ID = data_dict["devID"]
 
             except Exception as e:
                 print("Error: " + str(e))
