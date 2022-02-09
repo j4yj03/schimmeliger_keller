@@ -7,6 +7,8 @@
 
     "adafruit" : 
     {
+        "broker" : "io.adafruit.com",
+        "port" : 1883,
         "user" : "b_ilja",
         "key"  : "aio_FuoS98iogf9JapfSPc4ag1zH9J3o",
         "topics" : ["b_ilja/feeds/temperature", "b_ilja/feeds/humidity", "b_ilja/feeds/alarm-temp", "b_ilja/feeds/alarm-hum"],

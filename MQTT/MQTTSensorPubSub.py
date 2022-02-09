@@ -9,8 +9,7 @@ class MQTTSensorPubSub():
 
     def __init__(self, topics = None, type = 'subscriber'):
         self.client = None
-        self.broker = 'io.adafruit.com'
-        self.port = 1883
+
         self.client_id = f'python-mqtt-{random.randint(0, 1000)}'
 
         self.type = type
@@ -25,9 +24,14 @@ class MQTTSensorPubSub():
 
             print("configuration file", fn, "read successful!")
 
+            self.broker = config_data['broker']
+            self.port = config_data['port']
+
             self.ADAFRUIT_IO_USERNAME = config_data['adafruit']['user']
             self.ADAFRUIT_IO_KEY = config_data['adafruit']['key']
-            self.ADAFRUIT_IO_TOPICS_LIST = config_data['adafruit']['topics']
+
+            if self.ADAFRUIT_IO_TOPICS_LIST is None:
+                self.ADAFRUIT_IO_TOPICS_LIST = config_data['adafruit']['topics']
 
             self.TRESH_TEMP_H = config_data['adafruit']['threshhold_temp_high']
             self.TRESH_TEMP_L = config_data['adafruit']['threshhold_temp_low']
@@ -114,9 +118,12 @@ class MQTTSensorPubSub():
                 print(f"Failed to send message to topic {topic}")
 
 
-    def subscribe(self, topics):
+    def subscribe(self, topics = None):
         def on_message(client, userdata, msg):
             print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+
+        if topics is None:
+            topics = self.ADAFRUIT_IO_TOPICS_LIST
 
         if self.client is not None:
             for topic in topics:
