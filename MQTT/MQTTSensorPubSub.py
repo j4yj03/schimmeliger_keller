@@ -127,13 +127,13 @@ class MQTTSensorPubSub():
             current_time = now.strftime("%d.%m.%Y %H:%M:%S")
 
             if 'temp' in msg.topic:
-                print(f"{current_time} - Temperatur:\t{msg.payload.decode()} C\tTopic: '{msg.topic}'")
+                print(f"{current_time} - Temperatur:\t{msg.payload.decode()} C - Topic: '{msg.topic}'")
 
             elif 'hum' in msg.topic:
-                print(f"{current_time} - Luftfeuchtigkeit:\t{msg.payload.decode()} %\tTopic: '{msg.topic}'")
+                print(f"{current_time} - Luftfeuchtigkeit:\t{msg.payload.decode()} % - Topic: '{msg.topic}'")
 
             else:
-                print(f"{current_time} - Sensorwert:\t{msg.payload.decode()}\tTopic: '{msg.topic}'")
+                print(f"{current_time} - Sensorwert:\t{msg.payload.decode()} - Topic: '{msg.topic}'")
 
         if topics is None:
             topics = self.ADAFRUIT_IO_TOPICS_LIST
