@@ -32,8 +32,6 @@ def run():
 
             dht_type = 0 if sensor_type == 'DHT11' else 1 if sensor_type == 'DHT22' else 0
 
-            ###
-
             sensor = DTH(pin, driver_pin, dht_type)
 
             sensor_list.append(sensor)
@@ -47,8 +45,8 @@ def run():
             hum = result.humidity
 
 
-            ####################################################### not needed
-            '''
+            ####################################################### not needed (debug) #######
+            
             if sensor.sensortype() == 0:
                 temp_str = '{}.0'.format(temp)
                 hum_str = '{}.0'.format(hum)
@@ -71,29 +69,30 @@ def run():
                     "ele": 0
                 })
 
-                
+            print(int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum)
 
-                print(now[0 : 14], data)
-            '''
+
             ##################################################################################
             if (hum != 0xffff) and (temp != 0xffff):
-                datatosend = struct.pack('QHhHb', int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum, sensor.sensortype())
+                
+                datatosend = struct.pack('QHffb', int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum, sensor.sensortype())
+
+            try:
+
+                import LoraMac_TX as lora
+
+                lora.sendtoLoRa(datatosend)
+
+            except Exception as e:
+                print(e)
 
     
     except Exception as e:
         print(e)
 
-    try:
-
-        import LoraMac_TX as lora
-
-        lora.sendtoLoRa(datatosend)
-
-    except Exception as e:
-        print(e)
 
     finally:
-        print("sleeping for: " + str(SLEEP_TIMER_SEC) + " s")
+        #print("sleeping for: " + str(SLEEP_TIMER_SEC) + " s")
         deepsleep(SLEEP_TIMER_SEC * 1000)
         
 

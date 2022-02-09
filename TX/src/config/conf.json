@@ -1,13 +1,13 @@
 {
     "machine" :
     {
-        "sleeptimer_sec" : 30
+        "sleeptimer_sec" : 10
         
     },
 
     "sensor" :
     {
-        "sensortype" : ["DHT11"],
+        "sensortype" : ["DHT22"],
         "gpiopin" : ["P9"],
         "transdrivepin" : ["P15"]
     },
