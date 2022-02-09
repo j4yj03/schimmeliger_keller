@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from paho.mqtt import client as mqtt_client
 import random
 
@@ -120,7 +121,18 @@ class MQTTSensorPubSub():
 
     def subscribe(self, topics = None):
         def on_message(client, userdata, msg):
-            print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+
+            now = datetime.now()
+            current_time = now.strftime("Y-%m-%dT%H:%M:%S")
+
+            if 'temp' in msg.topic:
+                print(f"{current_time}: Temperatur: `{msg.payload.decode()}`°C.  Topic: `{msg.topic}`")
+
+            elif 'hum' in msg.topic:
+                print(f"{current_time}: Luftfeuchtigkeit: `{msg.payload.decode()}`%.  Topic: `{msg.topic}`")
+
+            else:
+                print(f"{current_time}: Sensorwert: `{msg.payload.decode()}`.  Topic: `{msg.topic}`")
 
         if topics is None:
             topics = self.ADAFRUIT_IO_TOPICS_LIST
