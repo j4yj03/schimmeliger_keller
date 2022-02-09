@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
     try:
 
-        publisher = pubsub.MQTTSensorPubSub()
+        publisher = pubsub.MQTTSensorPubSub(type = 'publisher')
 
         publisher.read_config()
 

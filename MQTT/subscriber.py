@@ -9,16 +9,16 @@ if __name__ == '__main__':
 
     try:
 
-        publisher = pubsub.MQTTSensorPubSub(type = 'subscriber')
+        subscriber = pubsub.MQTTSensorPubSub(type = 'subscriber')
 
-        publisher.read_config()
+        subscriber.read_config()
 
-        publisher.connect_mqtt()
+        subscriber.connect_mqtt()
     
 
         while True:
 
-            publisher.subscribe(topics)
+            subscriber.subscribe(topics)
             
     except Exception as e:
         print(e)

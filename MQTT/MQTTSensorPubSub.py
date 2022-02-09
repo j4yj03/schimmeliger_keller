@@ -7,13 +7,15 @@ from serial import Serial
 class MQTTSensorPubSub():
 
 
-    def __init__(self, type = 'subscriber'):
+    def __init__(self, topics, type = 'subscriber'):
         self.client = None
         self.broker = 'io.adafruit.com'
         self.port = 1883
         self.client_id = f'python-mqtt-{random.randint(0, 1000)}'
 
         self.type = type
+
+        self.ADAFRUIT_IO_TOPICS_LIST = topics if topics is not None else None
 
     def read_config(self):
         fn = "./config/conf.json"
