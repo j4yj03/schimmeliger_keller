@@ -19,8 +19,6 @@ def LoraDemoRun():
         data_raw = s.recv(64)
         #if Data has been received
         if data_raw != b'':
-            print(data_raw)
-            #print(data)
             uData = struct.unpack("QHffb",  data_raw)
             uData_json = json.dumps({
                 "time":uData[0],
