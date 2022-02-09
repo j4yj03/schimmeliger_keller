@@ -58,12 +58,6 @@ try:
     SENSOR_GPIO = conf['sensor']['gpiopin']
     SENSOR_TRANS_DRIVE = conf['sensor']['transdrivepin']
 
-    #WIFI_SSID = conf['wifi']['ssid']
-    #WIFI_PASS = conf['wifi']['passwd']
-
-    #ADA_USERNAME = conf['adafruit']['user']
-    #ADA_KEY = conf['adafruit']['key']
-    #ADA_TOPICS_LIST = conf['adafruit']['topics']
 
     DEVICE_ID = binascii.hexlify(machine.unique_id())
 

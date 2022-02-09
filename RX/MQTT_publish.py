@@ -8,111 +8,120 @@ broker = 'io.adafruit.com'
 port = 1883
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
 
-global ADAFRUIT_IO_TOPICS 
 
-global ADAFRUIT_IO_USERNAME
-global ADAFRUIT_IO_KEY
+class Mqtt_sensor_publisher():
 
-global TRESH_TEMP_H
-global TRESH_TEMP_L
-global TRESH_HUM_H
-global TRESH_HUM_L
+    def __init__(self):
+        self.client = None
 
+    def read_config(self):
+        fn = "./config/conf.json"
 
+        with open(fn) as config_file:
+            config_data = json.load(config_file)
 
-def read_config():
-    fn = "./config/conf.json"
+            print("configuration file", fn, "read successful!")
 
-    with open(fn) as config_file:
-        config_data = json.load(config_file)
+            self.ADAFRUIT_IO_USERNAME = config_data['adafruit']['user']
+            self.ADAFRUIT_IO_KEY = config_data['adafruit']['key']
+            self.ADAFRUIT_IO_TOPICS_LIST = config_data['adafruit']['topics']
 
-        print("configuration file", fn, "read successful!")
+            self.TRESH_TEMP_H = config_data['adafruit']['threshhold_temp_high']
+            self.TRESH_TEMP_L = config_data['adafruit']['threshhold_temp_low']
+            self.TRESH_HUM_H = config_data['adafruit']['threshhold_hum_high']
+            self.TRESH_HUM_L = config_data['adafruit']['threshhold_hum_low']
 
-        ADAFRUIT_IO_USERNAME = config_data['adafruit']['user']
-        ADAFRUIT_IO_KEY = config_data['adafruit']['key']
-        ADAFRUIT_IO_TOPICS_LIST = config_data['adafruit']['topics']
-
-        TRESH_TEMP_H = config_data['adafruit']['threshhold_temp_high']
-        TRESH_TEMP_L = config_data['adafruit']['threshhold_temp_low']
-        TRESH_HUM_H = config_data['adafruit']['threshhold_hum_high']
-        TRESH_HUM_L = config_data['adafruit']['threshhold_hum_low']
-
-def read_data():
-    try:
-        ser = Serial('/dev/ttyACM0', baudrate=115200, timeout=1)
-    except Exception as e:
-            print("Error: ", e)
-        
-    time_old = 0
-    while True:
+    def read_data(self):
         try:
-            data_str = ser.readline().decode('ascii')
-            if len(data_str) > 0:
-                data_dict = json.loads(data_str)
-                print(data_dict)
-                time_current = data_dict["time"]
-                if time_current > time_old:
-                    time_old = time_current
-                    temp = data_dict["temp"] 
-                    hum = data_dict["hum"] 
-                    dev_ID = data_dict["devID"]
-                    
-                    if (-40.0 < float(temp) < 80.0) and (0.0 < float(hum) < 100.0): #DHT22 range
-                        return temp, hum, dev_ID
-
+            ser = Serial('/dev/ttyACM0', baudrate=115200, timeout=1)
         except Exception as e:
-            print("Error: " + str(e))
+                print("Error: ", e)
+            
+        time_old = 0
+        while True:
+            try:
+                data_str = ser.readline().decode('ascii')
+                if len(data_str) > 0:
+                    data_dict = json.loads(data_str)
+                    print(data_dict)
+                    time_current = data_dict["time"]
+                    if time_current > time_old:
+                        time_old = time_current
+                        temp = data_dict["temp"] 
+                        hum = data_dict["hum"] 
+                        dev_ID = data_dict["devID"]
+                        
+                        if (-40.0 < float(temp) < 80.0) and (0.0 < float(hum) < 100.0): #DHT22 range
+                            self.temp = temp
+                            self.hum = hum
+                            self.dev_ID = dev_ID
+
+            except Exception as e:
+                print("Error: " + str(e))
 
 
-def connect_mqtt():
-    def on_connect(client, userdata, flags, rc):
-        if rc == 0:
-            print("Connected to MQTT Broker!")
-        else:
-            print("Failed to connect, return code %d\n", rc)
+    def connect_mqtt(self):
+        
+        def on_connect(client, userdata, flags, rc):
+            if rc == 0:
+                print("Connected to MQTT Broker!")
+            else:
+                print("Failed to connect, return code %d\n", rc)
 
-    # Set Connecting Client ID
-    client = mqtt_client.Client(client_id)
-    client.username_pw_set(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
-    client.on_connect = on_connect
-    client.connect(broker, port)
-    return client
+        # Set Connecting Client ID
+        client = mqtt_client.Client(client_id)
+        client.username_pw_set(self.ADAFRUIT_IO_USERNAME, self.ADAFRUIT_IO_KEY)
+        client.on_connect = on_connect
+        client.connect(broker, port)
 
-def publish(client, topic, msg):
-    msg = f"{msg}"
-    result = client.publish(topic, msg)
-    # result: [0, 1]
-    status = result[0]
-    if status == 0:
-        print(f"Send `{msg}` to topic `{topic}`")
-    else:
-        print(f"Failed to send message to topic {topic}")
+        client.loop_start()
+        self.client = client
+
+    def publish(self, topic, msg):
+        if self.client is not None:
+
+            if self.TRESH_TEMP_L < self.temp < self.TRESH_TEMP_H:
+                topic = self.ADAFRUIT_IO_TOPICS_LIST[0]
+                msg = f"{self.temp}"
+
+            else:
+                topic = self.ADAFRUIT_IO_TOPICS_LIST[2]
+                msg = f"{self.temp}"
+
+            if self.TRESH_HUM_L < self.hum < self.TRESH_HUM_H:
+                topic = self.ADAFRUIT_IO_TOPICS_LIST[1]
+                msg = f"{self.hum}"
+
+            else:
+                topic = self.ADAFRUIT_IO_TOPICS_LIST[3]
+                msg = f"{self.hum}"
+
+
+            msg = f"{msg}"
+            result = self.client.publish(topic, msg)
+            # result: [0, 1]
+            status = result[0]
+            if status == 0:
+                print(f"Send `{msg}` to topic `{topic}`")
+            else:
+                print(f"Failed to send message to topic {topic}")
     
 if __name__ == '__main__':
 
     try:
 
-        read_config()
+        publisher = Mqtt_sensor_publisher()
 
-        client = connect_mqtt()
-        client.loop_start()
+        publisher.read_config()
+
+        publisher.connect_mqtt()
     
 
         while True:
-            temp, hum, dev_ID = read_data()
 
-            if TRESH_TEMP_L < temp < TRESH_TEMP_H:
-                publish(client, ADAFRUIT_IO_TOPICS_LIST[0], temp)
-
-            else:
-                publish(client, ADAFRUIT_IO_TOPICS_LIST[2], temp)
-
-            if TRESH_HUM_L < hum < TRESH_HUM_H:
-                publish(client, ADAFRUIT_IO_TOPICS_LIST[1], hum)
-
-            else:
-                publish(client, ADAFRUIT_IO_TOPICS_LIST[3], hum)
-
+            publisher.read_data()
+            publisher.publish()
+            
     except Exception as e:
         print(e)
     

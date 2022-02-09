@@ -73,23 +73,17 @@ def run():
 
 
             ##################################################################################
-            if (hum != 0xffff) and (temp != 0xffff):
-
+            if (-40.0 < temp < 80.0) and (0.0 < hum < 100.0): #DHT22 range
+                pass
+            
                 format_str = 'QHffb'
                 
                 datatosend = struct.pack(format_str, int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum, sensor.sensortype())
                 print("time:", int(now[0 : 14]), "DEV_ID:", int(DEVICE_ID, 16), "Temp:", temp,"Hum:", hum)
-
-            try:
-
+                
                 import LoraMac_TX as lora
                 
                 lora.sendtoLoRa(datatosend)
-
-            except Exception as e:
-                print(e)
-
-    
     except Exception as e:
         print(e)
 
