@@ -6,9 +6,6 @@ from serial import Serial
 
 class MQTTSensorPubSub():
 
-    broker = 'io.adafruit.com'
-    port = 1883
-    client_id = f'python-mqtt-{random.randint(0, 1000)}'
 
     def __init__(self, type = 'subscriber'):
         self.client = None
