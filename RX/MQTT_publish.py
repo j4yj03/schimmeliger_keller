@@ -4,13 +4,13 @@ import random
 
 from serial import Serial
 
-broker = 'io.adafruit.com'
-port = 1883
-client_id = f'python-mqtt-{random.randint(0, 1000)}'
+
 
 
 class Mqtt_sensor_publisher():
-
+    broker = 'io.adafruit.com'
+    port = 1883
+    client_id = f'python-mqtt-{random.randint(0, 1000)}'
     def __init__(self):
         self.client = None
 
@@ -33,7 +33,7 @@ class Mqtt_sensor_publisher():
 
     def read_data(self):
         try:
-            ser = Serial('/dev/ttyACM0', baudrate=115200, timeout=1)
+            ser = Serial('/dev/ttyACM1', baudrate=115200, timeout=1)
         except Exception as e:
                 print("Error: ", e)
             
@@ -43,14 +43,14 @@ class Mqtt_sensor_publisher():
                 data_str = ser.readline().decode('ascii')
                 if len(data_str) > 0:
                     data_dict = json.loads(data_str)
-                    print(data_dict)
                     time_current = data_dict["time"]
                     if time_current > time_old:
                         time_old = time_current
-                        
-                        self.temp = data_dict["temp"] 
-                        self.hum = data_dict["hum"] 
+                        self.temp = float(data_dict["temp"]) 
+                        self.hum = float(data_dict["hum"]) 
                         self.dev_ID = data_dict["devID"]
+
+                        break
 
             except Exception as e:
                 print("Error: " + str(e))
@@ -61,39 +61,41 @@ class Mqtt_sensor_publisher():
         def on_connect(client, userdata, flags, rc):
             if rc == 0:
                 print("Connected to MQTT Broker!")
+                
             else:
                 print("Failed to connect, return code %d\n", rc)
 
         # Set Connecting Client ID
-        client = mqtt_client.Client(client_id)
+        client = mqtt_client.Client(self.client_id)
         client.username_pw_set(self.ADAFRUIT_IO_USERNAME, self.ADAFRUIT_IO_KEY)
         client.on_connect = on_connect
-        client.connect(broker, port)
-
-        client.loop_start()
+        client.connect(self.broker, self.port)
         self.client = client
+        client.loop_start()
 
-    def publish(self, topic, msg):
+    def publish(self):
         if self.client is not None:
-
             if self.TRESH_TEMP_L < self.temp < self.TRESH_TEMP_H:
-                topic = self.ADAFRUIT_IO_TOPICS_LIST[0]
-                msg = f"{self.temp}"
+                topic_temp = self.ADAFRUIT_IO_TOPICS_LIST[0]
+                msg_temp = f"{self.temp}"
 
             else:
-                topic = self.ADAFRUIT_IO_TOPICS_LIST[2]
-                msg = f"{self.temp}"
+                topic_temp = self.ADAFRUIT_IO_TOPICS_LIST[2]
+                msg_temp = f"{self.temp}"
+
+                
 
             if self.TRESH_HUM_L < self.hum < self.TRESH_HUM_H:
-                topic = self.ADAFRUIT_IO_TOPICS_LIST[1]
-                msg = f"{self.hum}"
+                topic_hum = self.ADAFRUIT_IO_TOPICS_LIST[1]
+                msg_hum = f"{self.hum}"
 
             else:
-                topic = self.ADAFRUIT_IO_TOPICS_LIST[3]
-                msg = f"{self.hum}"
+                topic_hum = self.ADAFRUIT_IO_TOPICS_LIST[3]
+                msg_hum = f"{self.hum}"
+        else:
+            print("client is none")
 
-
-            msg = f"{msg}"
+        for msg, topic in zip([msg_temp, msg_hum], [topic_temp, topic_hum]):
             result = self.client.publish(topic, msg)
             # result: [0, 1]
             status = result[0]
