@@ -1,18 +1,4 @@
 {
-    "machine" :
-    {
-        "sleeptimer_sec" : 10
-        
-    },
-
-    "sensor" :
-    {
-        "sensortype" : ["DHT22"],
-        "gpiopin" : ["P9"],
-        "transdrivepin" : ["P15"]
-    },
-    
-
     "wifi" : 
     {
         "ssid": "",
