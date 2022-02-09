@@ -1,1 +1,11 @@
 \babel@toc {ngerman}{}
+\beamer@sectionintoc {1}{Einleitung}{3}{0}{1}
+\beamer@sectionintoc {2}{Vorstellung der Projektidee}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Prinzip des Urban-Commons}{5}{0}{2}
+\beamer@sectionintoc {3}{Hardware}{6}{0}{3}
+\beamer@subsectionintoc {3}{1}{Blockdiagramm LoPy4}{7}{0}{3}
+\beamer@subsectionintoc {3}{2}{Schaltplan}{8}{0}{3}
+\beamer@sectionintoc {4}{Software}{9}{0}{4}
+\beamer@subsectionintoc {4}{1}{Blockschaltbild}{10}{0}{4}
+\beamer@sectionintoc {5}{Vorf\IeC {\"u}hrung}{11}{0}{5}
+\beamer@sectionintoc {6}{Ausblick}{12}{0}{6}
