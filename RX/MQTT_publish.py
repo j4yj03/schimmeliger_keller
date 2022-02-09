@@ -96,23 +96,25 @@ if __name__ == '__main__':
 
         client = connect_mqtt()
         client.loop_start()
+    
+
+        while True:
+            temp, hum, dev_ID = read_data()
+
+            if TRESH_TEMP_L < temp < TRESH_TEMP_H:
+                publish(client, ADAFRUIT_IO_TOPICS_LIST[0], temp)
+
+            else:
+                publish(client, ADAFRUIT_IO_TOPICS_LIST[2], temp)
+
+            if TRESH_HUM_L < hum < TRESH_HUM_H:
+                publish(client, ADAFRUIT_IO_TOPICS_LIST[1], hum)
+
+            else:
+                publish(client, ADAFRUIT_IO_TOPICS_LIST[3], hum)
+
     except Exception as e:
         print(e)
-
-    while True:
-        temp, hum, dev_ID = read_data()
-
-        if TRESH_TEMP_L < temp < TRESH_TEMP_H:
-            publish(client, ADAFRUIT_IO_TOPICS_LIST[0], temp)
-
-        else:
-            publish(client, ADAFRUIT_IO_TOPICS_LIST[2], temp)
-
-        if TRESH_HUM_L < hum < TRESH_HUM_H:
-            publish(client, ADAFRUIT_IO_TOPICS_LIST[1], hum)
-
-        else:
-            publish(client, ADAFRUIT_IO_TOPICS_LIST[3], hum)
     
 
 
