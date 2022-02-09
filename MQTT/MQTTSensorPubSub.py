@@ -7,7 +7,7 @@ from serial import Serial
 class MQTTSensorPubSub():
 
 
-    def __init__(self, topics, type = 'subscriber'):
+    def __init__(self, topics = None, type = 'subscriber'):
         self.client = None
         self.broker = 'io.adafruit.com'
         self.port = 1883
