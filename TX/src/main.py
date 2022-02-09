@@ -46,7 +46,7 @@ def run():
 
 
             ####################################################### not needed (debug) #######
-            
+            '''
             if sensor.sensortype() == 0:
                 temp_str = '{}.0'.format(temp)
                 hum_str = '{}.0'.format(hum)
@@ -68,19 +68,22 @@ def run():
                     "lon": 0.0,
                     "ele": 0
                 })
-
-            print(int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum)
+            '''
+            #
 
 
             ##################################################################################
             if (hum != 0xffff) and (temp != 0xffff):
+
+                format_str = 'QHffb'
                 
-                datatosend = struct.pack('QHffb', int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum, sensor.sensortype())
+                datatosend = struct.pack(format_str, int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum, sensor.sensortype())
+                print("time:", int(now[0 : 14]), "DEV_ID:", int(DEVICE_ID, 16), "Temp:", temp,"Hum:", hum)
 
             try:
 
                 import LoraMac_TX as lora
-
+                
                 lora.sendtoLoRa(datatosend)
 
             except Exception as e:
