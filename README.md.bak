@@ -5,12 +5,9 @@ Uni Projekt im Modul M12 Projekt Netzbasierte Systeme im Studiengang IKT Master 
 Die Adafruit Dashboards befinden sich auf:
 ### Temperatur:
 https://io.adafruit.com/b_ilja/feeds/temperature
-
-### Feuchtigkeit:
+### Temperatur:
 https://io.adafruit.com/b_ilja/feeds/humidity
-
-### Temperatur (Alarm):
+### Temperatur:
 https://io.adafruit.com/b_ilja/feeds/alarm-temp
-
-### Feuchtigkeit (Alarm):
+### Temperatur:
 https://io.adafruit.com/b_ilja/feeds/alarm-hum
