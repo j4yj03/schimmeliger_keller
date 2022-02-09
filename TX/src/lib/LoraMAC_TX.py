@@ -12,7 +12,6 @@ lora = LoRa(mode=LoRa.LORA,  frequency=868000000,  tx_power=20)
 s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
 
 def sendtoLoRa(datatosend):
-
     print('LoRa send: {}\n'.format(datatosend))
     s.setblocking(True)
     s.send(datatosend)

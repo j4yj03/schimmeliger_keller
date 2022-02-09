@@ -10,19 +10,6 @@
         "sensortype" : ["DHT22"],
         "gpiopin" : ["P9"],
         "transdrivepin" : ["P15"]
-    },
-
-    "wifi" : 
-    {
-        "ssid": "",
-        "passwd": ""
-    },
-
-    "adafruit" : 
-    {
-        "user" : "",
-        "key"  : "",
-        "topics" : [""]
     }
 
 }

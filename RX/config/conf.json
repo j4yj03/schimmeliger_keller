@@ -1,0 +1,19 @@
+{
+    "wifi" : 
+    {
+        "ssid": "",
+        "passwd": ""
+    },
+
+    "adafruit" : 
+    {
+        "user" : "b_ilja",
+        "key"  : "aio_FuoS98iogf9JapfSPc4ag1zH9J3o",
+        "topics" : ["b_ilja/feeds/temperature", "b_ilja/feeds/humidity", "b_ilja/feeds/alarm-temp", "b_ilja/feeds/alarm-hum"],
+        "threshhold_temp_high" : 25.0,
+        "threshhold_temp_low" : 0.0,
+        "threshhold_hum_high" : 25.0,
+        "threshhold_hum_low" : 2.0
+    }
+
+}
