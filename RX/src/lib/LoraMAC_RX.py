@@ -15,11 +15,13 @@ def LoraDemoRun():
     s.setblocking(False)
     print("Started")
     while True:        
+        time.sleep(1)
         data_raw = s.recv(64)
         #if Data has been received
         if data_raw != b'':
+            print(data_raw)
             #print(data)
-            uData = struct.unpack("QHhHb",  data_raw)
+            uData = struct.unpack("QHffb",  data_raw)
             uData_json = json.dumps({
                 "time":uData[0],
                 "devID":uData[1],
