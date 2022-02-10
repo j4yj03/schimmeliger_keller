@@ -27,7 +27,7 @@ class MQTTSensorPubSub():
         self.TRESH_TEMP_L = 0.0
         self.TRESH_HUM_H = 50.0
         self.TRESH_HUM_L = 0.0
-
+        # ende Initialisierung
 
         # zufällige client id
         self.client_id = f'python-mqtt-{random.randint(0, 1000)}'
