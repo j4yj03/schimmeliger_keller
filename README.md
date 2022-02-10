@@ -9,7 +9,9 @@ Uni Projekt im Modul M12 Projekt Netzbasierte Systeme im Studiengang IKT Master 
 >`päsentation` und `Vorbereitung` enthalten informative Dokumente.
 <br>
 <br>
+
 ## Die Adafruit Dashboards:
+
 #### Temperatur:
 https://io.adafruit.com/b_ilja/feeds/temperature
 
@@ -23,5 +25,6 @@ https://io.adafruit.com/b_ilja/feeds/alarm-temp
 https://io.adafruit.com/b_ilja/feeds/alarm-hum
 <br>
 <br>
+
 #### Viel Spaß beim stöbern!
 <br>
