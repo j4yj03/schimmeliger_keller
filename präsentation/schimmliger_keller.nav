@@ -37,35 +37,41 @@
 \headcommand {\slideentry {4}{1}{1}{9/9}{Blockschaltbild}{0}}
 \headcommand {\beamer@framepages {9}{9}}
 \headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{10}{DHT11 Daten\IeC {\"u}bertragung}}
-\headcommand {\slideentry {4}{2}{1}{10/10}{DHT11 Daten\IeC {\"u}bertragung}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{10}{Programmablaufplan}}
+\headcommand {\slideentry {4}{2}{1}{10/10}{Programmablaufplan}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionpages {10}{10}}
-\headcommand {\beamer@subsectionentry {0}{4}{3}{11}{LoRa}}
-\headcommand {\slideentry {4}{3}{1}{11/11}{LoRa}{0}}
+\headcommand {\slideentry {4}{2}{2}{11/11}{Programmablaufplan}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@sectionpages {9}{11}}
-\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\sectionentry {5}{Vorf\IeC {\"u}hrung}{12}{Vorf\IeC {\"u}hrung}{0}}
-\headcommand {\slideentry {5}{0}{1}{12/12}{}{0}}
+\headcommand {\beamer@subsectionpages {10}{11}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{12}{DHT11 Daten\IeC {\"u}bertragung}}
+\headcommand {\slideentry {4}{3}{1}{12/12}{DHT11 Daten\IeC {\"u}bertragung}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\beamer@sectionpages {12}{12}}
 \headcommand {\beamer@subsectionpages {12}{12}}
-\headcommand {\sectionentry {6}{Simulation Batterielaufzeit}{13}{Simulation Batterielaufzeit}{0}}
-\headcommand {\slideentry {6}{0}{1}{13/13}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{13}{LoRa}}
+\headcommand {\slideentry {4}{4}{1}{13/13}{LoRa}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\beamer@sectionpages {13}{13}}
+\headcommand {\beamer@sectionpages {9}{13}}
 \headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\sectionentry {7}{Ausblick}{14}{Ausblick}{0}}
-\headcommand {\slideentry {7}{0}{1}{14/14}{}{0}}
+\headcommand {\sectionentry {5}{Vorf\IeC {\"u}hrung}{14}{Vorf\IeC {\"u}hrung}{0}}
+\headcommand {\slideentry {5}{0}{1}{14/14}{}{0}}
 \headcommand {\beamer@framepages {14}{14}}
 \headcommand {\beamer@sectionpages {14}{14}}
 \headcommand {\beamer@subsectionpages {14}{14}}
-\headcommand {\sectionentry {8}{Quellen}{15}{Quellen}{0}}
-\headcommand {\slideentry {8}{0}{1}{15/15}{}{0}}
+\headcommand {\sectionentry {6}{Simulation Batterielaufzeit}{15}{Simulation Batterielaufzeit}{0}}
+\headcommand {\slideentry {6}{0}{1}{15/15}{}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@partpages {1}{15}}
-\headcommand {\beamer@subsectionpages {15}{15}}
 \headcommand {\beamer@sectionpages {15}{15}}
-\headcommand {\beamer@documentpages {15}}
-\headcommand {\gdef \inserttotalframenumber {15}}
+\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\sectionentry {7}{Ausblick}{16}{Ausblick}{0}}
+\headcommand {\slideentry {7}{0}{1}{16/16}{}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\beamer@sectionpages {16}{16}}
+\headcommand {\beamer@subsectionpages {16}{16}}
+\headcommand {\sectionentry {8}{Quellen}{17}{Quellen}{0}}
+\headcommand {\slideentry {8}{0}{1}{17/17}{}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@partpages {1}{17}}
+\headcommand {\beamer@subsectionpages {17}{17}}
+\headcommand {\beamer@sectionpages {17}{17}}
+\headcommand {\beamer@documentpages {17}}
+\headcommand {\gdef \inserttotalframenumber {17}}
