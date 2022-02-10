@@ -15,66 +15,43 @@ def run():
 
         rtc = RTC()
 
+        # systemzeit (tuple) als zeichenkette abspeichern (wird nach deepsleep nicht zurückgesetzt)
         now = "".join(map(str, rtc.now()))
 
         from dth import DTH
 
-        #dht_pin=Pin('P9', Pin.OPEN_DRAIN)	# connect DHT22 sensor data line to pin P9/G16 on the expansion board
-        #dht_pin(1)							# drive pin high to initiate data conversion on DHT sensor
-
+        # liste mit Sensoren initialisieren
         sensor_list = []
 
         for sensor_type, gpio_pin, trans_driver_pin in zip(SENSOR_LIST, SENSOR_GPIO, SENSOR_TRANS_DRIVE):
 
+            # pin für Sensor initialisieren
             pin = Pin(gpio_pin, mode=Pin.OPEN_DRAIN)
 
+            # pin für Transistoransteuerung definieren
             driver_pin = Pin(trans_driver_pin, mode=Pin.OUT, pull=Pin.PULL_DOWN)
 
+            # dht Typ aus Wert in der configdatei bestimmen
             dht_type = 0 if sensor_type == 'DHT11' else 1 if sensor_type == 'DHT22' else 0
 
+            # sensor Objekt erzeugen
             sensor = DTH(pin, driver_pin, dht_type)
 
+            # in die Liste für Sensoren packen
             sensor_list.append(sensor)
 
         
 
         for sensor in sensor_list:
 
+            # Sensor ansteuern, ecodieren und auslesen
             result = sensor.read()
 
+            # Temperatur und Feuchtigkeitswerte aus dem Objekt auslesen
             temp = result.temperature
             hum = result.humidity
 
-
-            ####################################################### not needed (debug) #######
-            '''
-            if sensor.sensortype() == 0:
-                temp_str = '{}.0'.format(temp)
-                hum_str = '{}.0'.format(hum)
-
-            elif sensor.sensortype() == 1:
-                temp_str = '{:3.1f}'.format(temp / 1.0)
-                hum_str = '{:3.1f}'.format(hum / 1.0)
-
-            else:
-                temp_str = 'invalid sensor'
-                hum_str = 'invalid sensor'
-
-
-            if (hum != 0xffff) and (temp != 0xffff):
-
-                data = json.dumps({
-                    "value": {"temp": float(temp_str), "hum": float(hum_str)},
-                    "lat": 0.0,
-                    "lon": 0.0,
-                    "ele": 0
-                })
-            '''
-            #
-
-
-            ##################################################################################
-
+            # physikalische Grenzen definieren (aus Datenblatt)
             temp_h = 50.0 if sensor.sensortype() == 0 else 80.0
             temp_l = 0.0 if sensor.sensortype() == 0 else -40.0
 
@@ -84,13 +61,17 @@ def run():
 
             if (temp_l < temp < temp_h) and (hum_l < hum < hum_h): #check DHT11/22 range
             
+                # byte format zur Datenübertragung definieren (u long long, u short, float, float, char)
                 format_str = 'QHffb'
                 
+                # Daten in bytearray speichern
                 datatosend = struct.pack(format_str, int(now[0 : 14]), int(DEVICE_ID, 16), temp,  hum, sensor.sensortype())
-                print("time:", int(now[0 : 14]), "DEV_ID:", int(DEVICE_ID, 16), "Temp:", temp,"Hum:", hum)
+                #print("time:", int(now[0 : 14]), "DEV_ID:", int(DEVICE_ID, 16), "Temp:", temp,"Hum:", hum)
                 
+                # Lora Kommunikation initialisieren
                 import LoraMac_TX as lora
 
+                # LoRa Kommunikation starten
                 lora.sendtoLoRa(datatosend)
 
             else:
@@ -100,7 +81,7 @@ def run():
 
 
     finally:
-        #print("sleeping for: " + str(SLEEP_TIMER_SEC) + " s")
+        # deepsleep einleiten
         deepsleep(SLEEP_TIMER_SEC * 1000)
         
 

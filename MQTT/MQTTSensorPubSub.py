@@ -7,15 +7,20 @@ from serial import Serial
 
 class MQTTSensorPubSub():
 
-
-    def __init__(self, topics = None, type = 'subscriber'):
+    def __init__(self, type = 'subscriber', topics = None, read_config = True):
         self.client = None
 
         self.client_id = f'python-mqtt-{random.randint(0, 1000)}'
 
-        self.type = type
+        self.type = type   
 
         self.ADAFRUIT_IO_TOPICS_LIST = topics if topics is not None else None
+
+        # wenn keine topics Liste übergeben wurde soll er sie aus der config einlesen
+        if read_config:
+            self.read_config()
+
+        
 
     def read_config(self):
         fn = "./config/conf.json"
@@ -123,7 +128,7 @@ class MQTTSensorPubSub():
                 print(f"Failed to send message to topic {topic}")
 
 
-    def subscribe(self, topics = None):
+    def subscribe(self):
         def on_message(client, userdata, msg):
 
             now = datetime.now()

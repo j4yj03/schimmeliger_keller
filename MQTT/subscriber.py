@@ -8,16 +8,14 @@ if __name__ == '__main__':
 
 
     try:
+        # Subscriber Objekt erzeugen
+        subscriber = pubsub.MQTTSensorPubSub(type = 'subscriber', read_config = True)
 
-        subscriber = pubsub.MQTTSensorPubSub(type = 'subscriber')
-
-        subscriber.read_config()
-
+        # mit mqtt broker verbinden
         subscriber.connect_mqtt()
     
-
         while True:
-
+            # am topic subscriben
             subscriber.subscribe(topics)
             
     except Exception as e:

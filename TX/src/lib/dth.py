@@ -2,7 +2,6 @@ import time
 from machine import enable_irq, disable_irq,  Pin
 '''
     source: https://github.com/JurassicPork/DHT_PyCom/blob/pulses_get/dth.py
-    edited: Sidney Göhler
 '''
 
 class DTHResult():
