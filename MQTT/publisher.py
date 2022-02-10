@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
     try:
         # publisher Objekt initialisieren
-        publisher = pubsub.MQTTSensorPubSub(type = 'publisher', read_config = True)
+        publisher = pubsub.MQTTSensorPubSub(role = 'publisher', deviceSerialPort = '/dev/ttyACM1')
 
         # mit broker verbinden
         publisher.connect_mqtt()
