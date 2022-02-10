@@ -1,16 +1,27 @@
-# schimmeliger_keller
+# Luftfeuchtigkeits-Sensor-Netzwerk zur zeitnahen Detektion von Wasserschäden auf Basis von LoRa(WAN)
+### Projekt "Schimmeliger Keller"
 Uni Projekt im Modul M12 Projekt Netzbasierte Systeme im Studiengang IKT Master an der HTW Berlin. <br>
-
-
-Die Adafruit Dashboards befinden sich auf:
-### Temperatur:
+<br>
+>Im Ordner `TX` befindet sich der code für den LoRa Sender und die auslesung des Sensors
+>Im Ordner `RX` befindet sich der code für den LoRa Empfänger
+>`MQTT` beinhaltet den code zum auslesen der seriellen Schnittstelle, sowie zum publishen und subscriben and den MQTT broker
+>`simulation_stromverbrauch` beinhaltet ein Jupyter Notebook, welches den Stromverbrauch, sowie die zu erwartene Batterielaufzeit des LoRa Senders / Erfassung der Sensorwerte, simuliert.
+>`päsentation` und `Vorbereitung` enthalten informative Dokumente
+<br>
+<br>
+## Die Adafruit Dashboards:
+#### Temperatur:
 https://io.adafruit.com/b_ilja/feeds/temperature
 
-### Feuchtigkeit:
+#### Feuchtigkeit:
 https://io.adafruit.com/b_ilja/feeds/humidity
 
-### Temperatur (Alarm):
+#### Temperatur (Alarm):
 https://io.adafruit.com/b_ilja/feeds/alarm-temp
 
-### Feuchtigkeit (Alarm):
+#### Feuchtigkeit (Alarm):
 https://io.adafruit.com/b_ilja/feeds/alarm-hum
+<br>
+<br>
+#### Viel Spaß beim stöbern!
+<br>
