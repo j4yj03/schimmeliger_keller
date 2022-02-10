@@ -50,8 +50,10 @@ class MQTTSensorPubSub():
 
         try:
             with open(fn) as config_file:
+                # text aus Datei lesen und json Objekt laden
                 config_data = json.load(config_file)
 
+                # parameter auslesen
                 self.broker = config_data['adafruit']['broker']
                 self.port = config_data['adafruit']['port']
 
