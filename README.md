@@ -10,7 +10,7 @@ Uni Projekt im Modul M12 Projekt Netzbasierte Systeme im Studiengang IKT Master 
 <br>
 <br>
 
-## Die Adafruit Dashboards:
+## Die Adafruit Feed
 
 #### Temperatur:
 https://io.adafruit.com/b_ilja/feeds/temperature
@@ -25,6 +25,12 @@ https://io.adafruit.com/b_ilja/feeds/alarm-temp
 https://io.adafruit.com/b_ilja/feeds/alarm-hum
 <br>
 <br>
+
+## Adafruit Dashboard
+https://io.adafruit.com/b_ilja/dashboards/schimmliger-keller
+<br>
+<br>
+
 
 #### Viel Spaß beim stöbern!
 <br>
