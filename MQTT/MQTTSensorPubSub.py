@@ -114,6 +114,7 @@ class MQTTSensorPubSub():
         
         # callback function
         def on_connect(client, userdata, flags, rc):
+            # print(rc)
             if rc == 0:
                 print("Connected to MQTT Broker!")
                 self.client = client
@@ -123,12 +124,16 @@ class MQTTSensorPubSub():
 
         try:
             # Set Connecting Client ID
+            # print(self.client_id)
             client = mqtt_client.Client(self.client_id)
+            # print(client)
             # set credentials
+            # print(self.ADAFRUIT_IO_USERNAME, self.ADAFRUIT_IO_KEY)
             client.username_pw_set(self.ADAFRUIT_IO_USERNAME, self.ADAFRUIT_IO_KEY)
             # define callback
             client.on_connect = on_connect
             # try connect
+            # print(self.broker, self.port)
             client.connect(self.broker, self.port)
             # self.client = client
 
@@ -190,9 +195,11 @@ class MQTTSensorPubSub():
 
         if self.client is not None:
             for topic in self.ADAFRUIT_IO_TOPICS_LIST:
+                # print(topic, self.client)
                 self.client.subscribe(topic)
                 self.client.on_message = on_message
 
+            # print(self.client, self.ADAFRUIT_IO_TOPICS_LIST)
             self.client.loop_forever()
         
 

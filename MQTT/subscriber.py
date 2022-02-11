@@ -10,13 +10,15 @@ if __name__ == '__main__':
     try:
         # Subscriber Objekt erzeugen
         subscriber = pubsub.MQTTSensorPubSub(role = 'subscriber', topics = topicsList)
-
+        # print(subscriber)
         # mit mqtt broker verbinden
         subscriber.connect_mqtt()
-    
-        while True:
-            # am topic subscriben
+
+        while True: 
             subscriber.subscribe()
+        
+            
+            
             
     except Exception as e:
         print(e)
