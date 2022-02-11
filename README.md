@@ -5,7 +5,7 @@ Uni Projekt im Modul M12 Projekt Netzbasierte Systeme im Studiengang IKT Master 
 >Im Ordner `TX` befindet sich der code für den LoRa Sender und die auslesung des Sensors.
 >Der Ordner `RX` enthält den code für den LoRa Empfänger.<br>
 >`MQTT` beinhaltet den code zum auslesen der seriellen Schnittstelle, sowie zum publishen und subscriben and den MQTT broker.<br>
->`simulation_stromverbrauch` beinhaltet ein Jupyter Notebook, welches den Stromverbrauch, sowie die zu erwartene Batterielaufzeit des LoRa Senders / Erfassung der Sensorwerte, simuliert.
+>`simulation_stromverbrauch` beinhaltet ein Jupyter Notebook, welches den Stromverbrauch, sowie die zu erwartene Batterielaufzeit des LoRa Senders / Erfassung der Sensorwerte, simuliert.<br><br>
 >`päsentation` und `Vorbereitung` enthalten informative Dokumente.
 <br>
 <br>
