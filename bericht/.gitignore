@@ -1,0 +1,10 @@
+
+*.log
+*.dvi
+*.ps
+*.blg
+*.bbl
+*.nlo
+*.lol
+*.aux
+*.out
