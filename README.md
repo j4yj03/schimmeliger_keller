@@ -13,21 +13,21 @@ Der Ordner `RX` enthält den code für den LoRa Empfänger.<br>
 ## Die Adafruit Feed
 
 #### Temperatur:
-https://io.adafruit.com/b_ilja/feeds/temperature
+>https://io.adafruit.com/b_ilja/feeds/temperature
 
 #### Feuchtigkeit:
-https://io.adafruit.com/b_ilja/feeds/humidity
+>https://io.adafruit.com/b_ilja/feeds/humidity
 
 #### Temperatur (Alarm):
-https://io.adafruit.com/b_ilja/feeds/alarm-temp
+>https://io.adafruit.com/b_ilja/feeds/alarm-temp
 
 #### Feuchtigkeit (Alarm):
-https://io.adafruit.com/b_ilja/feeds/alarm-hum
+>https://io.adafruit.com/b_ilja/feeds/alarm-hum
 <br>
 <br>
 
 ## Adafruit Dashboard
-https://io.adafruit.com/b_ilja/dashboards/schimmliger-keller
+>https://io.adafruit.com/b_ilja/dashboards/schimmliger-keller
 <br>
 <br>
 <br>
