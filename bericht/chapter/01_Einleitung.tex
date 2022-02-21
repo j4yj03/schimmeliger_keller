@@ -1,0 +1,49 @@
+% !TEX root = ../Thesis.tex
+%%
+%%  Hochschule für Technik und Wirtschaft Berlin --  Projektabschlussbericht
+%%
+%% Kapitel 1
+%%
+%%
+
+\chapter{Einleitung} \label{Einleitung}
+
+\section{Vorstellung der Projektidee} \label{Vorstellung der Projektidee}
+
+Die Digitalisierung hat unsere Art und Weise wie die Gesellschaft lebt und wie verrichtete Arbeit wertgeschätzt wird, grundlegend verändert. Es sind nicht mehr die Menschen, sondern Computer und Maschinen, die den Takt vorgeben und die Maßstäbe setzen. Arbeit und soziales Zusammenleben werden in einer von freien Marktwirtschaft geleiteten Gesellschaft durch die Digitalisierung neu bestimmt. Begriffe wie Homeoffice und Telearbeit sind aus unserem heutigen Arbeitsleben kaum mehr wegzudenken, was schlussendlich in unserer globalisierten Welt zu einem Optimierungswahn geführt hat. Weitere Folgen sind unter anderem die Privatisierung von Wissen und Information, sowie die Ausbeutung von Mensch und Natur.
+
+Aus diesen und weiteren Gründen wünschen sich immer mehr Menschen einen Rückschritt zu einer Gesellschafft, bei der moralische Werte über den wirtschaftlichen Erfolg gestellt werden.
+Sie wünschen sich mehr Selbstbestimmung, unter Rücksichtnahme der vorhandenen natürlichen Ressourcen und beteiligten Personen, um Schlussendlich die vorherrschende Ellenbogengesellschaft durch eine sozialere auszutauschen.
+
+Im Diskurs werden unter Anderem Begrenzung Anderer, Grenzsetzung gegenüber Anderen, aber auch Ausgrenzung Anderer bzw. die eigene Ausgrenzung thematisiert und in Frage gestellt, wodurch sich unter anderem die Bewegung der „Urban Commoner“ herauskristallisiert hat.
+
+Urban Commons zielt auf eine Entwicklung von individuellen und gesellschaftlichen Werte und Normen, auf Basis eines Zusammenschlusses einzelner Individuen, um ein bestimmtes Gebiet oder eine bestimmte Ressource unabhängig zu gestalten.
+
+Wir, Ilja Buschujew und Sidney Göhler, möchten mit unserem Luftfeuchtigkeit-Temperatur-Sensor Netzwerk unseren Beitrag dazu leisten, um prinzipiell jedem die Möglichkeit zu bieten, seine eigenen Daten zu sammeln und diese mit seinem Umfeld zu teilen, um dem sich fortschreitenden Konkurenzgedanken innerhalb seines Umfeldes entgegen zu wirken ohne dabei auf seine individuellen Bedürfnisse verzichten zu müssen.
+
+\section{Ausgangslage und Zielsetzung} \label{Ausgangslage und Zielsetzung}
+
+Wie schon im Abschnitt \ref{Vorstellung der Projektidee} beschrieben, versucht unser Projekt „Luftfeuchtigkeits-Sensornetzwerk auf Basis von LoRa(WAN)“ das Thema des „Urban-Commons”, was aus dem englischen kommt und so viel wie: „ gesellschaftliches- oder städisches Gemeingut“ bedeutet, aufzugreifen. Aber was versteht man jetzt genau unter dem Begriff „gesellschaftliches Gemeingut“ eigentlich?  
+
+Wir Menschen sind eine soziale und kooperative Spezies, die zu weitaus wundervollen Erzeugnissen fähig ist. Der Begriff der Emergenz stellt ein wunderbares Beispiel dafür dar. Es bezeichnet die Möglichkeit der Herausbildung von neuen Eigenschaften oder Strukturen eines Systems infolge des Zusammenspiels seiner Elemente. So ist das auch in der Gesellschaft; wenn die Menschen zusammen an einer Aufgabe oder einem Projekt arbeiten, können neue Strukturen und Eigenschaften der Gesellschaft daraus wachsen. Das Kollektiv ist also mehr als die Summe der einzelnen Individuen, denn die individuelle Identität ist immer auch Teil kollektiver Identitäten. Es gibt daher kein isoliertes Ich, sondern ein Ich-in-Bezogenheit \cite{Bollier2019}. Unser Identität wird von Anfang an aus Beziehungen zu anderen heraus gebildet.  
+
+„Die Welt als Commons zu denken und zu gestalten bedeutet, unsere Kooperationsfähigkeit so zu nutzen, dass sich niemand über den Tisch gezogen fühlt, aber auch niemandem ein Platz am Tisch verweigert wird.“ \cite{Bollier2019}. 
+
+Unserer Meinung nach betrifft es vor allem, die kooperative Gestaltung des eigenen Wohnumfeldes, welches unabhängig vom Staat, Markt, den sozialen Status, Herkunft, oder dem eigenen Einkommen stattfinden soll. Dabei spielt die Selbstbestimmung eine zentrale Rolle. Daher haben wir uns auch für das Projekt „Luftfeuchtigkeits-Sensornetzwerk auf Basis von LoRa(WAN)“ entschieden, dass an dem Prinzip des Commons anknüpfen soll.  
+
+Bei unserem Projekt soll jeder der Lust oder das Bedürfnis hat die Möglichkeit haben, einen eigenen Luftfeuchtigkeits- und Temperatursensor im Keller anzubringen und so bei Tagen an dem z.B. viel Regen fällt, oder es zu einem Rohrbruch im Keller kommt, wo das Wasser sich ansammelt und eventuell zu Sachschäden oder ähnlichen führen kann, zu warnen und mit anderen Menschen dies zu teilen.  
+
+Die Sensorwerte sollen über die LoRa-Funktechnik, dessen Frequenzband, genau wie WLAN oder Bluetooth, im unlizenziertem ISM-Band liegt, versendet und damit keine Gebühren für die Nutzung des Frequenzbandes bezahlt werden. Darüber hinaus weist LoRa eine durchaus hohe Reichweite auf, sodass damit auch mehrere Gebiete gleichzeitig im Umkreis von mehreren Kilometern abgedeckt werden und damit mehr Menschen sich an dem Netzwerk anschließen können, welches bei dem LoRaWAN (Longe Range Wide Area Network) der Fall ist. Jedoch beschränken wir uns in unserem Projekt nur auf eine Punkt-zu-Punkt LoRa Kommunikation, die man aber später noch ausbauen und zu LoRaWAN erweitern könnte.  
+
+\section{Strukturierung des Projektberichtes} \label{Strukturierung des Projektberichtes}
+
+Im nachfolgenden Kapitel 2. wird die herangehensweise der Produktentwicklung, verbunden mit dem Pflichtenheft, welches aus der Auswertung des Umfragebogens heraus entsteht, sowie die resultierende theoretische Realisierung der Projektidee im Form eines Systemkonzeptes und Blockschaltbildes. Zum Schluss wird die Art und Weise des Managements für unser Projekt beschrieben. 
+
+Im Kapitel 3. wird auf die Grundlagen, wie der Funktionsweise von LoRa und LoRaWAN, sowie dem MQTT-Protokoll, eingegangen.  
+
+Im 4. Kapitel wenden wir uns der praktischen Realisierung zu. Dabei beschreiben wir zunächst einmal die Hardware, die wir für das Projekt verwendet haben. Wir gehen auf die Funktionsweise und die besonderen Eigenschaften der Mikrocontroller, der Development-Boards und den Sensortyp ein. In Form eines Schaltplans wird die Verdrahtung der einzelnen Hardware-Komponenten dargestellt und beschrieben.
+
+Im zweiten Teil der praktischen Realisierung wird die Umsetzung in der Software beschrieben. Dabei gehen wir auf die Umsetzung der Punkt-zu-Punkt LoRa-Kommunikation zwischen dem LoRa-Sender und -Empfänger ein. Es wird die Einbindung des MQTT-Protokolls in der Software beschrieben und die Visualisierung der Sensordaten im Form eines Dashboards dargestellt. Abschließend wird der Stromverbrauch im Batteriebetrieb in Form einer Simulation in Jupyter-Notebook veranschaulicht und ausgewertet. 
+
+Abschließend wird im Kapitel 5. die Arbeit mit einem Fazit, im Form der Projektauswertung, der Probleme und Herausforderungen, die während der Arbeit entstanden sind, sowie ein Ausblick auf zukünftige Verbesserungsmöglichkeiten und eines Abschlusswortes, beendet. 
+
