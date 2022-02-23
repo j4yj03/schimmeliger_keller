@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.2.23)  23 FEB 2022 15:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 21.12) (preloaded format=pdflatex 2022.2.23)  23 FEB 2022 15:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1407,7 +1407,8 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'ngerman'.
- (Abschlussbericht_Schimmeliger_Keller.aux)
+
+No file Abschlussbericht_Schimmeliger_Keller.aux.
 \openout1 = `Abschlussbericht_Schimmeliger_Keller.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
@@ -1428,7 +1429,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
 LaTeX Font Info:    ... okay on input line 47.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
 LaTeX Font Info:    ... okay on input line 47.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1532,8 +1532,6 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 47.
 LaTeX Info: Redefining \pageref on input line 47.
 LaTeX Info: Redefining \nameref on input line 47.
- (Abschlussbericht_Schimmeliger_Keller.out)
-(Abschlussbericht_Schimmeliger_Keller.out)
 \@outlinefile=\write7
 \openout7 = `Abschlussbericht_Schimmeliger_Keller.out'.
 
@@ -1596,7 +1594,9 @@ Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Abschlussbericht_Schimmeliger_Keller.bbl' foun
 d.
- (Abschlussbericht_Schimmeliger_Keller.bbl)
+
+(D:/Documents/Uni/Projekt Netzbasierte Systeme/schimmeliger_keller-1/bericht\Ab
+schlussbericht_Schimmeliger_Keller.bbl)
 Package biblatex Info: Reference section=0 on input line 47.
 Package biblatex Info: Reference segment=0 on input line 47.
 \c@lstlisting=\count478
@@ -1678,8 +1678,10 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 Package tocbasic Info: character protrusion at toc deactivated on input line 55
 .
+\tf@toc=\write8
+\openout8 = `Abschlussbericht_Schimmeliger_Keller.toc'.
 
-(Abschlussbericht_Schimmeliger_Keller.toc
+
 
 Package scrlayer-scrpage Warning: \headheight to low.
 (scrlayer-scrpage)                At least 17.99445pt needed,
@@ -1689,7 +1691,7 @@ Package scrlayer-scrpage Warning: \headheight to low.
 (scrlayer-scrpage)                e.g., setting geometry's option
 (scrlayer-scrpage)                `head=17.99445pt'.
 (scrlayer-scrpage)                I'll also decrease \topmargin on input line 5
-8.
+5.
 
 
 Overfull \vbox (7.6611pt too high) has occurred while \output is active []
@@ -1698,11 +1700,12 @@ Overfull \vbox (7.6611pt too high) has occurred while \output is active []
 [1
 
 
-])
-\tf@toc=\write8
-\openout8 = `Abschlussbericht_Schimmeliger_Keller.toc'.
+] [2
 
- [2]
+
+
+
+]
 (D:/Documents/Uni/Projekt Netzbasierte Systeme/schimmeliger_keller-1/bericht\ch
 apter/01_Einleitung.tex
 chapter 1.
@@ -1715,11 +1718,18 @@ l.22
       [1
 
 
-
-
-
-
 ]
+
+LaTeX Warning: Reference `Vorstellung der Projektidee' on page 2 undefined on i
+nput line 25.
+
+
+LaTeX Warning: Citation 'Bollier2019' on page 2 undefined on input line 27.
+
+
+LaTeX Warning: Citation 'Bollier2019' on page 2 undefined on input line 29.
+
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
 been already used, duplicate ignored
 <to be read again> 
@@ -1732,17 +1742,11 @@ apter/02_Projektplanung.tex [3] [4
 
 ]
 chapter 2.
-<pictures/scrum.png, id=113, 2340.745pt x 1146.2825pt>
+<pictures/scrum.png, id=57, 2340.745pt x 1146.2825pt>
 File: pictures/scrum.png Graphic file (type png)
 <use pictures/scrum.png>
 Package pdftex.def Info: pictures/scrum.png  used on input line 26.
 (pdftex.def)             Requested size: 298.75262pt x 146.29338pt.
-
-LaTeX Warning: Citation 'scrum2018' on page 5 undefined on input line 27.
-
-
-LaTeX Warning: Citation 'scrum2018' on page 5 undefined on input line 27.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -1768,24 +1772,56 @@ meliger_keller-1/bericht/pictures/scrum.png (PNG copy)>] [7] [8
 
 ]
 chapter 3.
-<pictures/lpwan-wlan-mobilfunk.png, id=138, 456.70625pt x 264.99pt>
+
+LaTeX Warning: Reference `fig:lpwan' on page 9 undefined on input line 14.
+
+<pictures/lpwan-wlan-mobilfunk.png, id=84, 456.70625pt x 264.99pt>
 File: pictures/lpwan-wlan-mobilfunk.png Graphic file (type png)
 <use pictures/lpwan-wlan-mobilfunk.png>
 Package pdftex.def Info: pictures/lpwan-wlan-mobilfunk.png  used on input line 
 18.
 (pdftex.def)             Requested size: 298.75262pt x 173.3453pt.
+
+LaTeX Warning: Citation 'lpwan2022' on page 9 undefined on input line 19.
+
+
+LaTeX Warning: Citation 'lpwan2022' on page 9 undefined on input line 19.
+
+
+LaTeX Warning: Citation 'lpwan2022' on page 9 undefined on input line 23.
+
 [9 <D:/Documents/Uni/Projekt Netzbasierte Systeme/schimmeliger_keller-1/bericht
 /pictures/lpwan-wlan-mobilfunk.png>]
-<pictures/868-band.png, id=154, 579.16376pt x 339.2675pt>
+
+LaTeX Warning: Citation 'Staniec2020' on page 10 undefined on input line 25.
+
+
+LaTeX Warning: Citation 'Staniec2020' on page 10 undefined on input line 27.
+
+
+LaTeX Warning: Reference `fig:868-band' on page 10 undefined on input line 29.
+
+<pictures/868-band.png, id=95, 579.16376pt x 339.2675pt>
 File: pictures/868-band.png Graphic file (type png)
 <use pictures/868-band.png>
 Package pdftex.def Info: pictures/868-band.png  used on input line 33.
 (pdftex.def)             Requested size: 384.10959pt x 225.00436pt.
 
+LaTeX Warning: Citation 'Staniec2020' on page 10 undefined on input line 34.
+
+
+LaTeX Warning: Citation 'Staniec2020' on page 10 undefined on input line 34.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Citation 'Staniec2020' on page 10 undefined on input line 40.
+
 [10]
+
+LaTeX Warning: Citation 'lora2022' on page 11 undefined on input line 42.
+
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 42.
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -1798,7 +1834,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 42--42
 agoza-breaks-long-range-lorawan-based-
  []
 
-<pictures/chirp-sf.png, id=167, 1151.30125pt x 451.6875pt>
+
+LaTeX Warning: Reference `fig:css' on page 11 undefined on input line 44.
+
+<pictures/chirp-sf.png, id=101, 1151.30125pt x 451.6875pt>
 File: pictures/chirp-sf.png Graphic file (type png)
 <use pictures/chirp-sf.png>
 Package pdftex.def Info: pictures/chirp-sf.png  used on input line 48.
@@ -1847,11 +1886,10 @@ ferences/acronyms.tex) [17
 No file Abschlussbericht_Schimmeliger_Keller.nls.
 Package tocbasic Info: character protrusion at lof deactivated on input line 95
 .
-(Abschlussbericht_Schimmeliger_Keller.lof)
 \tf@lof=\write9
 \openout9 = `Abschlussbericht_Schimmeliger_Keller.lof'.
 
- [19
+[19
 
 
 ] [20
@@ -1861,8 +1899,6 @@ Package tocbasic Info: character protrusion at lof deactivated on input line 95
 ]
 Package tocbasic Info: character protrusion at lot deactivated on input line 98
 .
-
-(Abschlussbericht_Schimmeliger_Keller.lot)
 \tf@lot=\write10
 \openout10 = `Abschlussbericht_Schimmeliger_Keller.lot'.
 
@@ -1873,8 +1909,6 @@ Package tocbasic Info: character protrusion at lot deactivated on input line 98
 ]
 Package tocbasic Info: character protrusion at lol deactivated on input line 10
 1.
-
-(Abschlussbericht_Schimmeliger_Keller.lol)
 \tf@lol=\write11
 \openout11 = `Abschlussbericht_Schimmeliger_Keller.lol'.
 
@@ -1886,43 +1920,36 @@ Package tocbasic Info: character protrusion at lol deactivated on input line 10
 runsystem(makeindex -s settings/indexstyle.ist Abschlussbericht_Schimmeliger_Ke
 ller.idx)...executed safely (allowed).
 
+ (Abschlussbericht_Schimmeliger_Keller.ind)
 
-(Abschlussbericht_Schimmeliger_Keller.ind)
-chapter without number
-Package microtype Info: Character `029' is missing
-(microtype)             in font `T1/lmr/m/sc/12'.
-(microtype)             Ignoring protrusion settings for this character.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-11.
-(C:\Users\S\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
- [25
+LaTeX Warning: Empty bibliography on input line 111.
 
 
-
-]
 (D:/Documents/Uni/Projekt Netzbasierte Systeme/schimmeliger_keller-1/bericht\Ei
-genstaendigkeitserklaerung.tex [26
-
-
-
-]
+genstaendigkeitserklaerung.tex
 chapter without number
-) [27] (Abschlussbericht_Schimmeliger_Keller.aux)
+) [25
+
+
+
+
+] (Abschlussbericht_Schimmeliger_Keller.aux)
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package rerunfilecheck Info: File `Abschlussbericht_Schimmeliger_Keller.out' ha
-s not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+Package rerunfilecheck Warning: File `Abschlussbericht_Schimmeliger_Keller.out'
+ has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Abschlussbericht_Schimmeliger_Kelle
+r.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
 
 Package biblatex Warning: Please (re)run BibTeX on the file(s):
 (biblatex)                Abschlussbericht_Schimmeliger_Keller
@@ -1934,67 +1961,25 @@ run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39860 strings out of 478659
- 791878 string characters out of 2847816
- 1638101 words of memory out of 3000000
- 57021 multiletter control sequences out of 15000+600000
- 480300 words of font info for 137 fonts, out of 8000000 for 9000
+ 39732 strings out of 478659
+ 788914 string characters out of 2847816
+ 1634442 words of memory out of 3000000
+ 56940 multiletter control sequences out of 15000+600000
+ 476626 words of font info for 130 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
  115i,20n,109p,10781b,2329s stack positions out of 5000i,500n,10000p,200000b,80000s
-
-pdfTeX warning (dest): name{figure.2.3} has been referenced but does not exist,
- replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.2.2} has been referenced but does not exist,
- replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.3.4} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{section.3.3} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.3.2.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.3.2.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.3.2.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.3.1.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.3.1.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.3.1.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-{C:/Users/S/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}<C:/User
-s/S/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/S/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/S/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/S/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/S/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/S/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/S/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/S/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/lm/lmro12.pfb><C:/Users/S/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/lm/lmtt12.pfb>
-Output written on Abschlussbericht_Schimmeliger_Keller.pdf (31 pages, 576956 by
+{C:/Users/S/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}<C:/Us
+ers/S/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/
+S/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/S/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/S/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/S/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/S/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/S/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/lm/lmro12.pfb>
+Output written on Abschlussbericht_Schimmeliger_Keller.pdf (29 pages, 509672 by
 tes).
 PDF statistics:
- 443 PDF objects out of 1000 (max. 8388607)
- 88 named destinations out of 1000 (max. 500000)
- 43854 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 350 PDF objects out of 1000 (max. 8388607)
+ 71 named destinations out of 1000 (max. 500000)
+ 41286 words of extra memory for PDF output out of 42996 (max. 10000000)
 
