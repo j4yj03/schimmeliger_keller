@@ -1,4 +1,4 @@
-% !TEX root = ../Thesis.tex
+% !TEX root = ../Abschlussbericht_Schimmeliger_Keller.tex
 %%
 %%  Hochschule für Technik und Wirtschaft Berlin --  Projektabschlussbericht
 %%
@@ -23,24 +23,32 @@
 
 
 \section{Beschreibung der Software} \label{Software}
-\subsection{Software - LoRa-Sender} \label{Sender}
+
+Für unser Projekt haben wir drei verschiedene, miteinander interagierende Software Komponenten realisiert, welche über eine Schnittstelle (Interface) miteinander kommunizieren. 
+Der Vorteil einer solchen Architektur ist, dass die einzelnen Komponenten sich unter umständen wiederverwenden lassen und sich im Idealfall so eine Software modular aufbauen lässt.
+Da wir als Programmiersprache ausschließlich Python bzw. Micropython verwendet haben, könnte man argumentieren, dass unsere Software automatisch Modular ist, da sich in der Theorie alle programmierten Komponenten in Python wiederverwenden lassen.
+Dies ist aber sehr verallgemeinert gesprochen, da gerade die Programmierung der Mikrocontroller definitiv auch Individualsoftware benötigt, welche sich aber immerhin nicht nur auf einer einzelnen Mikrocontrollerfamilie ausführen funktionieren würde.
+Anzumerken ist noch, dass für unsere finale Version des Projektes vermutlich nur eine einzelne Softwarekomponente notwendig wäre.
+
+
+\subsection{1. Komponente: Sensoransteuerung und der Versand der Daten mittels LoRa(WAN)} \label{Sender}
+
+Für die Programmierung der Mikrocontroller verwenden wir die Programmiersprache Micropython, welche eine schlanke und schnelle Implementation der Programmiersprache Python ist, welche für Mikrocontroller optimiert wurde.
+
+\subsection{2. Komponente: Emfangen der Daten und Versand ins Internet} \label{Empfänger}
 
 \ldots
 
-\subsection{Software - LoRa-Empfänger} \label{Empfänger}
-
-\ldots
-
-\subsection{Software - MQTT} \label{Software-MQTT}
+\subsection{3. Komponente: Manuelles abrufen und versenden der veröffentlichten Daten} \label{PubSub}
 
 \ldots
 
 
-\section{Dashboard - Visualisierung der Sensordaten} \label{Dashboard und Visualisierung}
+\section{Visualisierung der Sensordaten} \label{Dashboard und Visualisierung}
 
 \ldots
 
 
-\section{Simulation - Stromverbrauch im Batteriebetrieb} \label{Simulation}
+\section{Berechnung der Laufzeit im Batteriebetrieb} \label{Simulation}
 
 \ldots
