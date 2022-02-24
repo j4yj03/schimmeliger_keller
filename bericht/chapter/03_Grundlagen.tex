@@ -12,7 +12,9 @@
 
 Der Begriff LoRa steht für \textbf{L}ong \textbf{R}ange und definiert dabei ein für weite Strecken ausgelegtes, funkbasiertes Übertragungsverfahren auf der Bitübertragungsschicht (physical layer) im OSI-Schichtenmodell. Es wurde von Nicolas Sornin und Olivier Seller in deren französischen Firma Cycleo, welche später von Semtech Corporation abgekauft wurde, im Jahr 2009 entwickelt \cite{semtech2020}. 
 
-LoRa kann zu den sogenannten \textbf{L}ow-\textbf{P}ower-\textbf{W}ide-\textbf{A}rea-\textbf{N}etwork (LPWAN) Technologien zugeordnet werden, die einen energiesparsamen Betrieb und eine hohe Übertragunsreichweite aufweisen. Im Vergleich zu WLAN oder Mobilfunk, fällt jedoch die Daten- bzw. Bandbreite bei diesen Technologien relativ gering aus, sodass diese hauptsächlich bei drahtlosen Sensornetzwerken Anwendung finden, wo es darum geht Sensordaten mit einer geringen Datenrate über eine weite Funkstrecke zu übertragen. Ein Vergleich zu den funkbasierten Technologien (WLAN, LPWAN und Mobilfunk) stellt die Abb. \ref{fig:lpwan} dar.
+\paragraph{LPWAN}
+
+LoRa kann zu den sogenannten \textbf{L}ow-\textbf{P}ower-\textbf{W}ide-\textbf{A}rea-\textbf{N}etwork (LPWAN) Technologien zugeordnet werden, die einen energiesparsamen Betrieb und eine hohe Übertragunsreichweite aufweisen. Im Vergleich zu WLAN oder Mobilfunk, fällt jedoch die Datenrate bei diesen Technologien relativ gering aus, sodass diese hauptsächlich bei drahtlosen Sensornetzwerken Anwendung finden, wo es darum geht Sensordaten mit einer geringen Datenrate über weite Funkstrecken zu übertragen. Ein Vergleich zu den funkbasierten Technologien (WLAN, LPWAN und Mobilfunk) stellt die Abb. \ref{fig:lpwan} dar.
 
 \begin{figure}[h]
  \centering
@@ -21,9 +23,15 @@ LoRa kann zu den sogenannten \textbf{L}ow-\textbf{P}ower-\textbf{W}ide-\textbf{A
  \label{fig:lpwan}
 \end{figure}
 
-Die hohe Reichweite, bei gleichzeitig energiesparsamem Betrieb, erzielen die LPWAN Technologien mithilfe von Frequenzen unterhalb des 1 GHz Bereiches. Da LoRa ebenfalls zu den LPWAN Technologien zählt, nutzt diese in Europa die lizenfreien 433 und 868 MHz ISM-Frequenzbänder. Die Frequenzbänder unterscheiden sich jenach Land und Region auf der ganzen Welt. In den USA z.B. liegt der nutzbare Frequenzband bei 915 MHz. Das 433 MHz Frequenzband ist jedoch nur für unidirektionale Übertragung, wo man entweder nur Senden oder Empfangen kann, vorgesehen. Hingegen ist das 868 MHz Band bidirektional, das heißt, dass damit das gleichzeitige Senden und Empfangen gewährleistet ist \cite{lpwan2022}. 
+\paragraph{Frequenzband}
+
+Die hohe Reichweite, bei gleichzeitig energiesparsamem Betrieb, erzielen die LPWAN Technologien mithilfe von Frequenzen unterhalb des 1 GHz Bereiches. Da LoRa ebenfalls zu den LPWAN Technologien zählt, nutzt diese in Europa die lizenfreien 433 und 868 MHz ISM-Frequenzbänder. Die Frequenzbänder unterscheiden sich jenach Land und Region auf der ganzen Welt. In den USA z.B. liegt der nutzbare Frequenzband bei 915 MHz, genauer gesagt zwischen 902 MHz und 928 MHz. Das 433 MHz Frequenzband ist jedoch nur für unidirektionale Übertragung, also entweder nur für Down- oder Uplink-Übertragung, vorgesehen. Hingegen ist das 868 MHz Band bidirektional, das heißt, dass sowohl Downlink-, als auch Uplink-Übertragung möglich ist \cite{lpwan2022}. 
+
+\paragraph{Funkkanal}
 
 Die jeweiligen Frequenzbänder haben eine bestimmte Frequenzbandbreite und werden wiederum in sogenannte Funkkanäle unterteilt, mit einer bestimmten Kanalbandbreite, um das gegenseitige stören gleicher Frequenzen zu minimieren. So weist z.B. das 868 MHz Frequenzband eine Frequenzbandbreite zwischen 863 und 870 MHz auf \cite{Staniec2020}. So können benachbarte Funkknoten, die sich im gleichen 868 MHz Frequenzband befinden, aber einen unterschiedlichen Funkkanal nutzen, gleichzeitig senden und empfangen, ohne sich dabei zu stören. 
+
+\paragraph{Duty Cycle}
 
 Darüberhinaus werden weitere regulatorische Maßnahmen ergriffen, wie die Festlegung einer Zeit in Form eines \textbf{D}uty-\textbf{C}ycles (DC), welches angibt, wie lange ein Funkknoten auf das Medium pro Tag zugreifen darf. Dieser ist ein prozentualer Wert und liegt bei LoRa normalerweise bei 1\% oder 10\% je nach Funkkanal und Sendeleistung \cite{Staniec2020}. 
 
@@ -36,30 +44,53 @@ Die Abbildung \ref{fig:868-band} zeigt das 868 MHz-Frequenzband mit den jeweilig
  \label{fig:868-band}
 \end{figure}
 
+\paragraph{Zugriffsverfahren}
+
 Weitere Möglichkeiten zur Verhinderung der gegenseitigen Störung, sind die definierten Zugriffsverfahren auf das Medium, die bei LPWAN auch als \textbf{P}olite-\textbf{M}edium-\textbf{A}ccess (PMA) heißen. Darunter zählt das sogenannte \textbf{C}lear-\textbf{C}hannel-\textbf{A}ssessment (CCA), welches wiederum in \textbf{A}daptive-\textbf{F}requency-\textbf{A}gility (AFA) und \textbf{L}isten-\textbf{B}efore-\textbf{T}alk (LBT) eingeteilt werden kann. Dabei ähnelt das CCA-Zugriffsverfahren sehr stark dem Carrier-Sense-Multiple-Access/Collision-Avoidance (CSMA/CA) Zugriffsverfahren bei z.B. WLAN.
 
-Bei dem AFA Verfahren, wird einerseits die Datenrate hinsichtlich der Kanaleigenschaften angespasst und andererseits ein geeigneter Funkkanal mittels spezieller Algorithmen, die die optimale Lastverteilung zwischen den jeweiligen Funkkanälen berechnen, ausgewählt. Das LBT Verfahren stellt sicher, dass immer nur ein Funkgerät auf einen Funkkanal zugreifen kann, um die gegenseitige Störung zu verhindern. So „lauscht“ (listen) es zunächst einmal auf den Funkkanal, auf dem es zugreifen möchte, um festzustellen ob es frei ist, bevor es darauf zu „sprechen“ (talk) beginnt. Wenn das Funkgerät feststellt, dass der Kanal momentan besetzt ist, dann wartet es eine gewisse Zeit, die normalerweise zwischen 5 und 10 ms beträgt, ab, bevor es nochmal versucht auf den Kanal zuzugreifen \cite{Staniec2020}. 
+\paragraph{AFA}
+
+Bei dem AFA Verfahren, wird einerseits die Datenrate hinsichtlich der Kanaleigenschaften angespasst und andererseits ein geeigneter Funkkanal mittels spezieller Algorithmen, die die optimale Lastverteilung zwischen den jeweiligen Funkkanälen berechnen, ausgewählt. 
+
+\paragraph{LBT}
+
+Das LBT Verfahren stellt sicher, dass immer nur ein Funkgerät auf einen Funkkanal zugreifen kann, um die gegenseitige Störung zu verhindern. So „lauscht“ (listen) es zunächst einmal auf den Funkkanal, auf dem es zugreifen möchte, um festzustellen ob es frei ist, bevor es darauf zu „sprechen“ (talk) beginnt. Wenn das Funkgerät feststellt, dass der Kanal momentan besetzt ist, dann wartet es eine gewisse Zeit, die normalerweise zwischen 5 und 10 ms beträgt, ab, bevor es nochmal versucht auf den Kanal zuzugreifen \cite{Staniec2020}. 
+
+\paragraph{Reichweite und Datenrate}
 
 Die Reichweite von LoRa beträgt zwischen 2-5 km in urbanen und 5-15 km in ländlichen Regionen mit keiner direkten Sichtverbindung (non-line-of-sight). Wenn es eine direkte Sichtverbindung (line-of-sight) zwischen den Funkmasten gibt, dann kann die Reichweite auch weit über 15 km erreichen. LoRa hat zudem eine sehr gute Gebäudedurchdringung, was es zu einer idealen Technologie für den Einsatz in Kellern ausmacht. Die Datenrate liegt dabei im Bereich zwischen 0.3 kBit/s  und 5.5 kBit/s und die maximale Übertragungsleistung bei 25 mW \cite{lora2022}. Der aktuelle Rekord, bei dem die Sensorwerte noch empfangen konnten, liegt bei einer unglaublichen Reichweite von 766 km, welcher im Juli 2019 aufgestellt wurde\footnote{https://tech-journal.semtech.com/university-of-zaragoza-breaks-long-range-lorawan-based-signal-record}.
 
-Die hohe Reichweite, bei gleichzeitig geringem Energieverbrauch, ist abgesehen von der niedrigen Frequenz, dem speziellen Modulationssverfahren zu verdanken. LoRa benutzt die sogenannte \textbf{C}hirp-\textbf{S}pread-\textbf{S}pectrum (CSS) Modulationstechnik, bei der sich die Frequenz eines Signals (0 oder 1) innerhalb eines definierten Frequenzbereiches gleichmäßig ändert (siehe Abb. \ref{fig:css}). Dieses Modulationsverfahren existierte schon vor der Erfindung von LoRa und zwar bei der Unterwasserkommunikation und den Sonargeräten im maritimen Sektor, sowie der Radartechnologie in der Luftfahrt \cite{semtech2020}.
+\paragraph{CSS-Modulationsverfahren}
+
+Die hohe Reichweite, bei gleichzeitig geringem Energieverbrauch, ist abgesehen von der niedrigen Frequenz, dem speziellen Modulationsverfahren zu verdanken. LoRa benutzt die sogenannte \textbf{C}hirp-\textbf{S}pread-\textbf{S}pectrum (CSS) Modulationstechnik, bei der sich die Frequenz eines Signals (0 oder 1) innerhalb eines definierten Frequenzbereiches gleichmäßig ändert (siehe Abb. \ref{fig:css}). Dabei steht der Begriff Chirp, nicht nur für das Zwitschern, sondern auch für \textbf{C}ompressed \textbf{H}igh \textbf{I}ntensity \textbf{R}adar \textbf{P}ulse. Dieses Modulationsverfahren existierte schon vor der Erfindung von LoRa und zwar bei der Unterwasserkommunikation und den Sonargeräten im maritimen Sektor, sowie der Radartechnologie in der Luftfahrt \cite{semtech2020}. 
 
 \begin{figure}[h]
  \centering
  \includegraphics[width=0.9\textwidth]{pictures/chirp-sf}
- \caption[chirp spread spectrum]{chirp spread spectrum \cite{lora2022}}
+ \caption[Darstellung eines Chirp-Signals]{Darstellung eines Chirp-Signals \cite{lora2022}}
  \label{fig:css}
 \end{figure}
 
-Die gleichmäßige Änderung der Frequenz innerhalb eines definierten Frequenzbereiches wird als chirp (zwitschern oder zirpen) bezeichnet und ist in der Natur weit verbreitet. So kommunizieren z.B. Vögel, Fledermäuse oder Delphine ebenfalls über die zeitliche Änderung der Frequenz. Dies hat den Vorteil, dass äußere Störungen einen geringeren Einfluss auf die Signalqualität ausüben und somit das Signal-Rausch-Verhältnis sich verbessert. Außerdem ist das CSS Verfahren weniger anfällig gegenüber den sogenannten Doppler-Effekt, bei dem es zu Signalverzerrungen bei dem Empfänger, wenn der Sender oder Empfänger in Bewegung sind, kommt. 
+Die gleichmäßige Änderung der Frequenz innerhalb eines definierten Frequenzbereiches wird als chirp bezeichnet und ist in der Natur weit verbreitet. So kommunizieren z.B. Vögel, Fledermäuse oder Delphine ebenfalls über die zeitliche Änderung der Frequenz. Dies hat den Vorteil, dass äußere Störungen einen geringeren Einfluss auf die Signalqualität ausüben und somit das Signal-Rausch-Verhältnis sich verbessert. Außerdem ist das CSS Verfahren weniger anfällig gegenüber den sogenannten Doppler-Effekt, bei dem es zu Signalverzerrungen bei dem Empfänger, wenn der Sender oder Empfänger in Bewegung sind, kommt. 
 
-Durch das hinzufügen eines sogenannten Spreizfaktors (Spreading Factor oder SF), kann außerdem die Geschwindigkeit der zeitlichen Änderung der Frequenz, also die Chirprate geändert und damit auch die Datenrate variiert werden. LoRa definiert dabei insgesamt sechs Abstufungen des Spreizfaktors (SF6 bis inkl. SF12) \cite{sf2022}.
+\paragraph{Spreizfaktor}
 
-Grundsätzlich gilt; je kleiner der Spreizfaktor, desto höher ist die Chirprate und damit auch die Datenrate der Übertragung. Jedoch nimmt die Reichweite der Datenübertragung, je kleiner der Spreizfaktor ist, ab. Bei der Erhöhung des Spreizfaktors um einen Wert, halbiert sich die Chirprate und damit auch die Datenrate, aber die Reichweite wird erhöht. 
+Durch das hinzufügen eines sogenannten Spreizfaktors (Spreading Factor oder SF), kann außerdem die Geschwindigkeit der zeitlichen Änderung der Frequenz, also die Chirprate geändert und damit auch die Datenrate variiert werden. LoRa definiert dabei insgesamt sechs Abstufungen des Spreizfaktors (SF7 bis inkl. SF12). Die Zahl des Spreizfaktos besagt auch, wieviele Bits in einem Symbol für die Datenübertragung verwendet werden. Je mehr Bits in einem Symbol, desto mehr Daten können in einem Datenpaket übertragen werden \cite{sf2017}. 
+
+Grundsätzlich gilt; je kleiner der Spreizfaktor, bei gleichbleibender Bandbreite, desto höher ist die Datenrate der Übertragung. Jedoch nimmt die Reichweite der Datenübertragung, je kleiner der Spreizfaktor ist, ab. Bei der Erhöhung des Spreizfaktors um einen Wert, halbiert sich die Chirprate und damit auch die Datenrate, aber die Reichweite wird erhöht \cite{sf2022}. 
 
 Auf der anderen Seite nimmt die Batterielaufzeit mit abnehmenden Spreizfaktor zu, da die Zeit, bei der das LoRa-Funkmodul zur Übertragung der Daten aktiv sein muss, aufgrund der erhöhten Chirp- bzw. Datenrate, abnimmt. 
 
-Darüberhinaus kann durch die Erhöhung der Kanalbandbreite, bei gleichbleibenden Spreizfaktor, ebenfalls eine Erhöhung der Datenrate bewirkt werden. 
+Die Abb. \ref{fig:sf_comparison_7_12} veranschaulicht die Chirp-Signale, die den gleichen Frequenzbereich, aber unterschiedliche Spreizfaktoren nutzen, gegenüber der Zeit, die sie dafür benötigen.  
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1\textwidth]{pictures/sf_comparison_7_12}
+ \caption[Chirprate gegenüber der Zeit bei unterschiedlichen SF]{Chirprate gegenüber der Zeit bei unterschiedlichen SF \cite{sf2017}}
+ \label{fig:sf_comparison_7_12}
+\end{figure}
+
+Darüberhinaus kann durch die Erhöhung der Kanalbandbreite, bei gleichbleibenden Spreizfaktor, ebenfalls eine Erhöhung der Datenrate bewirkt werden. LoRa nutzt dabei die Kanalbandbreiten 125 kHz, 250 kHz und 500 kHz.
 
 Mit der Änderung des Spreizfaktors und damit auch der Datenrate, können „Datenstaus“ im Netzwerk aktiv reguliert werden \cite{sf2022}. 
 
@@ -87,6 +118,83 @@ Schließlich verarbeiten die Anwendungs-Server (Application Server) die von den 
 
 \section{MQTT} \label{MQTT}
 
-\ldots
+MQTT steht für \textbf{M}essage-\textbf{Q}ueue-\textbf{T}elemetry-\textbf{T}ransport und ist ein Machine-to-Machine (M2M) Kommunikationsprotokoll, welches ursprünglich von IBM zur Überwachung von Gaspipelines entwickelt, es jedoch seit 2013 von \textbf{O}rganization for \textbf{A}dvanced of \textbf{S}tructured \textbf{I}nformation \textbf{S}tandards (OASIS) als Open-Source-Protokoll übernommen wurde und weiterentwickelt wird \cite{Mangel2019}. 
 
+Es wird auf der Anwendungsschicht im OSI-Schichtenmodell eingegliedert und weist folgende Eigenschaften auf:
+
+\begin{itemize}
+ \item geringe Komplexität 
+ \item hohe Flexibilität 
+ \item geringer Protokoll-Overhead 
+ \item Verwendung von TCP als Transportprotokoll
+\end{itemize}
+
+\paragraph{Publish-Subscribe-Architektur}
+
+Im Gegensatz zu der klassischen Client-Server-Architektur, verwendet MQTT die sogenannte Publish-Subscribe-Architektur (siehe Abb. \ref{fig:mqtt-architektur}).
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.7\textwidth]{pictures/mqtt-architecture}
+ \caption[MQTT Publish-Subscribe-Architektur]{MQTT Publish-Subscribe-Architektur \cite{Mqtt2022}}
+ \label{fig:mqtt-architektur}
+\end{figure}
+
+Die MQTT-Publish-Subscribe-Architektur besteht aus drei verschiedenen Komponenten. Einem Publisher, welcher auch als Producer genannt wird, einem Subscriber (dem Consumer) und einer zentralen Komponente, dem Broker. Der Publisher ist dafür zuständig seine Sensor- bzw. Messdaten an den Broker zu schicken. Der Broker, der als ein zentraler Server dient, verteilt diese Daten dann an die jeweiligen Subscriber, die an diesen Daten von dem jeweiligen Publisher interessiert sind. Publisher und Subscriber werden auch als Clients bezeichnet. Ein Client kann sowohl ein Publisher, als auch ein Subscriber sein. Die Clients können aber keine direkte Verbindung mit einander aufbauen, sondern die Kommunikation erfolgt immer stets über den Broke \cite{Mangel2019}. 
+
+\paragraph{Topics}
+
+Der Nachrichtenaustausch erfolgt bei MQTT mithilfe von sogenannten Topics. Diese sind dem URL-Schema wie bei HTTP angelehnt und sind nichts weiter als eine Zeichenkette von Wörtern, die über den \textit{Topic-Level-Seperator} »/«  getrennt werden. Somit ergibt sich eine Topic-Hierarchie mit verschiedenen \textit{Topic-Levels}. Ein Subscriber kann jetzt mithilfe der Topics, auf die Sensorwerte der gewünschten Publisher zugreifen (subscriben). 
+
+\paragraph{Topic Levels}
+
+Die oberste Ebene ist das Level-0-Topic. Betrachtet man das beispielsweise auf ein Gebäude, so stellt es das gesamte Gebäude dar. 
+
+\begin{verbatim}
+Gebäude/
+\end{verbatim}
+
+Die danachfolgende Ebene ist das Level-1-Topic, welches im Beispiel des Gebäudes die Etagen darstellen könnte. 
+
+\begin{verbatim}
+Gebäude/Etage/
+\end{verbatim}
+
+Das Level-2-Topic wären die einzelnen Wohnungen und das Level-3-Topic die einzelnen Zimmer. 
+
+\begin{verbatim}
+Gebäude/Etage/Wohnung/Zimmer/
+\end{verbatim}
+
+Das Level-4-Topic könnten die unterschiedlichen Sensorwerte, also z.B. Temperatur oder Luftfeuchtigkeit sein. 
+
+\begin{verbatim}
+Gebäude/Etage/Wohnung/Zimmer/Temperatur
+Gebäude/Etage/Wohnung/Zimmer/Luftfeuchtigkeit
+\end{verbatim}
+
+\paragraph{Wildcards}
+
+Mit Hilfe der Wildcards kann das Subscriben für Clients vereinfacht werden. Man unterscheidet dabei zwischen den Single-Level- und Multi-Level-Wildcards. So können z.B. die Temperaturwerte für alle Etagen ausgewählt werden, wenn man im Level-1-Topic das Single-Level-Wildcard-Zeichen setzt. Diese werden mit dem Plus-Zeichen (+) definiert.   
+
+\begin{verbatim}
+Gebäude/+/Wohnung/Zimmer/Temperatur
+\end{verbatim}
+
+Mit dem Multi-Level-Wildcard, welches mit dem Hashtag-Zeichen (\#) definiert wird, können, wie der Name schon sagt, mehrere Topic-Levels, die nach dem Wildcard kommen, ausgewählt werden. Ein Beispiel mit zwei Zimmern in einer Wohnung und das setzen des Multi-Level-Wildcards \cite{Mangel2019}:
+
+\begin{verbatim}
+Gebäude/Etage-1/Wohnung-1/#
+\end{verbatim}
+Dann werden folgende Topics ausgewählt:
+\begin{verbatim}
+Gebäude/Etage-1/Wohnung-1/Zimmer-1/Temperatur
+Gebäude/Etage-1/Wohnung-1/Zimmer-1/Luftfeuchtigkeit
+Gebäude/Etage-1/Wohnung-1/Zimmer-2/Temperatur
+Gebäude/Etage-1/Wohnung-1/Zimmer-2/Luftfeuchtigkeit
+\end{verbatim}
+
+\paragraph{Quality of Service}
+
+Das Quality of Service auch QoS genannt, wird bei MQTT der Grad der Zuverlässigkeit für die Datenübertragung bezeichnet. Das MQTT Protokoll definiert dabei drei Levels von QoS. Beim QoS-Level 0 wird jede Nachricht höchstens einmal versendet. Beim QoS-Level 1 wird jede Nachricht mindestens einmal versendet und beim QoS-Level 2 wird jede Nachricht genau einmal versendet. Bei dem QoS-Level 0, bei dem die Nachricht höchstens einmal versendet wird, gibt es keine Garantie, dass der Empfänger diese auch wirklich erhält. Wobei das QoS-Level 2 die Garantie des Empfanges gewährleistet. Jedoch wird mit dem Erhöhen des QoS-Levels auch mehr traffic generiert, weil damit mehr Nachrichten für die Empfangsbestätigung zwischen den Publisher und Subscriber versendet werden.   
 
