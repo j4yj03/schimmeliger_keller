@@ -26,8 +26,6 @@ Darüberhinaus verfügt das Entwicklungsboard über WLAN (802.11b/g/n/e/i), Blue
 Es lässt sich leicht mit einem Breadboard benutzen, um damit einfache Schaltungen, ohne zu löten, testen zu können. 
 
 Für die WLAN und Bluetooth Anwendung kann man entweder die interne, im Board eingebaute, oder eine externe Antenne verwenden. Bei der Nutzung von LoRa und Sigfox muss man jedoch darauf achten, dass man unbedingt eine externe Antenne verwendet, denn sonst könnte damit der LoRa-Chip beschädigt und unbrauchbar gemacht werden. Dafür gibt es zwei Anschlussmöglichkeiten; einmal für das 868 MHz und einmal für das 433 MHz Frequenzband. 
-<<<<<<< HEAD
-=======
 
 Dafür wird der SX1276 LoRa-Transceiver-Chip der Firma Semtech verwendet.
 
@@ -36,7 +34,6 @@ Dafür wird der SX1276 LoRa-Transceiver-Chip der Firma Semtech verwendet.
 \subsection{DHT Sensormodul} \label{DHT}
 
 Bei dem verwendeten Sensor handelt es sich um einen sog. DHT Sensor. Diesen gibt es in zwei verschiedenen Ausführungen, DHT11 und DHT22, wobei sich diese im auswertbaren Messbereich, der Messgenauigkeit und im Preis unterscheiden.
->>>>>>> 18b6446251714704563d4d7d0640c6edc0f42753
 
 Dafür wird der SX1276 LoRa-Transceiver-Chip der Firma Semtech verwendet. 
 
@@ -91,7 +88,6 @@ Für die Programmierung der Mikrocontroller verwenden wir die Programmiersprache
 	\end{figure}
 \end{center}
 
-<<<<<<< HEAD
 \subsection{2. Komponente: Emfangen der Daten und Versand ins Internet} \label{Empfänger}
 
 \ldots
@@ -119,7 +115,6 @@ Zu guter Letzt wird der Microcontroller in den Schlafmodus versetzt, wobei die Z
 Diese Softwarekomponente läuft schlussendlich auf dem LoRa Gateway, bzw. in unserem Fall dem zweiten Microcontroller, welcher in unserem Fall den Empfänger bei der P2P Verbindung darstellt.
 Wie bei der ersten Komponente, wird zunächst der Microcontroller initialisiert. Des Weiteren werden Konfigurationsdaten eingelesen, welche für die optionale WiFi Verbindung und das senden an die MQTT Broker benötigt werden. Möchte man die Sensordaten einfach nur über eine serielle Schnittstelle auslesen, können diese Felder entsprechend leer gelassen werden.
 Außerdem wird in dieser Komponente das LoRa Modul direkt initialisiert, da dies nur einmalig geschehen muss.\\
-<<<<<<< HEAD
 Es beginnt eine Endlosschleife, welche in bestimmten Abständen schaut, ob an dem Socket neue, per LoRa emfpangene, Daten aufgetaucht sind. Sollte dies der fall sein, werden die empfangenens bytes decodiert und auf ihre plausibilität gebprüft. Machen die empfangenen Daten Sinn, werden sie ins JSON Format gebracht und über die Serielle Schnitstelle ausgegeben, sollte der Nutzer der Microcontroller mit dem Internet verbunden haben, werden die Daten per MQTT an die entsprechenden Broker gesendet.\\
 In der Konfigurationsdatei kann der Nutzer bestimmte Schwellwerte definieren, bei denen die Daten an unterschiedliche Broker gesendet werden. Somit können auf dem einen Feed zunächst alle Daten gesammelt werden, auf einem anderen wiederum, nur Daten die einen wirklich interessieren.
 
@@ -139,12 +134,7 @@ Möchte der Nutzer seine Daten zunächst nur lokal verwalten, hat er dennoch die
 Es beginnt eine Endlosschleife
 
 \newpage
->>>>>>> 18b6446251714704563d4d7d0640c6edc0f42753
 
-\subsection{3. Komponente: Manuelles abrufen und versenden der veröffentlichten Daten} \label{PubSub}
-
-\ldots
->>>>>>> 944ad57d5bac5d8b622c461abe635912218f9c25
 
 
 \section{Visualisierung der Sensordaten} \label{Dashboard und Visualisierung}
@@ -154,7 +144,6 @@ Es beginnt eine Endlosschleife
 
 \section{Berechnung der Laufzeit im Batteriebetrieb} \label{Simulation}
 
-<<<<<<< HEAD
 \begin{center}
 	\begin{figure}[h]
 	 
@@ -169,6 +158,5 @@ Es beginnt eine Endlosschleife
 \[t_{Laufzeit} = \frac{C_{Batterie}}{I_{avg}}\]
 
 \newpage
-=======
-\ldots
->>>>>>> 944ad57d5bac5d8b622c461abe635912218f9c25
+
+
