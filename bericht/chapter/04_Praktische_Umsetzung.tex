@@ -93,7 +93,7 @@ Die einzelnen Sensor Messwerte sind noch in Integral Anteil und Dezimal Anteil u
 	\end{figure}
 \end{center}
 
-
+Abschließend sendet der DHT Sensor ein ca. 54µs langes LOW Signal, wonach der Bus wieder auf Versorgungsspannungsniveau gezogen wird und der Sensor in den Idle Mode geht.
 
 
 
@@ -103,9 +103,8 @@ Die einzelnen Sensor Messwerte sind noch in Integral Anteil und Dezimal Anteil u
 
 
 \begin{itemize} 
-	\item Request (die Anfrage)
-	\item Repsonse (die Antwort des Sensors)
-	\item Data (die vom Sensor übertragenen Daten)
+	\item \textbf{Antenne:}  Bei der verwendeten Antenne handelt es sich um eine Multiband Antenne, welche für mehrere Freuquenzbänder (unter anderem das LoRa Freuquenzband) genutz werden kann.
+	\item \textbf{USB Kabel:} Wir verwenden ein Daten-USB Kabel welches besonders geschirmt ist und eine maximal Länge von ca. 10cm aufweist. Wir hatten teilweise Probleme mit anderen USB Kabeln.
 \end{itemize}
 
 
@@ -147,5 +146,14 @@ Für die Programmierung der Mikrocontroller verwenden wir die Programmiersprache
 
 
 \section{Berechnung der Laufzeit im Batteriebetrieb} \label{Simulation}
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.9\textwidth]{pictures/dht_kommunikation2}}
+	 \caption[DHT Bit Identifikation]{DHT Bit Identifikation}
+	 \label{fig:dhtbits}
+	\end{figure}
+\end{center}
 
 \ldots
