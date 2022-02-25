@@ -12,14 +12,22 @@
 
 
 
-\subsection{DHT11/-22 Sensormodul} \label{DHT}
+\subsection{DHT Sensormodul} \label{DHT}
 
-\ldots
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.7\textwidth]{pictures/dht11_dataframe}}
+	 \caption[DHT Paketstruktur]{DHT Paketstruktur}
+	 \label{fig:zeitplanung}
+	\end{figure}
+\end{center}
+
 
 
 \subsection{Restliche Hardware} \label{Restliche Hardware}
 
-\ldots
+
 
 
 \section{Beschreibung der Software} \label{Software}
@@ -34,6 +42,15 @@ Anzumerken ist noch, dass für unsere finale Version des Projektes vermutlich nu
 \subsection{1. Komponente: Sensoransteuerung und der Versand der Daten mittels LoRa(WAN)} \label{Sender}
 
 Für die Programmierung der Mikrocontroller verwenden wir die Programmiersprache Micropython, welche eine schlanke und schnelle Implementation der Programmiersprache Python ist, welche für Mikrocontroller optimiert wurde.
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.4\textwidth]{pictures/sens_read_lora_send}}
+	 \caption[PAP komponente 1]{Programm Ablauf: Komponente 1}
+	 \label{fig:zeitplanung}
+	\end{figure}
+\end{center}
 
 \subsection{2. Komponente: Emfangen der Daten und Versand ins Internet} \label{Empfänger}
 
