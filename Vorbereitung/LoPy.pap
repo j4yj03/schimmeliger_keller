@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="5B8F991C5849DE1A">
-  <PROJECT FORMAT="1.00" NAME="LoPy" AUTHOR="SiGoehler" CREATED="2022.02.10 16:12:36" MODIFIED="2022.02.25 14:41:52">
+<FRAME GUID="2FB25471-B62C-4EE6-BD43-F819C095ACF8" FORMAT="0000" APP_VERSION="2.2.0.8" CHECKSUM="D7341041AA46B353">
+  <PROJECT FORMAT="1.00" NAME="LoPy" AUTHOR="SiGoehler" CREATED="2022.02.10 16:12:36" MODIFIED="2022.02.25 16:21:27">
     <DIAGRAMS>
       <DIAGRAM FORMAT="1.00" ID="0" NAME="Sensor Read und LoRa Send" CREATED="2022.02.10 16:12:39" MODIFIED="2022.02.25 14:41:52">
         <LAYOUT FORMAT="1.00" COLUMNS="2" ROWS="13">
@@ -101,8 +101,8 @@ Systemzeit auslesen]]></TEXT>
           <CONNECTION FORMAT="1.00" ID="30" FROM="26" TO="28" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
-      <DIAGRAM FORMAT="1.00" ID="1" NAME="LoRa Read" CREATED="2022.02.10 16:15:51" MODIFIED="2022.02.25 10:43:38">
-        <LAYOUT FORMAT="1.00" COLUMNS="2" ROWS="15">
+      <DIAGRAM FORMAT="1.00" ID="1" NAME="LoRa Read" CREATED="2022.02.10 16:15:51" MODIFIED="2022.02.25 16:21:27">
+        <LAYOUT FORMAT="1.00" COLUMNS="2" ROWS="16">
           <ENTRIES>
             <ENTRY COLUMN="0" ROW="0" ANCHOR="True">
               <FIGURE SUBTYPE="PapTitle" FORMAT="1.00" ID="0">
@@ -147,36 +147,41 @@ WiFi initialisieren und mit Netwerk verbinden]]></TEXT>
               </FIGURE>
             </ENTRY>
             <ENTRY COLUMN="0" ROW="8">
+              <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="50">
+                <TEXT><![CDATA[Sensordaten valide?]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="0" ROW="9">
               <FIGURE SUBTYPE="PapActivity" FORMAT="1.00" ID="20">
                 <TEXT><![CDATA[Daten nach json formatieren]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="9">
+            <ENTRY COLUMN="0" ROW="10">
               <FIGURE SUBTYPE="PapCondition" FORMAT="1.00" ID="36">
                 <TEXT><![CDATA[versenden per WiFi?]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="10">
+            <ENTRY COLUMN="0" ROW="11">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="22">
-                <TEXT><![CDATA[Formartierte Daten an per MQTT an Broker senden]]></TEXT>
+                <TEXT><![CDATA[Formartierte Daten per MQTT an Broker senden]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="11">
+            <ENTRY COLUMN="0" ROW="12">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="44">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="12">
+            <ENTRY COLUMN="0" ROW="13">
               <FIGURE SUBTYPE="PapOutput" FORMAT="1.00" ID="47">
                 <TEXT><![CDATA[Formartierte Daten an serielle Schnittstelle ausgeben]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="13">
+            <ENTRY COLUMN="0" ROW="14">
               <FIGURE SUBTYPE="PapLoopEnd" FORMAT="1.00" ID="8" ASSOCIATE="6">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="0" ROW="14">
+            <ENTRY COLUMN="0" ROW="15">
               <FIGURE SUBTYPE="PapEnd" FORMAT="1.00" ID="2">
                 <TEXT><![CDATA[Ende]]></TEXT>
               </FIGURE>
@@ -191,12 +196,17 @@ WiFi initialisieren und mit Netwerk verbinden]]></TEXT>
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="9">
+            <ENTRY COLUMN="1" ROW="8">
+              <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="52">
+                <TEXT><![CDATA[]]></TEXT>
+              </FIGURE>
+            </ENTRY>
+            <ENTRY COLUMN="1" ROW="10">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="38">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
             </ENTRY>
-            <ENTRY COLUMN="1" ROW="11">
+            <ENTRY COLUMN="1" ROW="12">
               <FIGURE SUBTYPE="PapConnector" FORMAT="1.00" ID="42">
                 <TEXT><![CDATA[]]></TEXT>
               </FIGURE>
@@ -208,7 +218,7 @@ WiFi initialisieren und mit Netwerk verbinden]]></TEXT>
           <CONNECTION FORMAT="1.00" ID="5" FROM="4" TO="6" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="9" FROM="8" TO="2" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="34" FROM="33" TO="10" TEXT="" />
-          <CONNECTION FORMAT="1.00" ID="19" FROM="18" TO="20" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="19" FROM="18" TO="50" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="11" FROM="10" TO="16" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="17" FROM="16" TO="18" TEXT="ja" />
           <CONNECTION FORMAT="1.00" ID="21" FROM="20" TO="36" TEXT="" />
@@ -223,6 +233,9 @@ WiFi initialisieren und mit Netwerk verbinden]]></TEXT>
           <CONNECTION FORMAT="1.00" ID="45" FROM="44" TO="47" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="46" FROM="42" TO="44" TEXT="" />
           <CONNECTION FORMAT="1.00" ID="41" FROM="38" TO="42" TEXT="" />
+          <CONNECTION FORMAT="1.00" ID="51" FROM="50" TO="20" TEXT="ja" />
+          <CONNECTION FORMAT="1.00" ID="53" FROM="50" TO="52" TEXT="nein" />
+          <CONNECTION FORMAT="1.00" ID="54" FROM="52" TO="24" TEXT="" />
         </CONNECTIONS>
       </DIAGRAM>
       <DIAGRAM FORMAT="1.00" ID="2" NAME="MQTT publisher" CREATED="2022.02.10 16:21:13" MODIFIED="2022.02.10 16:21:13">
