@@ -175,11 +175,12 @@ Zu guter Letzt wird der Microcontroller in den Schlafmodus versetzt, wobei die Z
 Diese Softwarekomponente läuft schlussendlich auf dem LoRa Gateway, bzw. in unserem Fall dem zweiten Microcontroller, welcher in unserem Fall den Empfänger bei der P2P Verbindung darstellt.
 Wie bei der ersten Komponente, wird zunächst der Microcontroller initialisiert. Des Weiteren werden Konfigurationsdaten eingelesen, welche für die optionale WiFi Verbindung und das senden an die MQTT Broker benötigt werden. Möchte man die Sensordaten einfach nur über eine serielle Schnittstelle auslesen, können diese Felder entsprechend leer gelassen werden.
 Außerdem wird in dieser Komponente das LoRa Modul direkt initialisiert, da dies nur einmalig geschehen muss.\\
-Es beginnt eine Endlosschleife
-
-\newpage
+Es beginnt eine Endlosschleife, welche in bestimmten Abständen schaut, ob an dem Socket neue, per LoRa emfpangene, Daten aufgetaucht sind. Sollte dies der fall sein, werden die empfangenens bytes decodiert und auf ihre plausibilität gebprüft. Machen die empfangenen Daten Sinn, werden sie ins JSON Format gebracht und über die Serielle Schnitstelle ausgegeben, sollte der Nutzer der Microcontroller mit dem Internet verbunden haben, werden die Daten per MQTT an die entsprechenden Broker gesendet.\\
+In der Konfigurationsdatei kann der Nutzer bestimmte Schwellwerte definieren, bei denen die Daten an unterschiedliche Broker gesendet werden. Somit können auf dem einen Feed zunächst alle Daten gesammelt werden, auf einem anderen wiederum, nur Daten die einen wirklich interessieren.
 
 \subsection{3. Komponente: Manuelles abrufen und versenden der veröffentlichten Daten} \label{PubSub}
+
+Möchte der Nutzer seine Daten zunächst nur lokal verwalten, hat er dennoch die Möglichkeit mithilfe der beiden folgende Skripte die Daten Nachträglich per MQTT an einen Broker zu schicken, bzw. den entsprechenden MQTT Broker zu subscriben, um seine Daten an einer anderen Stelle für die weitere Verabeitung zu sammeln.\\
 
 \begin{center}
 	\begin{figure}[h]
@@ -212,6 +213,8 @@ abc
 	\end{figure}
 \end{center}
 
-abc
+\[I_{avg} = \frac{I_{aktiv}\cdot t_{aktiv} + I_{passiv} \cdot t_{passiv}}{t_{aktiv} + t_{passiv}}\]
+
+\[t_{Laufzeit} = \frac{C_{Batterie}}{I_{avg}}\]
 
 \newpage
