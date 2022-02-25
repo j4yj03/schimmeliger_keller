@@ -1,10 +1,10 @@
-% !TEX root = ../Abschlussbericht_Schimmeliger_Keller.tex
-%%
-%%  Hochschule für Technik und Wirtschaft Berlin --  Projektabschlussbericht
-%%
-%% Kapitel 2 - Vorbereitung und Konzeptentwicklung
-%%
-%%
+!TEX root = ../Abschlussbericht_Schimmeliger_Keller.tex
+%
+%  Hochschule für Technik und Wirtschaft Berlin --  Projektabschlussbericht
+%
+% Kapitel 2 - Vorbereitung und Konzeptentwicklung
+%
+%
 
 \chapter{Projektplanung} \label{Projektplanung}
 \section{Pflichtenheft} \label{Pflichtenheft}
@@ -37,7 +37,7 @@ Ziel ist dabei eine schnelle und kostngünstige Entwicklung hochwertiger Produkt
 \begin{figure}[h]
  \centering
  \includegraphics[width=0.8\textwidth]{pictures/scrum}
- \caption[Agiles arbeiten mit Scrum]{Agiles arbeiten mit Scrum } %%\cite{scrum2018}
+ \caption[Agiles arbeiten mit Scrum]{Agiles arbeiten mit Scrum}\cite{scrum2018}
  \label{fig:scrum}
 \end{figure}
 
@@ -70,7 +70,7 @@ Aus den uns gesetzten Pflichten, haben sich für uns die folgende Projektstruktu
 \begin{center}
 	\begin{figure}[h]
 		 \noindent\makebox[\textwidth]{\includegraphics[width=1.2\textwidth]{pictures/PSP}}
-		 \caption[Projektstrukturplan]{Projektstrukturplan} %%\cite{scrum2018}
+		 \caption[Projektstrukturplan]{Projektstrukturplan} \cite{scrum2018}
 
 	\end{figure}
 \end{center}
@@ -83,7 +83,7 @@ Mithilfe des Projektstrukturplanes ließen
 	\begin{figure}[h]
 	 
 	 \noindent\makebox[\textwidth]{\includegraphics[width=1.3\textwidth]{pictures/zeitplanung}}
-	 \caption[Übersicht unserer Zeitplanung]{Übersicht unserer Zeitplanung} %%\cite{scrum2018}
+	 \caption[Übersicht unserer Zeitplanung]{Übersicht unserer Zeitplanung} \cite{scrum2018}
 	 \label{fig:zeitplanung}
 	\end{figure}
 \end{center}
@@ -181,7 +181,19 @@ Neben der PyCom Plattform existieren noch andere Entwicklungsplattformen, wie z.
 
 \section{Systemkonzept und theoretische Realisierung} \label{Systemkonzept und theoretische Realisierung}
 
-\subsection{Systemkonzept} \label{Systemkonzept}
+Nachfolgend wird das Systemkozept und die Realisierung für unser Projekt „Luftfeuchtigkeits-Sensornetzwerk zur zeitnahen Detektion von Wasserschäden auf Basis von LoRa(WAN)“ in Form eines Blockschaltbildes beschrieben. 
 
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1\textwidth]{pictures/Blockschaltbild_ProNeSy}
+ \caption[Systemkonzept für unser Projekt]{Systemkonzept für unser Projekt}
+ \label{fig:systemkonzept}
+\end{figure}
 
+Für unser Projekt haben wir uns, nach der Beratung mit Prof. Scheffler, dafür entschieden mit den Pycom-Entwicklungsboards zu arbeiten. Diese Boards haben den Vorteil, dass dort schon ein LoRa-Transceiver-Chip integriert ist. 
 
+Da nun sich ein Board mit dem Sensor für die Ausmessung der Luftfeuchtigkeit im Keller befinden soll, wird das andere Board dafür benötigt, um die Sensordaten über LoRa-Kommunikation, in einem Bereich wo es eine Internetverbindung gibt, zu empfangen und über das MQTT-Protokoll an den MQTT-Broker weiterzuleiten, damit andere, die an den Sensordaten interessiert sind, darauf zugreifen können. Als Datenformat wurde sowohl für die Übertragung mittels LoRa, als auch MQTT, JSON verwendet.
+
+Zur Weiterleitung der Sensordaten an den MQTT-Broker wurden die von dem Board empfangenen Sensordaten mithilfe einer UART-Verbindung am Computer ausgelesen und in Form eines Publisher-Clients versendet. Der Subscriber-Client kann nun die jeweiligen Sensorwerte auf den jeweiligen Topics, die er einsehen möchte, empfangen.
+
+Für die Visualisierung der Sensordaten haben wir uns für die Adafruit IO Plattform entschieden\footnote{https://io.adafruit.com/}. Diese Plattform bietet abgesehen von den tollen Visualisierungen der Sensorwerte im Form eines Dashboards, auch einen MQTT-Broker an, den man mit einigen bestimmten Einschränkungen bei der kostenlosen Variante für die eigene Anwendung nutzen kann. 
