@@ -46,17 +46,43 @@ Bei dem verwendeten Sensor handelt es sich um einen sog. DHT Sensor. Diesen gibt
 Anzumerken ist noch, dass der DHT22 Sensorungefähr das doppelte Volumen des DHT11 Sensors hat. Interessant ist auch, dass der DHT11 Sensor ungefähr doppelt so häufig angesprochen werden kann, was vermutlich auf seiner weniger komplexen Schaltung beruht.\\
 Für die meisten Anwendungsfälle würde wahrscheinlich ein DHT11 Sensor (oder mehrere parallel geschaltete DHT11 Sensoren) ausreichen, um ein weitgehend zuverlässiges Ergebnis zu erhalten.
 
+\subsubsection{Kommunikation mit dem DHT Sensor} 
+
+Die Kommunikation mit dem DHT Sensor erfolgt über eine einzelne Leitung, was zum einen die Kosten reduziert, zum anderen aber auch die Reichweite der störungfreien Übertragung erhöht. Um den Sensor anzusprechen und die Daten anschließend auszulesen, muss der Datenstrom kodiert werden. Dies geschieht über ein Protokoll, welches die Kommunikation in drei Schritte aufteilt:
+\begin{itemize} 
+	\item Request (die Anfrage)
+	\item Repsonse (die Antwort des Sensors)
+	\item Data (die vom Sensor übertragenen Daten)
+\end{itemize}
 
 
 \begin{center}
 	\begin{figure}[h]
 	 
-	 \noindent\makebox[\textwidth]{\includegraphics[width=0.9\textwidth]{pictures/dht_kommunikation1}}
+	 \noindent\makebox[\textwidth]{\includegraphics[width=1.1\textwidth]{pictures/dht_kommunikation1}}
 	 \caption[DHT Kommunikation]{DHT Kommunikation}
 	 \label{fig:dhtkommunikation}
 	\end{figure}
 \end{center}
 
+
+Um den DHT Sensor dazu zu bringen, Messewerte zu senden, zieht der Microcontroller den Datenbus für mindestens 18ms auf Masse, um ihn anschließend für 40µs wieder auf Versorgungsspannungsniveau zu ziehen. Dadurch versteht der DHT Sensor, dass er beginnen soll Messwerte zu sammeln.\\
+Der DHT Sensor antwortet zunächst mit einer Sequenz, bestehend aus einem ca. 54µs langen LOW und anschließend 80µs HIGH. 
+
+\newpage
+
+Nachfolgend sendet der DHT Sensor fünf Datenpakete, bestehend aus jeweils 8 Bit, welche die einzelnen Sensor Messwerte mit einer Prüfsumme darstellen. Insgesammt sendet der DHT Sensor somit 40 Bit.
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.9\textwidth]{pictures/dht11_dataframe}}
+	 \caption[DHT Paketstruktur]{DHT Paketstruktur}
+	 \label{fig:dhtpaketstruktur}
+	\end{figure}
+\end{center}
+
+Die einzelnen Sensor Messwerte sind noch in Integral Anteil und Dezimal Anteil unterteilt, wobei die einzelnen Bits sich durch die dauer des HIGH Signals nach einem 54µs langem LOW Singal unterscheiden.
 
 \begin{center}
 	\begin{figure}[h]
@@ -70,19 +96,17 @@ Für die meisten Anwendungsfälle würde wahrscheinlich ein DHT11 Sensor (oder m
 
 
 
-\begin{center}
-	\begin{figure}[h]
-	 
-	 \noindent\makebox[\textwidth]{\includegraphics[width=0.7\textwidth]{pictures/dht11_dataframe}}
-	 \caption[DHT Paketstruktur]{DHT Paketstruktur}
-	 \label{fig:dhtpaketstruktur}
-	\end{figure}
-\end{center}
 
-
+\newpage
 
 \subsection{Restliche Hardware} \label{Restliche Hardware}
 
+
+\begin{itemize} 
+	\item Request (die Anfrage)
+	\item Repsonse (die Antwort des Sensors)
+	\item Data (die vom Sensor übertragenen Daten)
+\end{itemize}
 
 
 
