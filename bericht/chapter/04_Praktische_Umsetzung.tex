@@ -14,12 +14,68 @@
 
 \subsection{DHT Sensormodul} \label{DHT}
 
+Bei dem verwendeten Sensor handelt es sich um einen sog. DHT Sensor. Diesen gibt es in zwei verschiedenen Ausführungen, DHT11 und DHT22, wobei sich diese im auswertbaren Messbereich, der Messgenauigkeit und im Preis unterscheiden.
+
+\begin{adjustwidth}{-1in}{-1in}% adjust the L and R margins by -1 inch
+	\begin{center}
+	
+	        \begin{tabular}{ccc}
+			\toprule
+			 & \textbf{DHT11} & \textbf{DHT22}\\
+
+			\midrule
+			Betriebsspannung & \multicolumn{2}{c}{3 \dots 5 V DC}\\
+			Stromverbrauch & \multicolumn{2}{c}{max. 2,5 mA während der Konvertierung}\\
+			Temperaturbereich & -20\dots 60 °C & -40\dots 80 °C  \\
+			Temperatur Genauigkeit & ± 2,0 °C & ± 0,5 °C\\
+			Feuchtigkeit Messbereich & 20\%\dots90\% RH & 0\%\dots99,9\% RH\\
+			Feuchtigkeit Genauigkeit & ± 5,0\% RH & ± 2\dots5\%\\
+			Abtastrate & 1 Hz & 0,5 Hz \\
+
+			\midrule
+			Preis (bei reichelt elektronik) & 1,80 € & 6,80 €\\
+
+			\bottomrule
+	
+	        \end{tabular}
+		\label{}
+		\captionof{table}{Vergleich DHT11 zu DHT22} \label{tab:vergleichDHT} 
+	\end{center}
+\end{adjustwidth}
+
+Anzumerken ist noch, dass der DHT22 Sensorungefähr das doppelte Volumen des DHT11 Sensors hat. Interessant ist auch, dass der DHT11 Sensor ungefähr doppelt so häufig angesprochen werden kann, was vermutlich auf seiner weniger komplexen Schaltung beruht.\\
+Für die meisten Anwendungsfälle würde wahrscheinlich ein DHT11 Sensor (oder mehrere parallel geschaltete DHT11 Sensoren) ausreichen, um ein weitgehend zuverlässiges Ergebnis zu erhalten.
+
+
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.9\textwidth]{pictures/dht_kommunikation1}}
+	 \caption[DHT Kommunikation]{DHT Kommunikation}
+	 \label{fig:dhtkommunikation}
+	\end{figure}
+\end{center}
+
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.9\textwidth]{pictures/dht_kommunikation2}}
+	 \caption[DHT Bit Identifikation]{DHT Bit Identifikation}
+	 \label{fig:dhtbits}
+	\end{figure}
+\end{center}
+
+
+
+
 \begin{center}
 	\begin{figure}[h]
 	 
 	 \noindent\makebox[\textwidth]{\includegraphics[width=0.7\textwidth]{pictures/dht11_dataframe}}
 	 \caption[DHT Paketstruktur]{DHT Paketstruktur}
-	 \label{fig:zeitplanung}
+	 \label{fig:dhtpaketstruktur}
 	\end{figure}
 \end{center}
 
