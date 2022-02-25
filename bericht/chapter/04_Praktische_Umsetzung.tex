@@ -26,10 +26,28 @@ Darüberhinaus verfügt das Entwicklungsboard über WLAN (802.11b/g/n/e/i), Blue
 Es lässt sich leicht mit einem Breadboard benutzen, um damit einfache Schaltungen, ohne zu löten, testen zu können. 
 
 Für die WLAN und Bluetooth Anwendung kann man entweder die interne, im Board eingebaute, oder eine externe Antenne verwenden. Bei der Nutzung von LoRa und Sigfox muss man jedoch darauf achten, dass man unbedingt eine externe Antenne verwendet, denn sonst könnte damit der LoRa-Chip beschädigt und unbrauchbar gemacht werden. Dafür gibt es zwei Anschlussmöglichkeiten; einmal für das 868 MHz und einmal für das 433 MHz Frequenzband. 
-
 Dafür wird der SX1276 LoRa-Transceiver-Chip der Firma Semtech verwendet.
 
+Für die Spannungsversorgung wird lediglich ein Mikro-USB-Kabel, welches an eine USB-Schnittstelle am Computer das Board mit 3.3-5.5V versorgt, benötigt. Neben der Spannungsversorgung kann damit auch das Board direkt programmiert werden. 
+
+Für die Programmierung des Boards kann man auf unterschiedliche Entwicklungsumgebungen zurückgreifen. So werden die Entwicklungsumgebungen wie Atom und Visual Studio Code (VSC) von dem Hersteller mit einem sogenannten Pymakr-Plugin für einen reibungslosen Upload und das Flashen des Boards unterstützt. Wenn das Benutzen des Plugins nicht möglich ist, wie unter anderem es teilweise bei uns der Fall war, so kann man auf das von PyCom angebotene File-Transfer-Protocol (FTP) zugreifen. Dafür muss man zunächst einmal einen FTP-Server auf dem Board erzeugen, mithilfe dessen man dann auf das Filesystem des Boards Zugriff hat. Damit der Code im Board läuft, muss man lediglich die jeweiligen Dateien (hauptsächlich die main.py Datei) auf das Board mit FTP-Befehlen in den Flash-Speicher kopieren. 
+
+Für die Unterstützung von LoRa bietet Pycom zwei Möglichkeiten an: LoRa-RAW und LoRaWAN. 
+Mit LoRa-RAW kann eine direkte Punkt-zu-Punkt Verbindung für die Kommunikation zwischen zwei LoRa-Knoten hergestellt werden. Mit LoRaWAN kann darüberhinaus der LoRa-Knoten in das TheThingsNetwork (TTN) oder das Chirpstack-Netzwerk eingebunden werden. Die Bandbreite kann zwischen den Werten 125, 250 und 500 kHz variiert werden. Außerdem kann man den Spreizfaktor zwischen 7 und 12 auswählen. Für die Synchronisation kann die Preamble mit der Anzahl der Chirps angepasst werden, wobei der Standardwert bei acht liegt. Wieviele „Chips” ein Symbol definieren, kann man mit der Coderate einstellen.
+Darüberhinaus ist zu erwähnen, dass PyCom mit PyMesh, auch die Möglichkeit eines LoRa-Mesh-Netzwerkes auf der MAC-Ebene anbietet. Es ist dabei wichtig, dass alle LoRa-Knoten das gleiche Frequenzband, Spreizfaktor und Bandbreite verwenden. Es verwendet dazu ein hierarchisches Mesh-Netzwerkmodell.
+
 \subsection{Mögliche Schaltung zum Selbstbauen} \label{LoPy4}
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=1.1\textwidth]{pictures/sensor_schematic}}
+	 \caption[Möglicher Schaltplan für einen Selbstbau]{Möglicher Schaltplan für einen Selbstbau}
+	 \label{fig:dhtkommunikation}
+	\end{figure}
+\end{center}
+
+Der Microcontroller kann ein beliebiger ESP32 basierender Microcontroller sein, wobei der LoPy4 das LoRa Modul bereits integriert hat. Der Transistor kann ein generischern NPN-Transistor sein und der Wiederstand R2 ist theoretisch auch optional, wenn der Microcontroller einen internen Pull-Up Wiederstand dazuschalten kann.
 
 \subsection{DHT Sensormodul} \label{DHT}
 
@@ -157,7 +175,7 @@ Jegliche Konfigurationsmöglichkeiten unserer Programme haben wir in extern Date
 Um das anbinden mehrere Sensonren zu ermöglichen haben wir uns dazu entschieden, eine Klasse zu programmieren, welche eben dieses Sensorobjekt darstellen soll. Der Treiber wurde von einem Benutzer auf github veröffentlicht, funktioniert aber im Prinzip nach dem oben genannten Verfahren, was bedeutet, dass zunächst eine gewisse Zeit gewartet wird, anschließend das Bus auf GND Niveau gezogen wird, um den Sensor mitzuteilen, dass er doch bitte anfängt Messwerte zu sammeln. Nachdem der Sensor eine Antwort gegeben hat, werden die empfangenen Bits zunächst alle gesammelt und anschließend in 5 einzelne Bytepakete decodiert. Abschließend prüft der Treiber mithilfer der Prüfsumme, ob die empfangenen Daten Sinn machen.\\ Je nach Sensortyp (DHT11/22) werden die empfangenen Daten nochmals in den richtigen Wertebereich \grqq verschoben\grqq.\\
 Anschließend werden für alle initialisierten Sensoren, über den Treiber die aktuellen Messwerte eingelesen und in ein bytearray verpackt, wobei hier schon das erste mal geschaut wird, ob die gemessen Sensorwerte überhaupt Sinn ergeben bzw. in dem vom Hersteller angebenen Bereich fallen, da es selbst bei der korrekten Dekodierung immernoch zu unsinnigen Werten kommen kann. 
 Wurde dieser Test erfolgreich bestanden wird im Microcontroller über das LoRa Modul über eine Bibliothek initialisiert und die ermittelten Werte werden versendet.\\ Ein weiterer Bestandteil des bytearrays ist die aktuelle Systemzeit, welche verwendet wird, um im späteren Verlauf ermitteln zu können, ob es sich wirklich um ein neues empfangenes Datenpaket handelt, oder ob das Paket in irgendeinem Puffer zunächst verloren gegangen ist und zufällig wieder ins Tageslicht gerückt ist.\\
-Zu guter Letzt wird der Microcontroller in den Schlafmodus versetzt, wobei die Zeit, die er im stromsparenden Modus verbringt benutzerdefiniert ist. Die Systemzeit läuft auch im Schlafmodus weiter, solange der Microcontroller mit Strom versorgt wird, nur das LoRa-Modul muss neu initialisiert werden.\\
+Zu guter Letzt wird der Microcontroller in den Schlafmodus versetzt, wobei die Zeit, die er im stromsparenden Modus verbringt benutzerdefiniert ist. Anzumerken ist hier noch, dass der Sensor über einen Transistor ausgeschaltet wird um noch etwas mehr Strom zu sparen und bei der Neuinitialisierung wieder angeschaltet wird. Die Systemzeit läuft auch im Schlafmodus weiter, solange der Microcontroller mit Strom versorgt wird, nur das LoRa-Modul muss neu initialisiert werden.\\
 
 \newpage
 
@@ -181,6 +199,11 @@ In der Konfigurationsdatei kann der Nutzer bestimmte Schwellwerte definieren, be
 \subsection{3. Komponente: Manuelles abrufen und versenden der veröffentlichten Daten} \label{PubSub}
 
 Möchte der Nutzer seine Daten zunächst nur lokal verwalten, hat er dennoch die Möglichkeit mithilfe der beiden folgende Skripte die Daten Nachträglich per MQTT an einen Broker zu schicken, bzw. den entsprechenden MQTT Broker zu subscriben, um seine Daten an einer anderen Stelle für die weitere Verabeitung zu sammeln.\\
+Dafür haben wir eine Pythonklasse bereitgestellt, welche es dem Nutzer ermöglicht, entweder ein MQTT Publisher und/oder Subscriber Objekt zu erzeugen.\\
+Im Falle des Publishers hat man die Möglichkeit, mehrere Schwellwerte in einer Konfigurationsdatei abzulegen, sodass je nach Bedarf ein oder mehrere Feeds mit Daten gefüttert werden können.\\\\
+Im Prinzip laufen beide Programme so, dass innerhalb einer Endlosschleife, entweder an der Seriellen Schnittstelle oder am MQTT Broker angefragt wird, ob neue Datensätze zur verfügung stehen. Beim Publisher gibt es noch die besonderheit, dass dieser die Daten erneut auf ihre Plausibilität prüft, wofür unter anderen ein Zeitstempel hilfreich ist, um zu erkennen, dass es sich um einen neuen Datensatz handelt.\\
+Ist dies der Fall, werden die Daten an den Broker gesendet.\\
+Der Subscriber gibt neue Datensätze in der Konsole/Serielle Schnittstelle aus, sodass diese ggf. weiter verarbeitet werden können.
 
 \begin{center}
 	\begin{figure}[h]
@@ -191,13 +214,11 @@ Möchte der Nutzer seine Daten zunächst nur lokal verwalten, hat er dennoch die
 	\end{figure}
 \end{center}
 
-abc
-
-\newpage
 
 \section{Visualisierung der Sensordaten} \label{Dashboard und Visualisierung}
 
-abc
+Für die Visualisierung unserer Sensordaten haben wir auf \textit{adafruit.io} einige Feeds erstellt welche zum Einen die Rohdaten, also alle Sensordaten, zum Anderen nur mit Daten, welche einen bestimmten Schwellwert überschritten haben, gefüttert werden. Die Feeds sind frei zugänglich und können von jedem gefüttert und betrachtet werden.\\
+Zur Visualisierung haben wir ein Dashboard erstellt, welches alle Feed in einem Liniendiagramm darstellt.
 
 \newpage
 
@@ -213,8 +234,30 @@ abc
 	\end{figure}
 \end{center}
 
+Der durchschnittliche Stromverbrauch je Programmzyklus ergibt sich somit aus dem Tastverhältnis zwischen aktivem und passivem Modus (duty cycle).
+
 \[I_{avg} = \frac{I_{aktiv}\cdot t_{aktiv} + I_{passiv} \cdot t_{passiv}}{t_{aktiv} + t_{passiv}}\]
 
+Anzumerken ist hier jedoch noch, dass der Microcontroller eine gewisse Zeit und einen gewissen Strom benötigt, um den Modus zu wechseln. Diese Kennzahlen sollten für ein präzises Modell aus dem Datenblatt entnommen werden, was wir für unser Projekt erstmal vernachlässigt haben.
+
+\subsubsection{Berechnung der durchschnittlichen Laufzeit im Bettriebetrieb}
+
+Die Laufzeit im Betteriebetrieb lässt sich über die Kapazität der Batterie(n) und des durchschnittlichen Stromverbrauchs ermitteln
+
 \[t_{Laufzeit} = \frac{C_{Batterie}}{I_{avg}}\]
+
+Nachfolgend wird illustriert, wie sich die Batterielaufzeit mit der zunahme der Programmzyklusdauer erhöht. Die farbliche Markierung gibt an, ob der Sensor die gesammt Zeit angeschalten bleibt, oder über einen Schalter bzw. Transistor nur im Moment der Ermittlung der Messwerte eingeschaltet wird.
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=1.1\textwidth]{pictures/batterielaufzeit}}
+	 \caption[Potentiell mögliche Batterielaufzeiten in Abhängigkeit zur Programmzykluszeit]{Potentiell mögliche Batterielaufzeiten in Abhängigkeit zur Programmzykluszeit}
+	 \label{fig:batterielaufzeit}
+	\end{figure}
+\end{center}
+
+Zu sehen ist, dass die Batterielaufzeit in beiden Fällen mit der Zunahme der Programmzyklusdauert ansteigt, ab einer bestimmten Dauer, aber nach und nach weniger zunimmt.\\\\
+Eine ausführlichere Simulation findet man im beiliegenden Jupyter Notebook.
 
 \newpage

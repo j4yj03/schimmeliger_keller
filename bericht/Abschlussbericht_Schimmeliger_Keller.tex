@@ -19,7 +19,7 @@
 \autor{Sidney Göhler und Ilja Buschujew}
 % \matrikelnr{s0559016}
 %% Version und Abgabedatum
-\version{0.2$\alpha$} 	%ToDo: wird derzeit noch nicht genutzt
+%\version{0.2$\alpha$} 	%ToDo: wird derzeit noch nicht genutzt
 \datum{25.02.2022}   	% Abgabedatum der Arbeit
 %% Typ der Arbeit
 \thesistyp{Projektabschlussbericht}
@@ -50,9 +50,9 @@
 \maketitle
 
 %% Inhaltsverzeichnis erstellen
-\cleardoubleoddpage
+%\cleardoubleoddpage
 \pagenumbering{Roman}
-\tableofcontents \clearpage
+\tableofcontents %\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -60,10 +60,10 @@
 %% Kurzzusammenfassung
 % \input{abstract/Abstract_de.tex}
 % \input{abstract/Abstract_en.tex}
-\clearpage
+%\clearpage
 
 %% Hauptteil
-\cleardoubleoddpage
+%\cleardoubleoddpage
 \pagenumbering{arabic}
 
 
@@ -74,9 +74,9 @@
 \input{chapter/05_Fazit.tex}
 
 %% Anhang
-\cleardoubleoddpage
-\appendix
-\input{chapter/99_Anhang.tex}
+%\cleardoubleoddpage
+%\appendix
+%\input{chapter/99_Anhang.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,30 +85,30 @@
 %% Abkürzungsverzeichnis
 % 	Befehl: makeindex Thesis.nlo -s nomencl.ist -o Thesis.nls
 %
-\input{references/acronyms.tex}
-\cleardoublepage
-\markboth{\nomname}{\nomname}
-\printnomenclature
+%\input{references/acronyms.tex}
+%\cleardoublepage
+%\markboth{\nomname}{\nomname}
+%\printnomenclature
 
 %% Abbildungsverzeichnis
-\listoffigures \clearpage
+\listoffigures %\clearpage
 
 %% Tabellenverzeichnis
-\listoftables \clearpage
+\listoftables %\clearpage
 
 %% Quelltextverzeichnis
-\lstlistoflistings \clearpage
+%\lstlistoflistings \clearpage
 
 %% Stichwortverzeichnis
 %	Befehl: makeindex Thesis
 %
-\printindex \clearpage
+\printindex %\clearpage
 
 %% Literaturverzeichnis
 %   Befehl: biber Thesis
 %
 \printbibliography[heading=bibintoc, title={\babel{Literaturverzeichnis}{Bibliography}}]
-\clearpage
+%\clearpage
 %Literaturverzeichnisse getrennt nach Stichwort
 %\printbibliography[heading=bibintoc, keyword={book}, title={Literaturverzeichnis}]\clearpage
 %\printbibliography[heading=bibintoc, keyword={online}, title={Onlinequellen}]\clearpage

@@ -40,6 +40,8 @@ Ziel ist dabei eine schnelle und kostngünstige Entwicklung hochwertiger Produkt
 	 \label{fig:scrum}
 \end{figure}
 
+\newpage
+
 Die Verantwortlichkeiten liegt beim sogenannten Scrum-Team, welches sich aus folgenden Rollen ergibt:
 \begin{adjustwidth}{-1in}{-1in}% adjust the L and R margins by -1 inch
 	\begin{center}
@@ -48,7 +50,7 @@ Die Verantwortlichkeiten liegt beim sogenannten Scrum-Team, welches sich aus fol
 			{Rolle} & {Besetzung in unserem Projekt} & {Anmerkung}\\
 
 			\midrule
-			{Product Owner} & {HTW Berlin} & {Vertreten durch Prod. Dr. Thomas Scheffler}\\
+			{Product Owner} & {HTW Berlin} & {v.d. Prof. Dr. Thomas Scheffler}\\
 			{Scrum Master} & {-} & {-}\\
 			{Projektmanager} & {Sidney Göhler} & {-}\\
 			{Scrum Team} & {Sidney Göhler, Ilja Buschujew} & {-}\\
@@ -59,8 +61,6 @@ Die Verantwortlichkeiten liegt beim sogenannten Scrum-Team, welches sich aus fol
 \end{adjustwidth}
 
 
-\newpage
-
 \subsection{Projektstruktur} \label{Projektstruktur}
 
 Aus den uns gesetzten Pflichten, haben sich für uns die folgende Projektstruktur grob herauskristalisiert, welche im laufenden Prozess immer weiter in Arbeitspakete verfeinert wurde.
@@ -68,7 +68,7 @@ Aus den uns gesetzten Pflichten, haben sich für uns die folgende Projektstruktu
 
 \begin{center}
 	\begin{figure}[h]
-		 \noindent\makebox[\textwidth]{\includegraphics[width=1.2\textwidth]{pictures/PSP}}
+		 \noindent\makebox[\textwidth]{\includegraphics[width=1\textwidth]{pictures/PSP}}
 		 \caption[Projektstrukturplan]{Projektstrukturplan} 
 
 	\end{figure}
@@ -76,7 +76,6 @@ Aus den uns gesetzten Pflichten, haben sich für uns die folgende Projektstruktu
 
 Mithilfe des Projektstrukturplanes ließen grob die einzelnen Arbeitspakete ableiten, wobei diese sich, wie bereits erwähnt, immer weiter verfeinert haben. Der enstehende Aufwand ließ sich zu Beginn noch nicht richtig abschätzen, dennoch konnten wir einen groben Zeitplan für die einzelnen Meilensteine abschätzen.
 
-\newpage
 
 \subsection{Zeitplanung} \label{Zeitplanung}
 
@@ -205,11 +204,9 @@ Für unser Projekt haben wir uns, nach der Beratung mit Prof. Scheffler, dafür 
 
 Da nun sich ein Board mit dem Sensor für die Ausmessung der Luftfeuchtigkeit im Keller befinden soll, wird das andere Board dafür benötigt, um die Sensordaten über LoRa-Kommunikation, in einem Bereich wo es eine Internetverbindung gibt, zu empfangen und über das MQTT-Protokoll an den MQTT-Broker weiterzuleiten, damit andere, die an den Sensordaten interessiert sind, darauf zugreifen können. Als Datenformat wurde sowohl für die Übertragung mittels LoRa, als auch MQTT, JSON verwendet.
 
-Zur Weiterleitung der Sensordaten an den MQTT-Broker wurden die von dem Board empfangenen Sensordaten mithilfe einer UART-Verbindung am Computer ausgelesen und in Form eines Publisher-Clients versendet. Der Subscriber-Client kann nun die jeweiligen Sensorwerte auf den jeweiligen Topics, die er einsehen möchte, empfangen.
+Zur Weiterleitung der Sensordaten an den MQTT-Broker wurden die von dem Board empfangenen Sensordaten mithilfe einer UART-Verbindung am Computer ausgelesen und in Form eines Publisher-Clients versendet. Der Subscriber-Client kann nun die jeweiligen Sensorwerte auf den jeweiligen Topics, die er einsehen möchte, empfangen.\\\\
 
 Für die Visualisierung der Sensordaten haben wir uns für die Adafruit IO Plattform entschieden\footnote{https://io.adafruit.com/}. Diese Plattform bietet abgesehen von den tollen Visualisierungen der Sensorwerte im Form eines Dashboards, auch einen MQTT-Broker an, den man mit einigen bestimmten Einschränkungen bei der kostenlosen Variante für die eigene Anwendung nutzen kann. 
-
-=======
 
 \begin{figure}[h]
 	 \centering
