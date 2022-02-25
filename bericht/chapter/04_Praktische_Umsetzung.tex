@@ -10,7 +10,22 @@
 \section{Verwendete Hardware} \label{Hardware}
 \subsection{LoPy4-Development-Board} \label{LoPy4}
 
+Das LoPy4 ist ein von Pycom Ltd. hergestelltes Development-Board für die Anwendungen im IoT-Bereich. Es unterstützt viele Schnittstellen und Übertragungsprotokolle, die für IoT-Anwendung von großer Relevanz sind. Die Abbildung \ref{fig:lopy-blockschaltbild} stellt die Funktionalitäten des LoPy4-Development-Boards in Form eines Blockdiagrammes  dar. 
 
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=1\textwidth]{pictures/blockdiagram_lopy}
+ \caption[LoPy4-Blockdiagramm]{LoPy4-Blockdiagramm}\cite{Lopy2022}
+ \label{fig:systemkonzept}
+\end{figure}
+
+Im Kern befindet sich ein Espressif ESP32 mit Xtensa dual-core-32-bit LX6 Mikroprozessor. Als Speicher verwendet es 520KB + 4MB RAM und einen externen 8MB Flash-Speicher, wohin auch der Code dann geladen wird. 
+
+Zur Ein-/Ausgabe und der Steuerung von Sensoren und Aktoren, bietet das Board vielseitige Peripherien wie GPIO, ADC, DAC, SPI, I2C, UART und PWM an. 
+
+Darüberhinaus verfügt das Entwicklungsboard über WLAN (802.11b/g/n/e/i), Bluetooth/Bluetooth Low Energy (BLE) v4.2, sowie LoRa und Sigfox Protokolle.  
+
+Es lässt sich leicht mit einem Breadboard benutzen, um damit einfache Schaltungen, ohne zu löten, testen zu können. 
 
 \subsection{DHT Sensormodul} \label{DHT}
 
