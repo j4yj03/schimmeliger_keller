@@ -20,12 +20,16 @@ Das LoPy4 ist ein von Pycom Ltd. hergestelltes Development-Board für die Anwend
 \end{figure}
 
 Im Kern befindet sich ein Espressif ESP32 mit Xtensa dual-core-32-bit LX6 Mikroprozessor. Als Speicher verwendet es 520KB + 4MB RAM und einen externen 8MB Flash-Speicher, wohin auch der Code dann geladen wird. 
-
 Zur Ein-/Ausgabe und der Steuerung von Sensoren und Aktoren, bietet das Board vielseitige Peripherien wie GPIO, ADC, DAC, SPI, I2C, UART und PWM an. 
 
 Darüberhinaus verfügt das Entwicklungsboard über WLAN (802.11b/g/n/e/i), Bluetooth/Bluetooth Low Energy (BLE) v4.2, sowie LoRa und Sigfox Protokolle.  
-
 Es lässt sich leicht mit einem Breadboard benutzen, um damit einfache Schaltungen, ohne zu löten, testen zu können. 
+
+Für die WLAN und Bluetooth Anwendung kann man entweder die interne, im Board eingebaute, oder eine externe Antenne verwenden. Bei der Nutzung von LoRa und Sigfox muss man jedoch darauf achten, dass man unbedingt eine externe Antenne verwendet, denn sonst könnte damit der LoRa-Chip beschädigt und unbrauchbar gemacht werden. Dafür gibt es zwei Anschlussmöglichkeiten; einmal für das 868 MHz und einmal für das 433 MHz Frequenzband. 
+
+Dafür wird der SX1276 LoRa-Transceiver-Chip der Firma Semtech verwendet.
+
+\subsection{Mögliche Schaltung zum Selbstbauen} \label{LoPy4}
 
 \subsection{DHT Sensormodul} \label{DHT}
 
@@ -153,7 +157,7 @@ Jegliche Konfigurationsmöglichkeiten unserer Programme haben wir in extern Date
 Um das anbinden mehrere Sensonren zu ermöglichen haben wir uns dazu entschieden, eine Klasse zu programmieren, welche eben dieses Sensorobjekt darstellen soll. Der Treiber wurde von einem Benutzer auf github veröffentlicht, funktioniert aber im Prinzip nach dem oben genannten Verfahren, was bedeutet, dass zunächst eine gewisse Zeit gewartet wird, anschließend das Bus auf GND Niveau gezogen wird, um den Sensor mitzuteilen, dass er doch bitte anfängt Messwerte zu sammeln. Nachdem der Sensor eine Antwort gegeben hat, werden die empfangenen Bits zunächst alle gesammelt und anschließend in 5 einzelne Bytepakete decodiert. Abschließend prüft der Treiber mithilfer der Prüfsumme, ob die empfangenen Daten Sinn machen.\\ Je nach Sensortyp (DHT11/22) werden die empfangenen Daten nochmals in den richtigen Wertebereich \grqq verschoben\grqq.\\
 Anschließend werden für alle initialisierten Sensoren, über den Treiber die aktuellen Messwerte eingelesen und in ein bytearray verpackt, wobei hier schon das erste mal geschaut wird, ob die gemessen Sensorwerte überhaupt Sinn ergeben bzw. in dem vom Hersteller angebenen Bereich fallen, da es selbst bei der korrekten Dekodierung immernoch zu unsinnigen Werten kommen kann. 
 Wurde dieser Test erfolgreich bestanden wird im Microcontroller über das LoRa Modul über eine Bibliothek initialisiert und die ermittelten Werte werden versendet.\\ Ein weiterer Bestandteil des bytearrays ist die aktuelle Systemzeit, welche verwendet wird, um im späteren Verlauf ermitteln zu können, ob es sich wirklich um ein neues empfangenes Datenpaket handelt, oder ob das Paket in irgendeinem Puffer zunächst verloren gegangen ist und zufällig wieder ins Tageslicht gerückt ist.\\
-Zu guter Letzt wird der Microcontroller in den Schlafmodus versetzt, wobei die Zeit, die er im stromsparenden Modus verbringt benutzerdefiniert ist. Die Systemzeit läuft auch im Schlafmodus weiter, solange der Microcontroller mit Strom versorgt wird.\\
+Zu guter Letzt wird der Microcontroller in den Schlafmodus versetzt, wobei die Zeit, die er im stromsparenden Modus verbringt benutzerdefiniert ist. Die Systemzeit läuft auch im Schlafmodus weiter, solange der Microcontroller mit Strom versorgt wird, nur das LoRa-Modul muss neu initialisiert werden.\\
 
 \newpage
 
@@ -168,7 +172,10 @@ Zu guter Letzt wird der Microcontroller in den Schlafmodus versetzt, wobei die Z
 	\end{figure}
 \end{center}
 
-abc
+Diese Softwarekomponente läuft schlussendlich auf dem LoRa Gateway, bzw. in unserem Fall dem zweiten Microcontroller, welcher in unserem Fall den Empfänger bei der P2P Verbindung darstellt.
+Wie bei der ersten Komponente, wird zunächst der Microcontroller initialisiert. Des Weiteren werden Konfigurationsdaten eingelesen, welche für die optionale WiFi Verbindung und das senden an die MQTT Broker benötigt werden. Möchte man die Sensordaten einfach nur über eine serielle Schnittstelle auslesen, können diese Felder entsprechend leer gelassen werden.
+Außerdem wird in dieser Komponente das LoRa Modul direkt initialisiert, da dies nur einmalig geschehen muss.\\
+Es beginnt eine Endlosschleife
 
 \newpage
 
