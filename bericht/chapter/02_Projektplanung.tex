@@ -10,6 +10,7 @@
 
 Auch wenn wir in erster Linie ein Produkt aus freien Inhalten entwickeln wollen, müssen wir an einigen Stellen den Kompromiss zwischen freiem Inhalt und Entwicklungsaufwand eingehen, da wir in der zeitlichen Ressource begrenzt sind.
 Im Zuge der Projektplanung haben wir eine Umfrage durchgeführt, woraus sich unser Pflichtenheft abgeleitet hat.
+<<<<<<< HEAD
 % 
 % \begin{itemize} 
 % 	\item \textbf{Anschaffungskosten:} Unser Persona möchte maximal 40 Euro in dieses Projekt investieren, um einen funktionsfähigen Funksensor zu erhalten. 
@@ -21,6 +22,19 @@ Im Zuge der Projektplanung haben wir eine Umfrage durchgeführt, woraus sich uns
 % 	\item \textbf{Datenschutz:} Der Endnutzer möchte selbst bestimmen, ob und mit wem er seine gesammelten Daten teilt. Des weiteren möchte er selbst bestimmen, ab welchem Zeitpunkt/Schwellwert er über den aktuellen Datenstand informiert wird.
 % 
 % \end{itemize}
+=======
+
+ \begin{itemize} 
+ 	\item \textbf{Anschaffungskosten:} Unser Persona möchte maximal 40 Euro in dieses Projekt investieren, um einen funktionsfähigen Funksensor zu erhalten. 
+ 	
+ 	\item \textbf{Laufende Kosten:} Um die laufenden Kostn gering zu halten, soll der Funksensor möglichst stromsparend und wartungsarm sein. Die Hardware sollte ihren Strom über einen Akku bzw. eine Batterie beziehen.
+ 	
+ 	\item \textbf{Einsatzgebiet:} Da der Sensor am Mikrocontroller im Bereich von -40°C\dots80°C arbeitet und auch in Gebieten mit einer relativen Feuchtigkeit von bis zu 100\% zum Einsatz kommen soll, muss das fertige Endprodukt mindestens diesen Anforderungen entsprechen. Die Entwicklung eines Gehäuses erfolgt aber erst nach Erreichen der Serienreife.
+ 	
+ 	\item \textbf{Datenschutz:} Der Endnutzer möchte selbst bestimmen, ob und mit wem er seine gesammelten Daten teilt. Des weiteren möchte er selbst bestimmen, ab welchem Zeitpunkt/Schwellwert er über den aktuellen Datenstand informiert wird.
+ 
+ \end{itemize}
+>>>>>>> baa7d21123956ad552f736e3f4632aba95a834ca
 
 
 \subsection{Vorgangsmodell} \label{Vorgangsmodell}
@@ -34,10 +48,10 @@ Resultierende Arbeitspakete werden zyklisch in sogenannten Sprints detailliert f
 Ziel ist dabei eine schnelle und kostngünstige Entwicklung hochwertiger Produkte, wobei die jeweiligen Anforderungen aus der Anwendersicht formutliert werden.
 
 \begin{figure}[h]
- \centering
- \includegraphics[width=0.8\textwidth]{pictures/scrum}
- \caption[Agiles arbeiten mit Scrum]{Agiles arbeiten mit Scrum\cite{scrum2018}}
- \label{fig:scrum}
+	 \centering
+	 \includegraphics[width=0.8\textwidth]{pictures/scrum}
+	 \caption[Agiles arbeiten mit Scrum]{Agiles arbeiten mit Scrum\cite{scrum2018}}
+	 \label{fig:scrum}
 \end{figure}
 
 Die Verantwortlichkeiten liegt beim sogenannten Scrum-Team, welches sich aus folgenden Rollen ergibt:
@@ -46,7 +60,7 @@ Die Verantwortlichkeiten liegt beim sogenannten Scrum-Team, welches sich aus fol
 		\begin{tabular}{ ccc }
 			\toprule
 			{Rolle} & {Besetzung in unserem Projekt} & {Anmerkung}\\
-			
+
 			\midrule
 			{Product Owner} & {HTW Berlin} & {Vertreten durch Prod. Dr. Thomas Scheffler}\\
 			{Scrum Master} & {-} & {-}\\
@@ -74,22 +88,27 @@ Aus den uns gesetzten Pflichten, haben sich für uns die folgende Projektstruktu
 	\end{figure}
 \end{center}
 
-Mithilfe des Projektstrukturplanes ließen
+Mithilfe des Projektstrukturplanes ließen grob die einzelnen Arbeitspakete ableiten, wobei diese sich, wie bereits erwähnt, immer weiter verfeinert haben. Der enstehende Aufwand ließ sich zu Beginn noch nicht richtig abschätzen, dennoch konnten wir einen groben Zeitplan für die einzelnen Meilensteine abschätzen.
+
+\newpage
 
 \subsection{Zeitplanung} \label{Zeitplanung}
 
 \begin{center}
 	\begin{figure}[h]
-	 
+
 	 \noindent\makebox[\textwidth]{\includegraphics[width=1.3\textwidth]{pictures/zeitplanung}}
 	 \caption[Übersicht unserer Zeitplanung]{Übersicht unserer Zeitplanung}
 	 \label{fig:zeitplanung}
 	\end{figure}
 \end{center}
 
-Illustriert wird unsere grobe Zeitplanung zu Beginn des Projektes. Wir wollten aufgrund unserer agilen Arbeitsweise nur grobe Zeiträume definieren. Wie sich schlussendlich herausgestellt hat, haben manche Teilaspekte länger, andere wiederum kürzer gerdauert.
+Illustriert wird unsere grobe Zeitplanung zu Beginn des Projektes. Wir wollten aufgrund unserer agilen Arbeitsweise nur grobe Zeiträume definieren. Wie sich schlussendlich herausgestellt hat, haben manche Teilaspekte länger, andere wiederum kürzer gerdauert.\\
+
+
 
 \newpage
+<<<<<<< HEAD
 Nachfolgend wird eine tabellarische Übersicht unserer Zeitplanung aufgeführt, wobei wir die Daten aus unserem Trello-Board entnehmen:
 % \begin{adjustwidth}{-1in}{-1in}% adjust the L and R margins by -1 inch
 % 	\begin{center}
@@ -137,6 +156,59 @@ Nachfolgend wird eine tabellarische Übersicht unserer Zeitplanung aufgeführt, 
 % 	\end{center}
 % 
 % \end{adjustwidth}
+=======
+Nachfolgend wird eine tabellarische Übersicht unserer Zeitplanung aufgeführt, wobei wir die Daten aus unserem Trello-Board entnehmen:\\
+
+\begin{adjustwidth}{-1in}{-1in}% adjust the L and R margins by -1 inch
+	\begin{center}
+		\begin{tabular}{ ccccc }
+			\toprule
+			{Vorgangsname} & {Anfang} & {Ende} & {Bearbeiter} & {Arbeitszeit}\\
+
+			\midrule
+			\multicolumn{5}{c}{\textbf{Vorbereitung}} \\
+			{Sichtung der Quellenlage} & {22.10.2021} & {11.02.2022} & S + I & 20h\\
+			{Erstellung Trelloboard} & {22.10.2021} & {22.10.2021} & S & 30m\\
+			{Erstellung eines Git repositories} & {22.10.2021} & {22.10.2021} & S & 30m\\
+			{Erstellung des PSP} & {29.10.2021} & {29.02.2022} & I & 2h\\
+			{Erstellung Zeitplan} & {01.11.2021} & {04.11.2022} & S & 2h\\
+			{Erstellung/Durchführung der Umfrage} & {05.11.2021} & {05.11.2021} & S + I & 2h\\
+			{Festlegung/Beschaffung der Hardware} & {15.11.2021} & {01.12.2021} & S + I & 3h\\
+			{Auswahl/Einrichtung Software IDE} & {01.12.2021} & {20.12.2021} & S + I & 2h\\
+			{Auswertung der Umfrage} & {15.11.2021} & {15.11.2021} & S + I & 1h\\
+			{Erstellung des Persona} & {15.11.2021} & {15.11.2021} & S + I & 2h\\
+
+			\midrule
+			\multicolumn{5}{c}{\textbf{Hardware}} \\
+			{Inbetriebnahme der Hardware} & {01.12.2021} & {27.12.2021} & S + I & 2h\\
+
+			\midrule
+			\multicolumn{5}{c}{\textbf{Software}} \\
+			{µC Management} & {03.01.2022} & {10.01.2022} & S + I & 2h\\
+			{Integration der Sensoren} & {10.01.2022} & {04.02.2022} & S & 6h\\
+			{Einrichtung einer P2P LoRa-Kommunikation} & {17.01.2022} & {11.02.2022} & S & 6h\\
+			{Entwicklung eines MQTT Publishers} & {17.01.2022} & {11.02.2022} & S + I & 2h\\
+			{Entwicklung eines MQTT Subscribers} & {17.01.2022} & {11.02.2022} & S + I & 1h\\
+			{Einrichtung einer grafischen Schnittstelle} & {10.01.2022} & {11.02.2022} &  I & 2h\\
+			{Softwaretests und Bugfixes} & {01.10.2021} & {20.02.2022} & S + I & 6h\\
+
+			\midrule
+			\multicolumn{5}{c}{\textbf{Nachbereitung}} \\
+			{Vorbereitung der Zwischenpräsentation} & {16.12.2021} & {17.12.2021} & S & 3h\\
+			{Vorbereitung der Abschlusspräsentation} & {01.02.2022} & {11.02.2022} & S + I & 6h\\
+			{Dokumentation} & {14.02.2022} & {25.02.2022} & S + I & 8h\\
+			{Langzeittests} & {20.01.2022} & {11.02.2022} & S + I & 2h\\
+
+			\midrule
+			{\textbf{Summe}} & & & & 81h\\
+
+			\bottomrule
+		\end{tabular}
+		\captionof{table}{Übersicht der Arbeitspakete und Arbeitszeiten} \label{tab:worklog} 
+	\end{center}
+
+\end{adjustwidth}
+>>>>>>> baa7d21123956ad552f736e3f4632aba95a834ca
 
 \newpage
 
@@ -147,26 +219,26 @@ Aus unseren Anforderungen geht hervor, dass die meisten potentiellen Nutzer mög
 
 \begin{adjustwidth}{-1in}{-1in}% adjust the L and R margins by -1 inch
 	\begin{center}
-	
-	        \begin{tabular}{ccc|ccc}
+
+	        \begin{tabular}{cccccc}
 			\toprule
 			\multicolumn{3}{c}{\textbf{PyCom}} & \multicolumn{3}{c}{\textbf{DIY}}\\
-	
+
 			Name & Anzahl & Kosten & Name & Anzahl & Kosten\\
 
 			\midrule
-			LoPy4 & 1 & 38,45 & ESP32 DevKit & 1 & 9,99\\
-			Pytrack  & 1 & 40,65 & Breadboard & 1 & 5,99\\
-			Antennen-Kit  & 1 & 9,00 & LoRa Transceiver + Antenne & 1 & 11,98\\
-			3 X 1.5V AAA Batterie-Halterung & 1 & 9,00 & 3 X 1.5V AAA Batterie-Halterung & 1 & 9,00 \\
-			DHT22 Sensor & 1 & 9,99 & DHT22 Sensor & 1 & 9,99\\
-			 &  &  & Passive Bauelemente &  & 2,00\\
+			LoPy4 & 2 & 38,45 € & ESP32 DevKit & 1 & 9,99 €\\
+			Pytrack  & 1 & 40,65 € & Breadboard & 1 & 5,99 €\\
+			Antennen-Kit  & 1 & 9,00 € & LoRa Transceiver + Antenne & 1 & 11,98 €\\
+			Batterie-Halterung & 1 & 9,00 € & Batterie-Halterung & 1 & 9,00 € \\
+			DHT22 Sensor & 1 & 9,99 € & DHT22 Sensor & 1 & 9,99 €\\
+			 &  &  & Passive Bauelemente &  & 2,00 €\\
 
 			\midrule
-			\textbf{Gesamtkosten} & & 107,09 & \textbf{Gesamtkosten} & & 48,95\\
+			\textbf{Gesamtkosten} & & 145,54 € & \textbf{Gesamtkosten} & & 48,95 €\\
 
 			\bottomrule
-	
+
 	        \end{tabular}
 		\label{}
 		\captionof{table}{Kostenaufstellung für das Projekt} \label{tab:kostenaustellung} 
@@ -174,8 +246,11 @@ Aus unseren Anforderungen geht hervor, dass die meisten potentiellen Nutzer mög
 \end{adjustwidth}
 
 Anzumerken ist hier, dass die Entwicklung des Produktes mithilfe der PyCom Plattfrom zwar deutlich kostenintensiver ist, aber besonders für einen Prototypen doch recht komfortabel, da jeder einzelne Baustein dafür gemacht ist, miteinander zu funktionieren.\\
-Tendenziell ließe sich aber mit einem "Selbstbau" der Preis um knapp die hälfte reduzieren.\\
-Neben der PyCom Plattform existieren noch andere Entwicklungsplattformen, wie z.B. das \textit{TOOGOO WiFi ESP-32 Entwicklungs Board}, welches den LoRa Transreceiver implementiert und teilweise auch schon eine Halterung für Batterien anbietet. 
+Tendenziell ließe sich aber mit einem \"Selbstbau\" der Preis um knapp die hälfte reduzieren.\\
+Neben der PyCom Plattform existieren noch andere Entwicklungsplattformen, wie z.B. das \textit{TOOGOO WiFi ESP-32 Entwicklungs Board}, welches den LoRa Transreceiver implementiert und teilweise auch schon eine Halterung für Batterien anbietet.\\
+Anzumerken ist auch, das der zweite LoPy4 entfallen würde, wenn man sich direkt mittels LoRaWAN an einem Gateway anmeldet und nicht wie wir es gemacht haben, zwei Microcontroller miteinander kommunizieren zu lassen.\\
+
+\newpage
 
 
 \section{Systemkonzept und theoretische Realisierung} \label{Systemkonzept und theoretische Realisierung}
@@ -196,3 +271,13 @@ Da nun sich ein Board mit dem Sensor für die Ausmessung der Luftfeuchtigkeit im
 Zur Weiterleitung der Sensordaten an den MQTT-Broker wurden die von dem Board empfangenen Sensordaten mithilfe einer UART-Verbindung am Computer ausgelesen und in Form eines Publisher-Clients versendet. Der Subscriber-Client kann nun die jeweiligen Sensorwerte auf den jeweiligen Topics, die er einsehen möchte, empfangen.
 
 Für die Visualisierung der Sensordaten haben wir uns für die Adafruit IO Plattform entschieden\footnote{https://io.adafruit.com/}. Diese Plattform bietet abgesehen von den tollen Visualisierungen der Sensorwerte im Form eines Dashboards, auch einen MQTT-Broker an, den man mit einigen bestimmten Einschränkungen bei der kostenlosen Variante für die eigene Anwendung nutzen kann. 
+<<<<<<< HEAD
+=======
+
+\begin{figure}[h]
+	 \centering
+	 \includegraphics[width=0.8\textwidth]{pictures/adafruitdashboard}
+	 \caption[Beispielhaftes Adafruit Dashboard]{Beispielhaftes Adafruit Dashboard\cite{adafruitdash}}
+	 \label{fig:adafruitdashboard}
+\end{figure}
+>>>>>>> baa7d21123956ad552f736e3f4632aba95a834ca
