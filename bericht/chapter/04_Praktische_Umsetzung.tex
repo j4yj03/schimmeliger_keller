@@ -46,7 +46,7 @@ Bei dem verwendeten Sensor handelt es sich um einen sog. DHT Sensor. Diesen gibt
 Anzumerken ist noch, dass der DHT22 Sensorungefähr das doppelte Volumen des DHT11 Sensors hat. Interessant ist auch, dass der DHT11 Sensor ungefähr doppelt so häufig angesprochen werden kann, was vermutlich auf seiner weniger komplexen Schaltung beruht.\\
 Für die meisten Anwendungsfälle würde wahrscheinlich ein DHT11 Sensor (oder mehrere parallel geschaltete DHT11 Sensoren) ausreichen, um ein weitgehend zuverlässiges Ergebnis zu erhalten.
 
-\subsubsection{Kommunikation mit dem DHT Sensor} 
+\subsubsection{Kommunikation mit dem DHT Sensor\cite{dht}} 
 
 Die Kommunikation mit dem DHT Sensor erfolgt über eine einzelne Leitung, was zum einen die Kosten reduziert, zum anderen aber auch die Reichweite der störungfreien Übertragung erhöht. Um den Sensor anzusprechen und die Daten anschließend auszulesen, muss der Datenstrom kodiert werden. Dies geschieht über ein Protokoll, welches die Kommunikation in drei Schritte aufteilt:
 \begin{itemize} 
@@ -133,8 +133,7 @@ Für die Programmierung der Mikrocontroller verwenden wir die Programmiersprache
 	\end{figure}
 \end{center}
 
-
-abc
+Zunächst wird der Microcontroller initialisiert, wobei er standartmäßig mit allen Modulen (WiFi, LoRa, etc.) im aktivierten Zustand startet. Dieser Umstand beruht darauf, dass wir die PyCom Plattform nutzen, welche wenig vorab Konfiguration ermöglicht.
 
 \newpage
 
