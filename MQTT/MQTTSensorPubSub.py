@@ -91,7 +91,7 @@ class MQTTSensorPubSub():
                     ''' 
                         Da die Übertragung mittels LoRa sowie die serielle Übertragung keine Fehlerkorrektur beinhaltet, 
                         müssen einige Kriterien erfüllt sein, damit die ausgelesenen Werte als valide gelten.
-                        Zum einen muss der Zeitstempel neuer sein als der vorherige, zum Anderen müssen die Sensorwerte
+                        Zum einen muss der Zeitstempel aktueller sein als der vorherige, zum Anderen müssen die Sensorwerte
                         in einer gewissen Range liegen.
                     '''
                     if time_current > time_old: # new timestamp ?
@@ -124,18 +124,16 @@ class MQTTSensorPubSub():
 
         try:
             # Set Connecting Client ID
-            # print(self.client_id)
             client = mqtt_client.Client(self.client_id)
-            # print(client)
+
             # set credentials
-            # print(self.ADAFRUIT_IO_USERNAME, self.ADAFRUIT_IO_KEY)
             client.username_pw_set(self.ADAFRUIT_IO_USERNAME, self.ADAFRUIT_IO_KEY)
+            
             # define callback
             client.on_connect = on_connect
+            
             # try connect
-            # print(self.broker, self.port)
             client.connect(self.broker, self.port)
-            # self.client = client
 
             # im publisher mode 
             if self.type != 'subscriber':
@@ -146,8 +144,9 @@ class MQTTSensorPubSub():
         
 
     def publish(self):
-        #client.loop_start()
+
         if self.client is not None:
+            # check thresholds
             if self.TRESH_TEMP_L < self.temp < self.TRESH_TEMP_H:
                 topic_temp = self.ADAFRUIT_IO_TOPICS_LIST[0]
                 msg_temp = f"{self.temp}"
@@ -179,7 +178,7 @@ class MQTTSensorPubSub():
 
 
     def subscribe(self):
-        # callback Funktion
+        # callback Funktion: Ausgabe der Messwerte
         def on_message(client, userdata, msg):
             now = datetime.now()
             current_time = now.strftime("%d.%m.%Y %H:%M:%S")
@@ -195,11 +194,10 @@ class MQTTSensorPubSub():
 
         if self.client is not None:
             for topic in self.ADAFRUIT_IO_TOPICS_LIST:
-                # print(topic, self.client)
+
                 self.client.subscribe(topic)
                 self.client.on_message = on_message
 
-            # print(self.client, self.ADAFRUIT_IO_TOPICS_LIST)
             self.client.loop_forever()
         
 

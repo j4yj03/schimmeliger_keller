@@ -35,7 +35,7 @@ Ziel ist dabei eine schnelle und kostngünstige Entwicklung hochwertiger Produkt
 
 \begin{figure}[h]
 	 \centering
-	 \includegraphics[width=0.8\textwidth]{pictures/scrum}
+	 \includegraphics[width=1\textwidth]{pictures/scrum}
 	 \caption[Agiles arbeiten mit Scrum]{Agiles arbeiten mit Scrum\cite{scrum2018}}
 	 \label{fig:scrum}
 \end{figure}
@@ -68,7 +68,7 @@ Aus den uns gesetzten Pflichten, haben sich für uns die folgende Projektstruktu
 
 \begin{center}
 	\begin{figure}[h]
-		 \noindent\makebox[\textwidth]{\includegraphics[width=1\textwidth]{pictures/PSP}}
+		 \noindent\makebox[\textwidth]{\includegraphics[width=1.05\textwidth]{pictures/PSP}}
 		 \caption[Projektstrukturplan]{Projektstrukturplan} 
 
 	\end{figure}
@@ -150,8 +150,8 @@ Nachfolgend wird eine tabellarische Übersicht unserer Zeitplanung aufgeführt, 
 
 \subsection{Kostenaufstellung} \label{Kostenaufstellung}
 
-Auch wenn wir unser Projekt in erster Linie als Freie Software bereitstellen wollen
-Aus unseren Anforderungen geht hervor, dass die meisten potentiellen Nutzer möglichst wenig für unser Produkt bezahlen möchten. Wie bei 
+Auch wenn wir unser Projekt in erster Linie als Freie Software bereitstellen wollen, ist die genutze Hardware leider proprietär.
+Aus unseren Anforderungen geht hervor, dass die meisten potentiellen Nutzer möglichst wenig für unser Produkt bezahlen möchten. 
 
 \begin{adjustwidth}{-1in}{-1in}% adjust the L and R margins by -1 inch
 	\begin{center}
@@ -163,15 +163,15 @@ Aus unseren Anforderungen geht hervor, dass die meisten potentiellen Nutzer mög
 			Name & Anzahl & Kosten & Name & Anzahl & Kosten\\
 
 			\midrule
-			LoPy4 & 2 & 38,45 € & ESP32 DevKit & 1 & 9,99 €\\
-			Pytrack  & 1 & 40,65 € & Breadboard & 1 & 5,99 €\\
-			Antennen-Kit  & 1 & 9,00 € & LoRa Transceiver + Antenne & 1 & 11,98 €\\
+			LoPy4 & 2 & 38,45 € & ESP32 DevKit & 2 & 9,99 €\\
+			Pytrack  & 1 & 40,65 € & Breadboard & 2 & 5,99 €\\
+			Antennen-Kit  & 1 & 9,00 € & LoRa Transceiver + Antenne & 2 & 11,98 €\\
 			Batterie-Halterung & 1 & 9,00 € & Batterie-Halterung & 1 & 9,00 € \\
 			DHT22 Sensor & 1 & 9,99 € & DHT22 Sensor & 1 & 9,99 €\\
 			 &  &  & Passive Bauelemente &  & 2,00 €\\
 
 			\midrule
-			\textbf{Gesamtkosten} & & 145,54 € & \textbf{Gesamtkosten} & & 48,95 €\\
+			\textbf{Gesamtkosten} & & 145,54 € & \textbf{Gesamtkosten} & & 76,91 €\\
 
 			\bottomrule
 
@@ -182,7 +182,7 @@ Aus unseren Anforderungen geht hervor, dass die meisten potentiellen Nutzer mög
 \end{adjustwidth}
 
 Anzumerken ist hier, dass die Entwicklung des Produktes mithilfe der PyCom Plattfrom zwar deutlich kostenintensiver ist, aber besonders für einen Prototypen doch recht komfortabel, da jeder einzelne Baustein dafür gemacht ist, miteinander zu funktionieren.\\
-Tendenziell ließe sich aber mit einem \"Selbstbau\" der Preis um knapp die hälfte reduzieren.\\
+Tendenziell ließe sich aber mit einem Selbstbau der Preis um knapp die hälfte reduzieren und durch Entwicklung einer Platine, wahrscheinlich noch weiter reduzieren.\\\\
 Neben der PyCom Plattform existieren noch andere Entwicklungsplattformen, wie z.B. das \textit{TOOGOO WiFi ESP-32 Entwicklungs Board}, welches den LoRa Transreceiver implementiert und teilweise auch schon eine Halterung für Batterien anbietet.\\
 Anzumerken ist auch, das der zweite LoPy4 entfallen würde, wenn man sich direkt mittels LoRaWAN an einem Gateway anmeldet und nicht wie wir es gemacht haben, zwei Microcontroller miteinander kommunizieren zu lassen.\\
 
@@ -195,7 +195,7 @@ Nachfolgend wird das Systemkozept und die Realisierung für unser Projekt „Luf
 
 \begin{figure}[h]
  \centering
- \includegraphics[width=1\textwidth]{pictures/Blockschaltbild_ProNeSy}
+ \includegraphics[width=1.1\textwidth]{pictures/Blockschaltbild_ProNeSy}
  \caption[Systemkonzept für unser Projekt]{Systemkonzept für unser Projekt}
  \label{fig:systemkonzept}
 \end{figure}
@@ -206,11 +206,11 @@ Da nun sich ein Board mit dem Sensor für die Ausmessung der Luftfeuchtigkeit im
 
 Zur Weiterleitung der Sensordaten an den MQTT-Broker wurden die von dem Board empfangenen Sensordaten mithilfe einer UART-Verbindung am Computer ausgelesen und in Form eines Publisher-Clients versendet. Der Subscriber-Client kann nun die jeweiligen Sensorwerte auf den jeweiligen Topics, die er einsehen möchte, empfangen.\\\\
 
-Für die Visualisierung der Sensordaten haben wir uns für die Adafruit IO Plattform entschieden\footnote{https://io.adafruit.com/}. Diese Plattform bietet abgesehen von den tollen Visualisierungen der Sensorwerte im Form eines Dashboards, auch einen MQTT-Broker an, den man mit einigen bestimmten Einschränkungen bei der kostenlosen Variante für die eigene Anwendung nutzen kann. 
+Für die Visualisierung der Sensordaten haben wir uns für die \textit{adafruit.io} Plattform entschieden\footnote{https://io.adafruit.com/}. Diese Plattform bietet abgesehen von den tollen Visualisierungen der Sensorwerte im Form eines Dashboards, auch einen MQTT-Broker an, den man mit einigen bestimmten Einschränkungen bei der kostenlosen Variante für die eigene Anwendung nutzen kann. 
 
 \begin{figure}[h]
 	 \centering
-	 \includegraphics[width=1\textwidth]{pictures/adafruitdashboard}
-	 \caption[Beispielhaftes Adafruit Dashboard]{Beispielhaftes Adafruit Dashboard\cite{adafruitdash}}
+	 \includegraphics[width=1.1\textwidth]{pictures/adafruitdashboard}
+	 \caption[Beispielhaftes Adafruit Dashboard]{Beispielhaftes \textit{adafruit.io} Dashboard\cite{adafruitdash}}
 	 \label{fig:adafruitdashboard}
 \end{figure}

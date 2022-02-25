@@ -2485,7 +2485,6 @@ Source: http://download.siliconexpert.com/pdfs/2005/02/24/Semi_Ap/2/VSH/Resistor
 <part name="IC1" library="blubb" deviceset="U893BSE" device="" value="LoRa Module"/>
 <part name="R1" library="eagle-ltspice" deviceset="R" device="0204/7" value="1k"/>
 <part name="R2" library="eagle-ltspice" deviceset="R" device="0204/7" value="4.7k"/>
-<part name="SUPPLY5" library="supply2" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2520,8 +2519,7 @@ Rev: 1.2</text>
 <attribute name="VALUE" x="16.256" y="90.932" size="1.778" layer="96"/>
 </instance>
 <instance part="R1" gate="G$1" x="111.76" y="45.72"/>
-<instance part="R2" gate="G$1" x="-7.62" y="60.96" rot="R90"/>
-<instance part="SUPPLY5" gate="G$1" x="-7.62" y="71.12"/>
+<instance part="R2" gate="G$1" x="-7.62" y="33.02" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -2538,9 +2536,13 @@ Rev: 1.2</text>
 <segment>
 <pinref part="Q1" gate="G1" pin="E"/>
 <wire x1="127" y1="40.64" x2="127" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="127" y1="20.32" x2="-17.78" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="127" y1="20.32" x2="-7.62" y2="20.32" width="0.1524" layer="91"/>
 <pinref part="SENS1" gate="A" pin="1"/>
+<wire x1="-7.62" y1="20.32" x2="-17.78" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="-17.78" y1="20.32" x2="-17.78" y2="93.98" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="-7.62" y1="27.94" x2="-7.62" y2="20.32" width="0.1524" layer="91"/>
+<junction x="-7.62" y="20.32"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -2593,11 +2595,6 @@ Rev: 1.2</text>
 <pinref part="U1" gate="G$1" pin="VIN"/>
 <wire x1="50.8" y1="81.28" x2="55.88" y2="81.28" width="0.1524" layer="91"/>
 </segment>
-<segment>
-<pinref part="SUPPLY5" gate="G$1" pin="VDD"/>
-<pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="-7.62" y1="68.58" x2="-7.62" y2="66.04" width="0.1524" layer="91"/>
-</segment>
 </net>
 <net name="N$8" class="0">
 <segment>
@@ -2637,7 +2634,7 @@ Rev: 1.2</text>
 <wire x1="-7.62" y1="48.26" x2="-15.24" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="-15.24" y1="48.26" x2="-15.24" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="-7.62" y1="55.88" x2="-7.62" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="-7.62" y1="38.1" x2="-7.62" y2="48.26" width="0.1524" layer="91"/>
 <junction x="-7.62" y="48.26"/>
 </segment>
 </net>

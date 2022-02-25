@@ -5,6 +5,7 @@ global SENSOR_TRANS_DRIVE
 
 global WIFI_SSID
 global WIFI_PASS
+global WIFI_CONNECTED
 
 global ADA_USERNAME
 global ADA_KEY

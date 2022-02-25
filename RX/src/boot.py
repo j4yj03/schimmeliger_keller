@@ -25,6 +25,7 @@ def connect_wifi(WIFI_SSID, WIFI_PWD):
                 machine.idle() # Save power while waiting.
 
             print("Connected to", WIFI_SSID, wlan.ifconfig(), "\n")
+            return wlan.isconnected()
             
             
 conf = load_config_data()
@@ -36,4 +37,4 @@ ADA_USERNAME = conf['adafruit']['user']
 ADA_KEY = conf['adafruit']['key']
 ADA_TOPICS_LIST = conf['adafruit']['topics']
 
-connect_wifi(WIFI_SSID, WIFI_PASS)
+WIFI_CONNECTED = connect_wifi(WIFI_SSID, WIFI_PASS)

@@ -12,6 +12,23 @@ import json
 
 import globalvars
 
+def sub_cb(topic, msg):
+   print(msg)
+
+def mqtt_init(device_id, ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY):
+    client = MQTTClient(device_id, "io.adafruit.com",user=ADAFRUIT_IO_USERNAME, password=ADAFRUIT_IO_KEY, port=1883)
+
+    client.set_callback(sub_cb)
+    client.connect()
+    #client.subscribe(topic="youraccount/feeds/lights")
+
+    return client
+
+def mqtt_publish(mqtt_client, ADAFRUIT_IO_TOPIC, MESSAGE):
+    mqtt_client.publish(topic=ADAFRUIT_IO_TOPIC, msg=MESSAGE)
+    mqtt_client.check_msg()
+
+
 def LoraReceive():
     #set to have no heart beat
     pycom.heartbeat(False)
@@ -38,27 +55,15 @@ def LoraReceive():
             pycom.rgbled(0x007f00) # green
             time.sleep(1)
             pycom.rgbled(0x000000) # off
+            if WIFI_CONNECTED:
+                for topic, key, value in zip(ADA_TOPICS_LIST, uData_json.keys(), uData_json.values()):
+                    mqtt_publish(mqtt_client, topic, value)
 
 
-def mqtt_init(device_id, ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY):
-    client = MQTTClient(device_id, "io.adafruit.com",user=ADAFRUIT_IO_USERNAME, password=ADAFRUIT_IO_KEY, port=1883)
 
-    client.set_callback(sub_cb)
-    client.connect()
-    #client.subscribe(topic="youraccount/feeds/lights")
-
-    return client
-
-def mqtt_publish(mqtt_client, ADAFRUIT_IO_TOPIC, MESSAGE):
-    mqtt_client.publish(topic=ADAFRUIT_IO_TOPIC, msg=MESSAGE)
-    mqtt_client.check_msg()
-
-def sub_cb(topic, msg):
-   print(msg)
-   
 mqtt_client = mqtt_init(device_ID)
 
-LoraReceive()
+LoraReceive(mqtt_client)
 
 
 
