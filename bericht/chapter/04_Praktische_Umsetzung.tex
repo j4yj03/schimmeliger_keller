@@ -35,34 +35,96 @@ Dafür wird der SX1276 LoRa-Transceiver-Chip der Firma Semtech verwendet.
 
 Bei dem verwendeten Sensor handelt es sich um einen sog. DHT Sensor. Diesen gibt es in zwei verschiedenen Ausführungen, DHT11 und DHT22, wobei sich diese im auswertbaren Messbereich, der Messgenauigkeit und im Preis unterscheiden.
 
-Dafür wird der SX1276 LoRa-Transceiver-Chip der Firma Semtech verwendet. 
+\begin{adjustwidth}{-1in}{-1in}% adjust the L and R margins by -1 inch
+	\begin{center}
+	
+	        \begin{tabular}{ccc}
+			\toprule
+			 & \textbf{DHT11} & \textbf{DHT22}\\
 
-Für die Spannungsversorgung wird lediglich ein Mikro-USB-Kabel, welches an eine USB-Schnittstelle am Computer das Board mit 3.3-5.5V versorgt, benötigt. Neben der Spannungsversorgung kann damit auch das Board direkt programmiert werden. 
+			\midrule
+			Betriebsspannung & \multicolumn{2}{c}{3 \dots 5 V DC}\\
+			Stromverbrauch & \multicolumn{2}{c}{max. 2,5 mA während der Konvertierung}\\
+			Temperaturbereich & -20\dots 60 °C & -40\dots 80 °C  \\
+			Temperatur Genauigkeit & ± 2,0 °C & ± 0,5 °C\\
+			Feuchtigkeit Messbereich & 20\%\dots90\% RH & 0\%\dots99,9\% RH\\
+			Feuchtigkeit Genauigkeit & ± 5,0\% RH & ± 2\dots5\%\\
+			Abtastrate & 1 Hz & 0,5 Hz \\
 
-Für die Programmierung des Boards kann man auf unterschiedliche Entwicklungsumgebungen zurückgreifen. So werden die Entwicklungsumgebungen wie Atom und Visual Studio Code (VSC) von dem Hersteller mit einem sogenannten Pymakr-Plugin für einen reibungslosen Upload und das Flashen des Boards unterstützt. Wenn das Benutzen des Plugins nicht möglich ist, wie unter anderem es teilweise bei uns der Fall war, so kann man auf das von PyCom angebotene File-Transfer-Protocol (FTP) zugreifen. Dafür muss man zunächst einmal einen FTP-Server auf dem Board erzeugen, mithilfe dessen man dann auf das Filesystem des Boards Zugriff hat. Damit der Code im Board läuft, muss man lediglich die jeweiligen Dateien (hauptsächlich die main.py Datei) auf das Board mit FTP-Befehlen in den Flash-Speicher kopieren. 
+			\midrule
+			Preis (bei reichelt elektronik) & 1,80 € & 6,80 €\\
 
-Für die Unterstützung von LoRa bietet es zwei Möglichkeiten: LoRa-RAW und LoRaWAN. 
+			\bottomrule
+	
+	        \end{tabular}
+		\label{}
+		\captionof{table}{Vergleich DHT11 zu DHT22} \label{tab:vergleichDHT} 
+	\end{center}
+\end{adjustwidth}
 
-Mit LoRa-RAW kann eine direkte Punkt-zu-Punkt Verbindung für die Kommunikation zwischen zwei LoRa-Knoten hergestellt werden. Mit LoRaWAN kann darüberhinaus der LoRa-Knoten in das TheThingsNetwork (TTN) oder das Chirpstack-Netzwerk eingebunden werden. Die Bandbreite kann zwischen den Werten 125, 250 und 500 kHz variiert werden. Außerdem kann man den Spreizfaktor zwischen 7 und 12 auswählen. Für die Synchronisation kann die Preamble mit der Anzahl der Chirps angepasst werden, wobei der Standardwert bei acht liegt. Wieviele „Chips” ein Symbol definieren, kann man mit der Coderate einstellen.
+Anzumerken ist noch, dass der DHT22 Sensorungefähr das doppelte Volumen des DHT11 Sensors hat. Interessant ist auch, dass der DHT11 Sensor ungefähr doppelt so häufig angesprochen werden kann, was vermutlich auf seiner weniger komplexen Schaltung beruht.\\
+Für die meisten Anwendungsfälle würde wahrscheinlich ein DHT11 Sensor (oder mehrere parallel geschaltete DHT11 Sensoren) ausreichen, um ein weitgehend zuverlässiges Ergebnis zu erhalten.
 
-Darüberhinaus ist zu erwähnen, dass PyCom mit PyMesh, auch die Möglichkeit eines LoRa-Mesh-Netzwerkes auf der MAC-Ebene anbietet. Es ist dabei wichtig, dass alle LoRa-Knoten das gleiche Frequenzband, Spreizfaktor und Bandbreite verwenden. Es verwendet dazu ein hierarchisches Mesh-Netzwerkmodell.
+\subsubsection{Kommunikation mit dem DHT Sensor\cite{dht}} 
 
+Die Kommunikation mit dem DHT Sensor erfolgt über eine einzelne Leitung, was zum einen die Kosten reduziert, zum anderen aber auch die Reichweite der störungfreien Übertragung erhöht. Um den Sensor anzusprechen und die Daten anschließend auszulesen, muss der Datenstrom kodiert werden. Dies geschieht über ein Protokoll, welches die Kommunikation in drei Schritte aufteilt:
+\begin{itemize} 
+	\item Request (die Anfrage)
+	\item Repsonse (die Antwort des Sensors)
+	\item Data (die vom Sensor übertragenen Daten)
+\end{itemize}
 
-\subsection{DHT Sensormodul} \label{DHT}
 
 \begin{center}
 	\begin{figure}[h]
 	 
-	 \noindent\makebox[\textwidth]{\includegraphics[width=0.7\textwidth]{pictures/dht11_dataframe}}
-	 \caption[DHT Paketstruktur]{DHT Paketstruktur}
-	 \label{fig:zeitplanung}
+	 \noindent\makebox[\textwidth]{\includegraphics[width=1.1\textwidth]{pictures/dht_kommunikation1}}
+	 \caption[DHT Kommunikation]{DHT Kommunikation}
+	 \label{fig:dhtkommunikation}
 	\end{figure}
 \end{center}
 
 
+Um den DHT Sensor dazu zu bringen, Messewerte zu senden, zieht der Microcontroller den Datenbus für mindestens 18ms auf Masse, um ihn anschließend für 40µs wieder auf Versorgungsspannungsniveau zu ziehen. Dadurch versteht der DHT Sensor, dass er beginnen soll Messwerte zu sammeln.\\
+Der DHT Sensor antwortet zunächst mit einer Sequenz, bestehend aus einem ca. 54µs langen LOW und anschließend 80µs HIGH. 
+
+\newpage
+
+Nachfolgend sendet der DHT Sensor fünf Datenpakete, bestehend aus jeweils 8 Bit, welche die einzelnen Sensor Messwerte mit einer Prüfsumme darstellen. Insgesammt sendet der DHT Sensor somit 40 Bit.
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.9\textwidth]{pictures/dht11_dataframe}}
+	 \caption[DHT Paketstruktur]{DHT Paketstruktur}
+	 \label{fig:dhtpaketstruktur}
+	\end{figure}
+\end{center}
+
+Die einzelnen Sensor Messwerte sind noch in Integral Anteil und Dezimal Anteil unterteilt, wobei die einzelnen Bits sich durch die dauer des HIGH Signals nach einem 54µs langem LOW Singal unterscheiden.
+
+\begin{center}
+	\begin{figure}[h]
+	 
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.9\textwidth]{pictures/dht_kommunikation2}}
+	 \caption[DHT Bit Identifikation]{DHT Bit Identifikation}
+	 \label{fig:dhtbits}
+	\end{figure}
+\end{center}
+
+Abschließend sendet der DHT Sensor ein ca. 54µs langes LOW Signal, wonach der Bus wieder auf Versorgungsspannungsniveau gezogen wird und der Sensor in den Idle Mode geht.
+
+
+
+\newpage
 
 \subsection{Restliche Hardware} \label{Restliche Hardware}
 
+
+\begin{itemize} 
+	\item \textbf{Antenne:}  Bei der verwendeten Antenne handelt es sich um eine Multiband Antenne, welche für mehrere Freuquenzbänder (unter anderem das LoRa Freuquenzband) genutz werden kann.
+	\item \textbf{USB Kabel:} Wir verwenden ein Daten-USB Kabel welches besonders geschirmt ist und eine maximal Länge von ca. 10cm aufweist. Wir hatten teilweise Probleme mit anderen USB Kabeln.
+\end{itemize}
 
 
 
@@ -72,26 +134,24 @@ Für unser Projekt haben wir drei verschiedene, miteinander interagierende Softw
 Der Vorteil einer solchen Architektur ist, dass die einzelnen Komponenten sich unter umständen wiederverwenden lassen und sich im Idealfall so eine Software modular aufbauen lässt.
 Da wir als Programmiersprache ausschließlich Python bzw. Micropython verwendet haben, könnte man argumentieren, dass unsere Software automatisch Modular ist, da sich in der Theorie alle programmierten Komponenten in Python wiederverwenden lassen.
 Dies ist aber sehr verallgemeinert gesprochen, da gerade die Programmierung der Mikrocontroller definitiv auch Individualsoftware benötigt, welche sich aber immerhin nicht nur auf einer einzelnen Mikrocontrollerfamilie ausführen funktionieren würde.
-Anzumerken ist noch, dass für unsere finale Version des Projektes vermutlich nur eine einzelne Softwarekomponente notwendig wäre.
+Anzumerken ist noch, dass für unsere finale Version des Projektes vermutlich nur eine einzelne Softwarekomponente notwendig wäre.\\
+Für die Programmierung der Mikrocontroller verwenden wir die Programmiersprache Micropython, welche eine schlanke und schnelle Implementation der Programmiersprache Python ist, welche für Mikrocontroller optimiert wurde.
+
+\newpage
 
 
 \subsection{1. Komponente: Sensoransteuerung und der Versand der Daten mittels LoRa(WAN)} \label{Sender}
 
-Für die Programmierung der Mikrocontroller verwenden wir die Programmiersprache Micropython, welche eine schlanke und schnelle Implementation der Programmiersprache Python ist, welche für Mikrocontroller optimiert wurde.
 
 \begin{center}
 	\begin{figure}[h]
 	 
-	 \noindent\makebox[\textwidth]{\includegraphics[width=0.4\textwidth]{pictures/sens_read_lora_send}}
+	 \noindent\makebox[\textwidth]{\includegraphics[width=0.35\textwidth]{pictures/sens_read_lora_send}}
 	 \caption[PAP komponente 1]{Programm Ablauf: Komponente 1}
-	 \label{fig:zeitplanung}
+	 \label{fig:lorasendsensorread}
 	\end{figure}
 \end{center}
 
-\subsection{2. Komponente: Emfangen der Daten und Versand ins Internet} \label{Empfänger}
-
-\ldots
-=======
 Zunächst wird der Microcontroller initialisiert, wobei er standartmäßig mit allen Modulen (WiFi, LoRa, etc.) im aktivierten Zustand startet. Dieser Umstand beruht darauf, dass wir die PyCom Plattform nutzen, welche wenig vorab Konfiguration ermöglicht.\\
 Jegliche Konfigurationsmöglichkeiten unserer Programme haben wir in extern Dateien im JSON Format abgelegt, welche im nächsten Schritt eingelesen werden. In der Konfigurationsdatei können unter Anderem die Dauer, die der Microcontroller im Schlafmodus verbringen soll, sowie die einzelnen Sensoren definiert werden.\\
 Um das anbinden mehrere Sensonren zu ermöglichen haben wir uns dazu entschieden, eine Klasse zu programmieren, welche eben dieses Sensorobjekt darstellen soll. Der Treiber wurde von einem Benutzer auf github veröffentlicht, funktioniert aber im Prinzip nach dem oben genannten Verfahren, was bedeutet, dass zunächst eine gewisse Zeit gewartet wird, anschließend das Bus auf GND Niveau gezogen wird, um den Sensor mitzuteilen, dass er doch bitte anfängt Messwerte zu sammeln. Nachdem der Sensor eine Antwort gegeben hat, werden die empfangenen Bits zunächst alle gesammelt und anschließend in 5 einzelne Bytepakete decodiert. Abschließend prüft der Treiber mithilfer der Prüfsumme, ob die empfangenen Daten Sinn machen.\\ Je nach Sensortyp (DHT11/22) werden die empfangenen Daten nochmals in den richtigen Wertebereich \grqq verschoben\grqq.\\
@@ -130,16 +190,16 @@ Möchte der Nutzer seine Daten zunächst nur lokal verwalten, hat er dennoch die
 	 \label{fig:MQTTpubsub}
 	\end{figure}
 \end{center}
-=======
-Es beginnt eine Endlosschleife
+
+abc
 
 \newpage
 
-
-
 \section{Visualisierung der Sensordaten} \label{Dashboard und Visualisierung}
 
-\ldots
+abc
+
+\newpage
 
 
 \section{Berechnung der Laufzeit im Batteriebetrieb} \label{Simulation}
@@ -158,5 +218,3 @@ Es beginnt eine Endlosschleife
 \[t_{Laufzeit} = \frac{C_{Batterie}}{I_{avg}}\]
 
 \newpage
-
-
